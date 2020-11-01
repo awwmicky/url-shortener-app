@@ -1,0 +1,19 @@
+/* 
+ black / dimgray / gray / darkgray / lightgray / silver
+ slategray / darkslategray / lightslategray /
+ gainsboro / ghostwhite / whitesmoke / white
+*/
+
+html, body, #root { border: 1px solid black; }
+
+header { border: 2px solid dimgray; }
+main { border: 2px solid dimgray; }
+footer { border: 2px solid dimgray; }
+
+/* header > .web-layout { border: 2px solid slategray; } */
+/* main .web-layout { border: 2px solid slategray; } */
+/* footer > .web-layout { border: 2px solid slategray; } */
+
+form { border: 2px solid black; }
+table { border: 2px solid black; }
+table * { border: 1px solid gray; }

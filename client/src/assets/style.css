@@ -1,0 +1,16 @@
+.table-container {
+    overflow-x: scroll;
+    max-width: 500px;
+}
+/* .url-table th,  */
+/* .url-table td */
+/* { min-width: 200px; } */
+
+#url-form {
+    max-width: 500px;
+}
+
+#url-form label {
+    display: inline-block;
+    width: 55px;
+}

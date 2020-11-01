@@ -1,0 +1,35 @@
+{
+  "name": "web-application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "client": "cd client && npm start",
+    "server": "nodemon server,js",
+    "preinstall--": "git pull",
+    "postinstall": "cd client && npm install",
+    "build": "npm install && (cd client && npm install && npm run build)",
+    "dev": "concurrently -n 'server,client' -c 'yellow,white' npm:server  npm:client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.2.0",
+    "knex": "^0.21.11",
+    "morgan": "^1.10.0",
+    "nanoid": "^3.1.16",
+    "objection": "^2.2.3",
+    "pg": "^8.4.2",
+    "yup": "^0.29.3"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  }
+}
