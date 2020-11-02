@@ -1,4 +1,3 @@
 module.exports = {
-    Link: require('./Link.js'),
-    User: require('./User.js')
+    Link: require('./Link.js')
 }

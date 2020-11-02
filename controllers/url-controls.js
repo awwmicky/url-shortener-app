@@ -1,50 +1,54 @@
-const { Link,User } = require('../models/');
+const { scheme } = require('../middleware/validates.js');
+const { Link } = require('../models/');
 const { nanoid } = require('nanoid');
-const yup = require('yup');
 
-const scheme = yup.object().shape({
-    username: yup.string().trim().matches(/[\w\_\-]+/i),
-    name: yup.string().trim().matches(/[\w\_\-]+/i),
-    link: yup.string().trim().url().required()
-})
 
 module.exports = {
-    readUrlById : async (req,res) => {
+    /* GET */
+    findUrlByName : async (req,res) => {
         if (true) return res.send('ok…');
 
+        // ! check custom URL in DB
+        // ! update count in DB
+
         try {
-            const data = await User.query()
-            .findOne({ username:'king' })
-            .joinRelated('links_id');
+            const data = await Link.query();
+
             console.table(data)
 
             res.send('your short URL')   
         } catch (err) { console.log(err); }
     },
 
-    createShortUrl : async (req,res,next) => {
-        if (true) return res.send('ok…');
-        
-        let { username,name,link } = req.body;
+    /* POST */
+    createShortUrl : async (req,res,next) => {       
+        const { custom,link } = req.body;
         console.log(req.body)
 
         try {
             await scheme.validate(req.body)
+            console.log(req.body)
 
-            username = username.trim();
-            if (!name) {
-                name = nanoid(7).toLowerCase();
+            if (!custom) {
+                req.body.custom = nanoid(7).toLowerCase();
             } else {
-                const doesExist = await db; // findOne(name)
-                if (doesExist) throw new Error(
+                const doesExist = await Link
+                .query().where('custom', custom);
+
+                // if (doesExist) throw new Error(
+                //     'custom URL name is already in use.'
+                // );
+
+                if (doesExist) return next(new Error(
                     'custom URL name is already in use.'
-                );
+                ));
             }
 
-            let user = { username };
+            // ! insert new data to DB
+
             let data = { name, link };
 
-            res.json({ ...user, data })
+            res.json({ data })
         } catch (err) { next(err); }
     },
    
