@@ -38,6 +38,13 @@ function App () {
 
   // const resetAllData = e => setState(draft => initState);
 
+  const handleClick = async (e) => {
+    try {
+      const { data } = await axios.get('/url/id');
+      setState(draft => { draft.data = data; })
+    } catch (err) { console.error(err); }
+  };
+
   
   return (
     <>
@@ -89,6 +96,13 @@ function App () {
             onChange={ handleValue }
           />
         </fieldset>
+
+        <button
+          type="button"
+          name="get-btn"
+          id="get-btn"
+          onClick={ handleClick }
+        >Click</button>
         
         <button 
           type="submit"

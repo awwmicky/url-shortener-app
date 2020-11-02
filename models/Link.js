@@ -1,12 +1,9 @@
-const env = process.env.NODE_ENV || 'development';
-const key = require('../config/knexfile.js')[env];
-const connection = require('knex')(key);
-const { Model } = require('objection');
+const { Model,connection } = require('../config/connection.js');
 Model.knex(connection)
 
 const User = require('./User.js');
 
-export default class Link extends Model {
+module.exports = class Link extends Model {
     static get tableName () {
         return 'links'
     }
@@ -17,7 +14,7 @@ export default class Link extends Model {
                 relation: Model.BelongsToOneRelation,
                 modelClass: User,
                 join: {
-                    from: 'links.users_id',
+                    from: 'links.user_id',
                     to: 'users.id'
                 }
             }

@@ -1,6 +1,6 @@
-// const { Link,User } = require('../models/');
-const yup = require('yup');
+const { Link,User } = require('../models/');
 const { nanoid } = require('nanoid');
+const yup = require('yup');
 
 const scheme = yup.object().shape({
     username: yup.string().trim().matches(/[\w\_\-]+/i),
@@ -9,11 +9,22 @@ const scheme = yup.object().shape({
 })
 
 module.exports = {
-    readShortUrlById : (req,res) => {
-        res.send('your short URL')
+    readUrlById : async (req,res) => {
+        if (true) return res.send('ok…');
+
+        try {
+            const data = await User.query()
+            .findOne({ username:'king' })
+            .joinRelated('links_id');
+            console.table(data)
+
+            res.send('your short URL')   
+        } catch (err) { console.log(err); }
     },
 
     createShortUrl : async (req,res,next) => {
+        if (true) return res.send('ok…');
+        
         let { username,name,link } = req.body;
         console.log(req.body)
 

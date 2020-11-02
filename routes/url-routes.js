@@ -3,7 +3,7 @@ const url = require('../controllers/url-controls.js');
 
 
 /* HTTP/API Request */
-router.get('/:id', url.readShortUrlById)
+router.get('/:id', url.readUrlById)
 router.post('/new', url.createShortUrl)
 router.get('/*', url.error)
 
