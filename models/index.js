@@ -1,3 +1,4 @@
 module.exports = {
-    ModelName: require('---'),
+    Link: require('./Link.js'),
+    User: require('./User.js')
 }

@@ -1,3 +1,4 @@
+// const { Link,User } = require('../models/');
 const yup = require('yup');
 const { nanoid } = require('nanoid');
 
@@ -15,18 +16,18 @@ module.exports = {
     createShortUrl : async (req,res,next) => {
         let { username,name,link } = req.body;
         console.log(req.body)
-        
+
         try {
             await scheme.validate(req.body)
 
-            if (!username) username = "anonymous";
+            username = username.trim();
             if (!name) {
                 name = nanoid(7).toLowerCase();
-            } else{
+            } else {
                 const doesExist = await db; // findOne(name)
-                if (doesExist) {
-                    throw new Error('custom URL name already in use.');
-                }
+                if (doesExist) throw new Error(
+                    'custom URL name is already in use.'
+                );
             }
 
             let user = { username };
@@ -35,6 +36,6 @@ module.exports = {
             res.json({ ...user, data })
         } catch (err) { next(err); }
     },
-    
+   
     error : (req,res,next) => next()
 }

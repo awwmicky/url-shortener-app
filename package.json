@@ -10,7 +10,8 @@
     "preinstall--": "git pull",
     "postinstall": "cd client && npm install",
     "build": "npm install && (cd client && npm install && npm run build)",
-    "dev": "concurrently -n 'server,client' -c 'yellow,white' npm:server  npm:client"
+    "dev": "concurrently -n 'server,client' -c 'yellow,white' npm:server  npm:client",
+    "dev:db": "cd test && node database.js"
   },
   "keywords": [],
   "author": "",
