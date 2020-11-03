@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const page = require('../controllers/page-controls.js');
+const page = require('../controllers/page-control.js');
 
 
 /* HTTP/API Request */

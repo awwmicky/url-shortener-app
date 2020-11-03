@@ -2,32 +2,33 @@ import React, { useEffect } from 'react'
 import './assets/reset.css'
 import './assets/style.css'
 import './assets/test.css'
+import db from './assets/data-temp.json'
 import { useImmer } from 'use-immer'
 import axios from 'axios'
 
+
 const initState = { 
-  data: [],
-  username: "",
-  name: "",
+  data: null,
+  custom: "",
   link: ""
 };
 
 function App () {
   
   const [ state,setState ] = useImmer(initState);
-  const { data,username,name,link } = state;
+  const { data,custom,link } = state;
 
   useEffect(() => {
-    console.log( (data.length ? data : ""),name,link )
-  }, [ data,name,link ])
+    console.log( (data ? data : ""),custom,link )
+  }, [ data,custom,link ])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
-      const body = { username,name,link };
-      const { data } = await axios.post('/url/new', body);
-      setState(draft => { draft.data = data; })
+      const body = { custom,link };
+      const { data:res } = await axios.post('/url/new', body);
+      setState(draft => { draft.data = res; })
     } catch (err) { console.error('Error:', err) }    
   };
 
@@ -40,8 +41,8 @@ function App () {
 
   const handleClick = async (e) => {
     try {
-      const { data } = await axios.get('/url/id');
-      setState(draft => { draft.data = data; })
+      const { data:res } = await axios.get(`/url/${custom}`);
+      setState(draft => { draft.data = res; })
     } catch (err) { console.error(err); }
   };
 
@@ -56,40 +57,26 @@ function App () {
         onSubmit={ handleSubmit }
       >
         <fieldset>
-          <label htmlFor="username">username:</label>
+          <label htmlFor="custom">custom:</label>
           <input 
             type="text"
-            name="username" 
-            id="username"
+            name="custom"
+            id="custom"
             placeholder="anonymous"
             autoComplete="off"
             autoFocus
-            value={ username }
+            value={ custom }
             onChange={ handleValue }
           />
         </fieldset>
 
         <fieldset>
-          <label htmlFor="url-name">name:</label>
-          <input 
-            type="text"
-            name="name" 
-            id="url-name"
-            placeholder="/custom-name"
-            autoComplete="off"
-            // autoFocus
-            value={ name }
-            onChange={ handleValue }
-          />
-        </fieldset>
-
-        <fieldset>
-          <label htmlFor="url-link">link:</label>
+          <label htmlFor="link">link:</label>
           <input 
             type="text" 
             name="link"
-            id="url-link"
-            placeholder="www.link.com"
+            id="link"
+            placeholder="www.website.com"
             autoComplete="off"
             // autoFocus
             value={ link }
@@ -103,12 +90,12 @@ function App () {
           id="get-btn"
           onClick={ handleClick }
         >Click</button>
-        
+
         <button 
           type="submit"
           name="submit_btn"
           id="submit-btn"
-        >Submit</button>
+        >Create URL</button>
       </form>
 
       <div className="table-container">
@@ -116,20 +103,39 @@ function App () {
           <thead>
             <tr>
               <th>Clicks</th>
-              <th>Short URL</th>
+              <th>Custom URL</th>
               <th>Show Link</th>
               <th>Copy Link</th>
               <th>Delete Link</th>
             </tr>
           </thead>
+          
           <tbody>
             <tr>
               <td>0</td>
-              <td><a href="link.com">link</a></td>
-              <td><button className="btn show">👁️</button></td>
+              <td><a href="link.com">/short</a></td>
+              <td>
+                <button className="btn show">👁️</button>
+                <a href="link.com" hidden>link</a>
+              </td>
               <td><button className="btn copy">📋</button></td>
               <td><button className="btn delete">❌</button></td>
             </tr>
+
+            {
+              db.map(url => (
+                <tr key={ url.id }>
+                  <td>{ url.count }</td>
+                  <td><a href="link.com">/{ url.custom }</a></td>
+                  <td>
+                    <button className="btn show">👁️</button>
+                    <a href={ url.link } hidden>link</a>
+                  </td>
+                  <td><button className="btn copy">📋</button></td>
+                  <td><button className="btn delete">❌</button></td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>
