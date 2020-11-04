@@ -8,7 +8,7 @@ module.exports = {
 
   /* 505 / 500 */
   internalServerError: (err,req,res,next) => {
-    // console.error(err)
+    console.error(err)
     res.status(err.status || 505).json({ 
       error: { 
         status: (err.status || 500),
@@ -16,5 +16,5 @@ module.exports = {
         stack: process.env.NODE_ENV === 'production' ? "✗" : err.stack
       }
     })
-  }
+  } // ! fix error message update
 }

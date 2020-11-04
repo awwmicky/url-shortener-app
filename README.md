@@ -27,7 +27,7 @@
     - map & append to VDOM
     - [**File →**](/client/src/assets/data-temp.json)
 
-* [ ] check: priority, run & view all updates
+* [x] check: priority, run & view all updates
     - [**IMPORTANT →**](/package.json)
 
 * [ ] add: apply tooltip style for `show link` button

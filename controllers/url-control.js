@@ -1,7 +1,10 @@
-const { Link } = require('../models/');
+const { Url_Link } = require('../models/');
 const { nanoid } = require('nanoid');
 const Url = require('url-parse');
 
+const viewLog = (data) => console.table(
+    data , ['id', 'custom', 'domain', 'url', 'count']
+);
 
 module.exports = {
     /* GET */
@@ -9,7 +12,7 @@ module.exports = {
         const { custom } = req.params;
 
         try {
-            const data = await Link
+            const data = await Url_Link
             .query().findOne({ custom });
 
             // console.table([ data ])
@@ -22,23 +25,26 @@ module.exports = {
         const { custom,link } = req.body;
         const domain = new Url(link);
         req.body.domain = domain.hostname;
+        req.body.url = link;
+        delete req.body.link;
 
         try {
             if (!custom) {
                 req.body.custom = nanoid(7).toLowerCase();
             } else {
-                const doesExist = await Link
+                const doesExist = await Url_Link
                 .query().where('custom', custom);
+
+                console.log( doesExist )
 
                 if (doesExist.length) throw new Error(
                     'custom URL name is already in use.'
                 );
             }
 
-            // ! insert new data to DB
-            // const data = await Link.query().insert(req.body);
-            // res.json( data )
-            res.json( req.body )
+            const data = await Url_Link.query().insert(req.body);
+            console.table([ data ])
+            res.json( data )
         } catch (err) { next(err); }
     },
 
@@ -48,11 +54,12 @@ module.exports = {
         const { count } = req.query;
 
         try {
-            const data = await Link.query()
-            .findById(id).patch({count: count + 1});
-
-            console.table([ data ])
-            res.json({ load:'✓', data }) // ?
+            const up = await Url_Link.query()
+            .findById(id).patch({count: +(count) + 1});
+            // const data = await Url_Link.query();
+            // viewLog( data )
+            // res.json( data )
+            res.send('count updated  ✓')
         } catch (err) { next(err); }      
     },
 
@@ -61,11 +68,13 @@ module.exports = {
         const { id } = req.params;
 
         try {
-            const data = await Link.query().deleteById(id);
-            console.table([ data ])
-            res.json({ load:'✓', data }) // ?
+            const del = await Url_Link.query().deleteById(id);
+            // const data = await Url_Link.query();
+            // viewLog( data )
+            // res.json( data )
+            res.send('url deleted ✓')
         } catch (err) { next(err); }      
     },
-   
+
     error : (req,res,next) => next()
 }

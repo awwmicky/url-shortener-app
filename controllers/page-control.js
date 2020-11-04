@@ -1,10 +1,10 @@
-const { Link } = require('../models/');
+const { Url_Link } = require('../models/');
 
 module.exports = {
     /* GET all */
-    displayAllUrls : async (req,res) => {
+    displayAllUrls : async (req,res,next) => {
         try {
-            const data = await Link.query();
+            const data = await Url_Link.query();
             // console.table(data)
             res.send( data )
         } catch (err) { next(err) }
@@ -12,21 +12,18 @@ module.exports = {
 
     /* GET one */
     redirectToUrl : async (req,res) => {
-        const {  id : custom } = req.params;
+        const { custom } = req.params;
 
         try {
-            const data = await Link
+            const data = await Url_Link
             .query().findOne({ custom });
 
-            console.log(data)
-
-            // return res.send(data)
-            // if (data === null) return res.sendStatus(404);
-
-            if (data) res.redirect( data.link );
+            console.table([ data ])
+            if (data) res.redirect( data.url );
             else res.redirect(`/?error=${ custom }-not-found`)
         } catch (err) { res.redirect('/?error=link-not-found'); }
-    },
+    }, // ! apply react-router-dom to redirect
+    // ! fix redirect
 
     error : (req,res,next) => next()
 }

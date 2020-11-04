@@ -1,6 +1,8 @@
+const { url_link } = require('../table-names.js');
+
 exports.seed = (knex) => {
-  return knex('links').del().then(() => {
-    return knex('links').insert([
+  return knex( url_link ).del().then(() => {
+    return knex( url_link ).insert([
       { custom:"ge"  , domain:"google"       , url:"https://www.google.com/"       },
       { custom:"bg"  , domain:"bing"         , url:"https://www.bing.com/"         },
       { custom:"ddg" , domain:"duckduckgo"   , url:"https://www.duckduckgo.com/"   },

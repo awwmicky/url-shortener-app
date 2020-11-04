@@ -1,4 +1,5 @@
-const TABLE = 'url_link';
+const { url_link } = require('../table-names.js');
+
 
 const timeStamps = (table, knex) => {
   table.timestamp('created_at').defaultTo(knex.fn.now());
@@ -7,7 +8,7 @@ const timeStamps = (table, knex) => {
 
 exports.up = (knex) => {
   return Promise.all([
-    knex.schema.createTable(TABLE, (table) => {
+    knex.schema.createTable( url_link,(table) => {
       table.increments('id').primary();
 
       table.string('custom', 30).notNullable();
@@ -23,6 +24,6 @@ exports.up = (knex) => {
 
 exports.down = (knex) => {
   return Promise.all([
-    knex.schema.dropTableIfExists(TABLE)
+    knex.schema.dropTableIfExists( url_link )
   ])
 }

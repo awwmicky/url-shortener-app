@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 import './assets/reset.css'
 import './assets/style.css'
 import './assets/test.css'
-import db from './assets/data-temp.json'
+// import db from './assets/data-temp.json'
 import { useImmer } from 'use-immer'
 import axios from 'axios'
 
 
 const initState = { 
-  // data: null,
-  data: db,
+  data: null,
+  // data: db,
   custom: "",
   link: ""
 };
@@ -21,13 +21,13 @@ function App () {
   const [ state,setState ] = useImmer(initState);
   const { data,custom,link } = state;
 
-  // useEffect(() => {
-  //   (() => (
-  //     axios.get('/all')
-  //     .then(res => setState(draft => { draft.data = res.data; }))
-  //     .catch(err => console.error(err))
-  //   ))()
-  // }, [ ])
+  useEffect(() => {
+    (() => (
+      axios.get('/all')
+      .then(res => setState(draft => { draft.data = res.data; }))
+      .catch(err => console.error(err))
+    ))()
+  }, [ ])
 
   useEffect(() => {
     console.log( (data ? data : ""),custom,link )
@@ -39,8 +39,12 @@ function App () {
     try {
       const body = { custom,link };
       const { data:res } = await axios.post('/url/new', body);
-      console.log( res )
-      // setState(draft => { draft.data = res; })
+      // console.log( res )
+      setState(draft => { 
+        // draft.custom = "";
+        // draft.link = "";
+        draft.data.push(res)
+      })
     } catch (err) { console.error(err) }
   };
 
@@ -49,34 +53,36 @@ function App () {
     setState(draft => { draft[name] = value; })
   };
 
+  // ! include a reset btn ???
   // const resetAllData = e => setState(draft => initState);
+  ////
 
   const handleTest = async (e) => {
     try {
-      const { data:res } = await axios.get(`/url/${custom}`);
+      const { data:res } = await axios.get(`/${custom}`);
       console.info( res )
       // setState(draft => { draft.data = res; })
-    } catch (err) { console.error(err); }
-  };
+    } catch (err) { console.error(err) }
+  }; // ? TEST redirect
 
   const handleCount = async (e) => {
     const id = container(e).dataset.id;
     if ( data[id].checked ) return;
-    
-    // try {
-      // const url = `/url/${ id }?count=${ data[id].count }`;
-      // const { data:res } = await axios.patch(url);
-      // console.info(res)
+
+    try {
+      const url = `/url/${ data[id].id }?count=${ data[id].count }`;
+      const { data:res } = await axios.patch(url);
+      console.info( res )
 
       setState(draft => { 
         draft.data[id].count += 1;
         draft.data[id].checked = !draft.data[id].checked;
       })
-    // } catch (err) { console.error(err); }
-  };
+    } catch (err) { console.error(err) }
+  }; // ?
 
   // ! apply tooltip style
-  const toggleLink = () => {};
+  const handleVisibility = (e) => {};
   ////
 
   // ! apply copy to clipboard
@@ -89,15 +95,15 @@ function App () {
   const handleDelete = async (e) => {
     const id = container(e).dataset.id;
     
-    // try {
-      // const { data:res } = await axios.delete(`/url/${ id }`);
-      // console.info(res)
+    try {
+      const { data:res } = await axios.delete(`/url/${ data[id].id }`);
+      console.info( res )
 
       setState(draft => { 
         delete draft.data[id];
         draft.data = draft.data.filter(Boolean);
       })
-    // } catch (err) { console.error(err); }
+    } catch (err) { console.error(err) }
   };
 
   
@@ -116,7 +122,7 @@ function App () {
             type="text"
             name="custom"
             id="custom"
-            placeholder="anonymous"
+            placeholder="url-name"
             autoComplete="off"
             autoFocus
             value={ custom }
@@ -191,17 +197,17 @@ function App () {
                   <td>
                     <button 
                       className="btn show" 
-                      onClick={ toggleLink }
+                      onClick={ handleVisibility }
                     >👁️</button>
-                      <a 
-                        className="tooltip" 
-                        href={ link.url }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title="go to link"
-                        hidden
-                        onClick={ handleCount }
-                      >URL</a>
+                    <a 
+                      className="tooltip" 
+                      href={ link.url }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="go to link"
+                      hidden
+                      onClick={ handleCount }
+                    >URL</a>
                   </td>
                   <td>
                     <button 

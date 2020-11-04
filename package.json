@@ -12,8 +12,8 @@
     "rollback": "knex migrate:rollback --cwd ./config/",
     "migrate": "knex migrate:latest --cwd ./config/",
     "seed": "knex seed:run --cwd ./config/",
-    "build": "npm install && (cd client && npm install && npm run build)",
     "db": "npm-run-all rollback migrate seed",
+    "build": "npm install && (cd client && npm install && npm run build)",
     "dev": "concurrently -n 'server,client' -c 'yellow,white' npm:server  npm:client",
     "dev:db": "cd test && node database.js",
     "dev:val": "cd test && node validation.js"
