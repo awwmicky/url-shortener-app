@@ -1,8 +1,16 @@
 # URL Shortener App
 
-* [ ] issue: fix `validation.js` test file
+## App Checklist
+* [x] issue: fix `validation.js` test file
     - apply for `validates.js` middleware
     - [**File →**](/test/validation.js)
+
+* [] issue: find way to receive error messge
+    - [**Ln. 52 →**](/middleware/validates.js)
+
+* [ ] security: check for npm, safe inputs
+    - remove any potential injection attacks
+    - [**File →**](/client/src/App.js)
 
 * [ ] add: apply `jsonSchema` for DB model
     - [**Ln. 9 →**](/models/Link.js)

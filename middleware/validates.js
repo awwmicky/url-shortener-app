@@ -1,51 +1,55 @@
 const yup = require('yup');
 
-const errorResponse = (that,message) => {
-  const { path,createError } = that;
+const errorResponse = (err) => {
+  const { createError,path,message } = err;
   return createError({ path,message });
 };
 
 const obj = {
-  t : 'test-name',
-  m : 'error message',
-
+  name: 'custom-name',
+  message: 'error',
   lenErr  : 'custom URL must be between 2 - 30 char long.',
   charErr : 'custom URL must contain a-z,0-9, or "-".',
+  test (val) {
+    const { createError } = this;
 
-  fn (val) {
-    console.log(val)
     const len = val.length;
     const regex = /^([\w\-])+$/;
 
-    // if (true) return false;
-
     if (!val) return true;
-    if (len <= 2 && 30 >= len) return errorResponse(this, obj.lenErr);
-    if ( !regex.test(val) ) return errorResponse(this, obj.charErr);
-    return true;
+    if ( !(2 <= len && len <= 30) ) return errorResponse({
+      createError, path:obj.name, message:obj.lenErr
+    });
+    if ( !regex.test(val) ) return errorResponse({
+      createError, path:obj.name, message:obj.charErr
+    });
+    return val;
   }
 };
 
 const schema = yup.object().shape({
-  // custom : yup.string().trim().test( obj.t,obj.m,obj.fn ),
+  custom : yup.string().trim().test( obj ),
   link   : yup.string().trim().url().required()
 });
 
 module.exports = {  
   validateInp : async (req,res,next) => {
-    console.log(req.body)
+    console.log('validating ~')
     try {
-      console.log('validating ~')
-      const isValid = await schema.validateSync(
-        { link: req.body.link }
-        // ,{ abortEarly:false }
-      );
-      console.log('validated ✓','\n',isValid)
-      req.body.link = isValid.link;
-      console.log(req.body)
-      next()
-    } catch (err) { next(err); }
+      const check = [req.body,{abortEarly:false}];
+      const isVal = await schema.validate(...check);
+      
+      if (isVal) {
+        console.log('validated ✓')
+        // console.log(isVal,req.body)
+        req.body = isVal;
+        return next();
+      } else { console.error(isVal) }
+    } catch (err) {
+      console.log('validated ✗')
+      // console.error(err)
+      return next(err);
+      // ! send proper error message
+    }
   }
 }
-
-// ! check for middleware option next()

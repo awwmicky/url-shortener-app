@@ -28,8 +28,9 @@ function App () {
     try {
       const body = { custom,link };
       const { data:res } = await axios.post('/url/new', body);
-      setState(draft => { draft.data = res; })
-    } catch (err) { console.error('Error:', err) }    
+      console.log( res )
+      // setState(draft => { draft.data = res; })
+    } catch (err) { console.error(err) }
   };
 
   const handleValue = (e) => {
@@ -42,7 +43,8 @@ function App () {
   const handleClick = async (e) => {
     try {
       const { data:res } = await axios.get(`/url/${custom}`);
-      setState(draft => { draft.data = res; })
+      console.info( res )
+      // setState(draft => { draft.data = res; })
     } catch (err) { console.error(err); }
   };
 

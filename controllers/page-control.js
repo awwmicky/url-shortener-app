@@ -11,11 +11,11 @@ module.exports = {
 
             console.log(data)
 
-            return res.send(data)
+            // return res.send(data)
             // if (data === null) return res.sendStatus(404);
 
             if (data) res.redirect(data.link);
-            else res.redirect(`/?error=${name}-not-found`)
+            else res.redirect(`/?error=${ custom }-not-found`)
         } catch (err) { res.redirect('/?error=link-not-found'); }
     },
 

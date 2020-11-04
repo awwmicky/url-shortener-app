@@ -20,12 +20,11 @@ module.exports = {
     /* POST */
     createShortUrl : async (req,res,next) => {
         const { custom } = req.body;
-        // if (true) return res.json('ok…');
 
         try {
             if (!custom) {
                 req.body.custom = nanoid(7).toLowerCase();
-            }  else {
+            } else {
                 const doesExist = await Link
                 .query().where('custom', custom);
 
