@@ -1,25 +1,27 @@
 const { Link } = require('../models/');
 const { nanoid } = require('nanoid');
+const Url = require('url-parse');
 
 
 module.exports = {
     /* GET */
     findUrlByName : async (req,res,next) => {
-        const {  id:custom } = req.params;
+        const { custom } = req.params;
 
         try {
             const data = await Link
             .query().findOne({ custom });
 
-            console.table([ data ])
-
+            // console.table([ data ])
             res.json( data )
         } catch (err) { next(err); }
     },
 
     /* POST */
     createShortUrl : async (req,res,next) => {
-        const { custom } = req.body;
+        const { custom,link } = req.body;
+        const domain = new Url(link);
+        req.body.domain = domain.hostname;
 
         try {
             if (!custom) {
@@ -34,10 +36,35 @@ module.exports = {
             }
 
             // ! insert new data to DB
-            const data = req.body;
-
-            res.json( data )
+            // const data = await Link.query().insert(req.body);
+            // res.json( data )
+            res.json( req.body )
         } catch (err) { next(err); }
+    },
+
+    /* PATCH */
+    updateCountToURL: async (req,res,next) => {
+        const { id } = req.params;
+        const { count } = req.query;
+
+        try {
+            const data = await Link.query()
+            .findById(id).patch({count: count + 1});
+
+            console.table([ data ])
+            res.json({ load:'✓', data }) // ?
+        } catch (err) { next(err); }      
+    },
+
+    /* DELETE */
+    removeURL: async (req,res,next) => {
+        const { id } = req.params;
+
+        try {
+            const data = await Link.query().deleteById(id);
+            console.table([ data ])
+            res.json({ load:'✓', data }) // ?
+        } catch (err) { next(err); }      
     },
    
     error : (req,res,next) => next()

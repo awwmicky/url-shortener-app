@@ -8,15 +8,26 @@ import axios from 'axios'
 
 
 const initState = { 
-  data: null,
+  // data: null,
+  data: db,
   custom: "",
   link: ""
 };
+
+const container = (e) => e.target.parentElement.parentElement;
 
 function App () {
   
   const [ state,setState ] = useImmer(initState);
   const { data,custom,link } = state;
+
+  // useEffect(() => {
+  //   (() => (
+  //     axios.get('/all')
+  //     .then(res => setState(draft => { draft.data = res.data; }))
+  //     .catch(err => console.error(err))
+  //   ))()
+  // }, [ ])
 
   useEffect(() => {
     console.log( (data ? data : ""),custom,link )
@@ -40,7 +51,7 @@ function App () {
 
   // const resetAllData = e => setState(draft => initState);
 
-  const handleClick = async (e) => {
+  const handleTest = async (e) => {
     try {
       const { data:res } = await axios.get(`/url/${custom}`);
       console.info( res )
@@ -48,9 +59,50 @@ function App () {
     } catch (err) { console.error(err); }
   };
 
+  const handleCount = async (e) => {
+    const id = container(e).dataset.id;
+    if ( data[id].checked ) return;
+    
+    // try {
+      // const url = `/url/${ id }?count=${ data[id].count }`;
+      // const { data:res } = await axios.patch(url);
+      // console.info(res)
+
+      setState(draft => { 
+        draft.data[id].count += 1;
+        draft.data[id].checked = !draft.data[id].checked;
+      })
+    // } catch (err) { console.error(err); }
+  };
+
+  // ! apply tooltip style
+  const toggleLink = () => {};
+  ////
+
+  // ! apply copy to clipboard
+  const handleCopy = (e) => {
+    const id = container(e).dataset.id;
+    const customLink = '/' + data[id].custom;
+    console.log( customLink )
+  };
+
+  const handleDelete = async (e) => {
+    const id = container(e).dataset.id;
+    
+    // try {
+      // const { data:res } = await axios.delete(`/url/${ id }`);
+      // console.info(res)
+
+      setState(draft => { 
+        delete draft.data[id];
+        draft.data = draft.data.filter(Boolean);
+      })
+    // } catch (err) { console.error(err); }
+  };
+
   
   return (
-    <>
+    <main>
       <h1>URL Shortener App</h1>
       
       <form 
@@ -90,7 +142,7 @@ function App () {
           type="button"
           name="get-btn"
           id="get-btn"
-          onClick={ handleClick }
+          onClick={ handleTest }
         >Click</button>
 
         <button 
@@ -105,6 +157,7 @@ function App () {
           <thead>
             <tr>
               <th>Clicks</th>
+              <th>Domain URL</th>
               <th>Custom URL</th>
               <th>Show Link</th>
               <th>Copy Link</th>
@@ -113,35 +166,62 @@ function App () {
           </thead>
           
           <tbody>
-            <tr>
-              <td>0</td>
-              <td><a href="link.com">/short</a></td>
-              <td>
-                <button className="btn show">👁️</button>
-                <a href="link.com" hidden>link</a>
-              </td>
-              <td><button className="btn copy">📋</button></td>
-              <td><button className="btn delete">❌</button></td>
-            </tr>
-
             {
-              db.map(url => (
-                <tr key={ url.id }>
-                  <td>{ url.count }</td>
-                  <td><a href="link.com">/{ url.custom }</a></td>
+              data && data.map((link, id) => (
+                <tr key={ link.id } data-id={ id }>
+                  <td>{ link.count }</td>
                   <td>
-                    <button className="btn show">👁️</button>
-                    <a href={ url.link } hidden>link</a>
+                    <a 
+                      href={ link.url }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="go to link"
+                      onClick={ handleCount }
+                    >{ link.domain }</a>
                   </td>
-                  <td><button className="btn copy">📋</button></td>
-                  <td><button className="btn delete">❌</button></td>
+                  <td>
+                    <a 
+                      href={ link.url }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="go to link"
+                      onClick={ handleCount }
+                    >{ `/${link.custom}` }</a>
+                  </td>
+                  <td>
+                    <button 
+                      className="btn show" 
+                      onClick={ toggleLink }
+                    >👁️</button>
+                      <a 
+                        className="tooltip" 
+                        href={ link.url }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="go to link"
+                        hidden
+                        onClick={ handleCount }
+                      >URL</a>
+                  </td>
+                  <td>
+                    <button 
+                      className="btn copy"
+                      onClick={ handleCopy }
+                    >📋</button>
+                  </td>
+                  <td>
+                    <button 
+                      className="btn delete"
+                      onClick={ handleDelete }
+                    >❌</button>
+                  </td>
                 </tr>
               ))
             }
           </tbody>
         </table>
       </div>
-    </>
+    </main>
   );
 }
 

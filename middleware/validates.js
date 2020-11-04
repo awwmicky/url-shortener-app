@@ -14,7 +14,7 @@ const obj = {
     const { createError } = this;
 
     const len = val.length;
-    const regex = /^([\w\-])+$/;
+    const regex = /^([\w\s\-])+$/;
 
     if (!val) return true;
     if ( !(2 <= len && len <= 30) ) return errorResponse({
@@ -27,8 +27,10 @@ const obj = {
   }
 };
 
+const fn = (val) => val.replace(/\s+/g, '-');
+
 const schema = yup.object().shape({
-  custom : yup.string().trim().test( obj ),
+  custom : yup.string().trim().test( obj ).transform( fn ),
   link   : yup.string().trim().url().required()
 });
 

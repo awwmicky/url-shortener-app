@@ -6,5 +6,18 @@ module.exports = class Link extends Model {
         return 'links'
     }
 
-    // ! add validation check DB
+    static get jsonSchema() {
+        return {
+          type: 'object',
+          properties: {
+            id:      { type : 'integer' },
+            custom:  { type : 'string'  },
+            domain:  { type : 'string'  },
+            url:     { type : 'string'  },
+            checked: { type : 'boolean' },
+            count:   { type : 'integer' }
+          }
+        };
+    }d
+    // ! check if schema works
 }

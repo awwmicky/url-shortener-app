@@ -2,7 +2,9 @@
     {
         "id"         : 1,
         "custom"     : "ge",
-        "link"       : "https://www.google.com/",
+        "domain"     : "google.com",
+        "url"        : "https://www.google.com/",
+        "checked"    : false,
         "count"      : 0,
         "create_at"  : 1111,
         "updated_at" : 2222
@@ -10,7 +12,9 @@
     {
         "id"         : 2,
         "custom"     : "an",
-        "link"       : "https://www.amazon.com/",
+        "domain"     : "amazon.com",
+        "url"        : "https://www.amazon.com/",
+        "checked"    : false,
         "count"      : 0,
         "create_at"  : 1111,
         "updated_at" : 2222
@@ -18,23 +22,9 @@
     {
         "id"         : 3,
         "custom"     : "tt",
-        "link"       : "https://www.torrent.com/",
-        "count"      : 0,
-        "create_at"  : 1111,
-        "updated_at" : 2222
-    },
-    {
-        "id"         : 4,
-        "custom"     : "bg",
-        "link"       : "https://www.bing.com/",
-        "count"      : 0,
-        "create_at"  : 1111,
-        "updated_at" : 2222
-    },
-    {
-        "id"         : 5,
-        "custom"     : "ddg",
-        "link"       : "https://www.duckduckgo.com/",
+        "domain"     : "torrent.com",
+        "url"        : "https://www.torrent.com/",
+        "checked"    : false,
         "count"      : 0,
         "create_at"  : 1111,
         "updated_at" : 2222
