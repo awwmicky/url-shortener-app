@@ -36,8 +36,7 @@
 * [ ] add: find npm to copy to clipboard for `copy link` button
     - [**Ln. 82 →**](/client/src/App.js)
 
-* [ ] refactor: create components for React `App.js` file
+* [x] refactor: create components for React `App.js` file
     - use `useContext` hook, API folder, 
     - use `useImmerReducer` for API display all
     - [**File →**](/client/src/App.js)
-    
