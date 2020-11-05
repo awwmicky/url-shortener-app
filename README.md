@@ -1,8 +1,47 @@
 # URL Shortener App
 
+## Setup & Install
+1. **Requirements**
+    - `Node` / `NPM` / `Postgres`
+2. **Clone Repo**
+```bash
+HTTPS
+  $ git clone https://github.com/awwmicky/url-shortener-app.git
+
+SSH
+  $ git clone git@github.com:awwmicky/url-shortener-app.git
+
+GitHub CLI
+  $ gh repo clone awwmicky/url-shortener-app
+```
+3. **Add NPM Packages**
+    - `npm install`
+    - …will take some time…
+4. **Create `.env` File**
+    - add postres admin access
+```env
+DB_HOST_LOCAL = [ add localhost ]
+DB_USER_LOCAL = [ add username  ]
+DB_PASS_LOCAL = [ add password  ]
+DB_NAME_LOCAL = [ add database  ]
+```
+5. **Migrate & Seed Data**
+    - `npm run db`
+6. **DONE! → Run Web App**
+    - `npm run dev`
+
+## Tech Tools
+- `Postres` / `KnexJS` / `ObjectionJS` (ORM)
+- `React` (Hooks) / `Node` / `Express`
+- url tools: `nanoid` / `url-parse` / `yup`
+
 ## App Checklist
 * [ ] issue: find way to receive error message
     - [**Ln. 52 →**](/middleware/validates.js)
+
+* [ ] issue: need NPM script to access env file
+    - e.g: `NODE_ENV=development`
+    - [**Ln. 1 →**](/config/knexfile.js)
     
 * [x] issue: fix `validation.js` test file
     - apply for `validates.js` middleware

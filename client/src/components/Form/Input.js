@@ -4,8 +4,8 @@ import { Context } from '../../assets/Context.js'
 
 export default function Input (props) {
 
-  const { name,ph,focus='' } = props;
-  const { state : { custom },setState } = useContext(Context);
+  const { name,ph,focus='',val } = props;
+  const { setState } = useContext(Context);
 
 
   const handleValue = (e) => {
@@ -24,7 +24,7 @@ export default function Input (props) {
         placeholder={ ph }
         autoComplete="off"
         autoFocus={ focus ? true : false }
-        value={ custom }
+        value={ val }
         onChange={ handleValue }
       />
     </fieldset>

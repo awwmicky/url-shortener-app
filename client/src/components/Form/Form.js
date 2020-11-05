@@ -45,11 +45,13 @@ export default function Form () {
         name={ 'custom' }
         ph={ 'enter-custom-name' }
         focus={ true }
+        val={ custom }
       />
 
       <Input
         name={ 'link' }
         ph={ 'www.website.com' }
+        val={ link }
       /> 
 
       <button

@@ -8,6 +8,7 @@ import { useImmer } from 'use-immer'
 // import axios from 'axios'
 import Form from './components/Form/Form'
 import Table from './components/Table/Table'
+import useClipboard from './utils/useClipboard.js'
 
 
 const initState = { 
@@ -20,6 +21,7 @@ const initState = {
 
 function App () {
   
+  const [ isCopied,handleCopy ] = useClipboard(1500);
   const [ state,setState ] = useImmer(initState);
   const { data,custom,link } = state;
   const states = { state, setState };
@@ -39,7 +41,7 @@ function App () {
   }, [ data,custom,link ])
 
   // ! include a reset btn ???
-  // const resetAllData = e => setState(draft => initState);
+  // const resetAllData = (e) => setState(draft => initState);
 
   ////
 
@@ -47,6 +49,10 @@ function App () {
     <Context.Provider value={ states }>
       <main>
         <h1>URL Shortener App</h1>
+        <button 
+          onClick={ () => handleCopy('plop…✱') }
+        >{ isCopied ? 'COPIED' : 'TEST' }</button>
+        
         <Form />
         <Table />
       </main>

@@ -48,12 +48,22 @@ export default function Button (props) {
     }
   };
 
+  const checkTitle = (className) => {
+    switch (className) {
+      case 'show'  : return 'show link';
+      case 'copy'  : return 'copy link';
+      case 'delete': return 'delete link';
+      default: break;
+    }
+  };
+
   ////
 
   return (
     <>
       <button 
         className={ `btn ${cName}` }
+        title={ checkTitle(cName) }
         onClick={ checkEvent(cName) }
       >{ i }</button>
     </>
