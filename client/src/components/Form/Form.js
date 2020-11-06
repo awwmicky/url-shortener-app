@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Context } from '../../utils/Context.js'
+import Context from '../../utils/Context.js'
 // import './Form.css'
 import axios from 'axios'
 import Input from './Input'

@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Context } from '../../../utils/Context.js'
+import Context from '../../../utils/Context.js'
 // import './Body.css'
 import Anchor from './Anchor'
 import Button from './Button'
@@ -27,8 +27,8 @@ export default function Body () {
               <Anchor
                 url={ link.url } 
                 cName={ 'tooltip' } 
-                text={ 'URL' } 
-                hide={ 'hidden' } 
+                text={ link.url } 
+                hide={ true } 
               />
             </td>
 

@@ -1,5 +1,5 @@
-import { useContext } from 'react'
-import { Context } from '../../../utils/Context.js'
+import { useState,useEffect,useContext } from 'react'
+import Context from '../../../utils/Context.js'
 // import './Button.css'
 import axios from 'axios'
 
@@ -11,21 +11,28 @@ export default function Button (props) {
     state:{ data } , setState,
     useClipboard , container 
   } = useContext(Context);
+  const [ text,setText ] = useState(i);
   const [ isCopied,copyLink ] = useClipboard(1500);
 
   ////
+
+  useEffect(() => {
+    if (isCopied) setText('📦')
+    else setText( i )
+  }, [ i,isCopied ])
 
   // ! apply tooltip style
   const handleVisibility = (e) => {
     console.log( e.target )
   };
 
-  // ? copy URL ✓
+  // const handleHidden = (e) => { };
+
   const handleCopy = (e) => {
     const id = container(e).dataset.id;
     const customLink = '/' + data[id].custom;
     copyLink( customLink )
-    console.log( customLink )
+    console.log( isCopied,customLink )
   };
 
   const handleDelete = async (e) => {
@@ -69,7 +76,7 @@ export default function Button (props) {
         className={ `btn ${cName}` }
         title={ checkTitle(cName) }
         onClick={ checkEvent(cName) }
-      >{ i }</button>
+      >{ text }</button>
     </>
   );
 }

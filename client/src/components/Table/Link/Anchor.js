@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Context } from '../../../utils/Context.js'
+import Context from '../../../utils/Context.js'
 // import './Anchor.css'
 import axios from 'axios'
 

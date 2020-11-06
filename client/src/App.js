@@ -7,7 +7,7 @@ import { useImmer } from 'use-immer'
 // import axios from 'axios'
 import Form from './components/Form/Form'
 import Table from './components/Table/Table'
-import { Context } from './utils/Context.js'
+import Context from './utils/Context.js'
 import useClipboard from './utils/useClipboard.js'
 
 

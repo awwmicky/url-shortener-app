@@ -1,6 +1,7 @@
 import { useContext } from 'react'
-import { Context } from '../../utils/Context.js'
+import Context from '../../utils/Context.js'
 // import './Input.css'
+
 
 export default function Input (props) {
 
