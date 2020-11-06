@@ -16,10 +16,10 @@ GitHub CLI
 ```
 3. **Add NPM Packages**
     - `npm install`
-    - …will take some time…
+    - …it will take some time…
 4. **Create `.env` File**
     - add postres admin credentials
-    - connects to the client DB
+    - this connects to the client DB
 ```env
 DB_HOST_LOCAL = [ add localhost ]
 DB_USER_LOCAL = [ add username  ]
