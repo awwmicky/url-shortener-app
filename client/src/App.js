@@ -60,7 +60,6 @@ function App () {
     <Context.Provider value={ states }>
       <main>
         <h1>URL Shortener App</h1>
-        {/* <button onClick={ handleModal }>MODAL</button> */}
 
         <Form />
         <Table />

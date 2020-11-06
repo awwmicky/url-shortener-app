@@ -1,5 +1,7 @@
 # URL Shortener App
 
+> ### status: **Not Deployed**
+
 ## Setup & Install
 1. **Requirements**
     - `Node` / `NPM` / `Postgres`
@@ -41,4 +43,4 @@ DB_NAME_LOCAL = [ add database  ]
 
 ---
 
-[check out my app checklist](/docs/history-log.md)
+[check out my app checklist →](/docs/history-log.md)

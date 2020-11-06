@@ -1,3 +1,7 @@
+[**← Go Back**](../)
+
+---
+
 # History Log
 
 ## App Checklist
@@ -34,13 +38,17 @@
 * [x] check: priority, run & view all updates
     - [**IMPORTANT →**](../package.json)
 
-* [ ] add: apply tooltip style for `show link` button
+* [x] add: apply tooltip style for `show link` button
     - [**Ln. 78 →**](../client/src/App.js)
 
-* [ ] add: find npm to copy to clipboard for `copy link` button
+* [x] add: find npm to copy to clipboard for `copy link` button
     - [**Ln. 82 →**](../client/src/App.js)
 
 * [x] refactor: create components for React `App.js` file
     - use `useContext` hook, API folder, 
     - use `useImmerReducer` for API display all
     - [**File →**](../client/src/App.js)
+
+---
+
+[**← Go Back**](../)
