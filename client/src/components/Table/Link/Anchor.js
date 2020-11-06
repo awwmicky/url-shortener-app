@@ -1,23 +1,24 @@
 import { useContext } from 'react'
-import { Context } from '../../../assets/Context.js'
+import { Context } from '../../../utils/Context.js'
 // import './Anchor.css'
 import axios from 'axios'
 
-const container = (e) => e.target.parentElement.parentElement;
 
 export default function Anchor (props) {
 
   const { url, text, cName='', hide='' } = props;
-  const { state:{ data }, setState } = useContext(Context);
+  const { 
+    state:{ data } , setState , container 
+  } = useContext(Context);
 
   ////
 
   const handleCount = async (e) => {
     const id = container(e).dataset.id;
     if ( data[id].checked ) return;
+    const url = `/url/${ data[id].id }?count=${ data[id].count }`;
 
     try {
-      const url = `/url/${ data[id].id }?count=${ data[id].count }`;
       const { data:res } = await axios.patch(url);
       console.info( res )
 

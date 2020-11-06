@@ -18,7 +18,8 @@ GitHub CLI
     - `npm install`
     - …will take some time…
 4. **Create `.env` File**
-    - add postres admin access
+    - add postres admin credentials
+    - connects to the client DB
 ```env
 DB_HOST_LOCAL = [ add localhost ]
 DB_USER_LOCAL = [ add username  ]
@@ -31,9 +32,12 @@ DB_NAME_LOCAL = [ add database  ]
     - `npm run dev`
 
 ## Tech Tools
-- `Postres` / `KnexJS` / `ObjectionJS` (ORM)
-- `React` (Hooks) / `Node` / `Express`
-- url tools: `nanoid` / `url-parse` / `yup`
+- DB: `Postres` / `KnexJS` / `ObjectionJS (ORM)`
+- Front-End: `React (Hooks)` / `Sass`
+- Back-End: `Node` / `Express`
+    - url tools: `nanoid` / `url-parse` / `yup`
+    - protection: `helmet` / `cors`
+- General: `Axios`
 
 ## App Checklist
 * [ ] issue: find way to receive error message

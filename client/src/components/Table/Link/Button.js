@@ -1,14 +1,17 @@
 import { useContext } from 'react'
-import { Context } from '../../../assets/Context.js'
+import { Context } from '../../../utils/Context.js'
 // import './Button.css'
 import axios from 'axios'
 
-const container = (e) => e.target.parentElement.parentElement;
 
 export default function Button (props) {
 
-  const { cName='', i } = props;
-  const { state:{ data },setState } = useContext(Context);
+  const { cName='', i='text' } = props;
+  const { 
+    state:{ data } , setState,
+    useClipboard , container 
+  } = useContext(Context);
+  const [ isCopied,copyLink ] = useClipboard(1500);
 
   ////
 
@@ -16,20 +19,21 @@ export default function Button (props) {
   const handleVisibility = (e) => {
     console.log( e.target )
   };
-  ////
 
-  // ! apply copy to clipboard
+  // ? copy URL ✓
   const handleCopy = (e) => {
     const id = container(e).dataset.id;
     const customLink = '/' + data[id].custom;
+    copyLink( customLink )
     console.log( customLink )
   };
 
   const handleDelete = async (e) => {
     const id = container(e).dataset.id;
+    const url = `/url/${ data[id].id }`;
     
     try {
-      const { data:res } = await axios.delete(`/url/${ data[id].id }`);
+      const { data:res } = await axios.delete(url);
       console.info( res )
 
       setState(draft => { 
