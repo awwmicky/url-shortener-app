@@ -7,6 +7,7 @@ import { useImmer } from 'use-immer'
 // import axios from 'axios'
 import Form from './components/Form/Form'
 import Table from './components/Table/Table'
+import Modal from './components/Modal/Modal'
 import Context from './utils/Context.js'
 import useClipboard from './utils/useClipboard.js'
 
@@ -20,12 +21,24 @@ const initState = {
   link: ""
 };
 
+const initModal = {
+  isShowing: false, 
+  url: ""
+}
 
 function App () {
+
+  // const [ isShowing,setModal ] = useState(false);
+  // const handleModal = (e) => { setModal(!isShowing) };
   
   const [ state,setState ] = useImmer(initState);
+  const [ modal,setModal ] = useImmer(initModal);
   const { data,custom,link } = state;
-  const states = { state,setState,useClipboard,container };
+  const states = { 
+    state,setState,
+    modal,setModal,
+    useClipboard,container 
+  };
 
   ////
 
@@ -47,10 +60,13 @@ function App () {
     <Context.Provider value={ states }>
       <main>
         <h1>URL Shortener App</h1>
-        
+        {/* <button onClick={ handleModal }>MODAL</button> */}
+
         <Form />
         <Table />
       </main>
+
+      <Modal />
     </Context.Provider>
   );
 }

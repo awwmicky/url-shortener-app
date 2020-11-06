@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import Context from '../../../utils/Context.js'
+// import Modal from '../../Modal/Modal'
 // import './Body.css'
 import Anchor from './Anchor'
 import Button from './Button'
@@ -7,7 +8,7 @@ import Button from './Button'
 
 export default function Body () {
 
-  const { state:{ data }} = useContext(Context);
+  const { state:{ data },setModal } = useContext(Context);
 
   return (
     <tbody>
@@ -19,19 +20,7 @@ export default function Body () {
             <td><Anchor url={ link.url } text={ link.domain } /></td>
             <td><Anchor url={ link.url } text={ '/' + link.custom } /></td>
 
-            <td>
-              <Button 
-                cName={ 'show' } 
-                i={ '👁‍🗨' } 
-              />
-              <Anchor
-                url={ link.url } 
-                cName={ 'tooltip' } 
-                text={ link.url } 
-                hide={ true } 
-              />
-            </td>
-
+            <td><Button cName={ 'show' } i={ '👁‍🗨' } setModal={ setModal } /></td>
             <td><Button cName={ 'copy' } i={ '📋' } /></td>
             <td><Button cName={ 'delete' } i={ '❌' } /></td>
           </tr>

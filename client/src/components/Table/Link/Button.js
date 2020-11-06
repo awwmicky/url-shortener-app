@@ -6,9 +6,9 @@ import axios from 'axios'
 
 export default function Button (props) {
 
-  const { cName='', i='text' } = props;
+  const { cName='' , i='text' } = props;
   const { 
-    state:{ data } , setState,
+    state:{ data } , setState, setModal,
     useClipboard , container 
   } = useContext(Context);
   const [ text,setText ] = useState(i);
@@ -21,12 +21,14 @@ export default function Button (props) {
     else setText( i )
   }, [ i,isCopied ])
 
-  // ! apply tooltip style
   const handleVisibility = (e) => {
-    console.log( e.target )
+    const id = container(e).dataset.id;
+    console.log( data[id].url )
+    setModal(draft => {
+      draft.isShowing = true;
+      draft.url = data[id].url;
+    })
   };
-
-  // const handleHidden = (e) => { };
 
   const handleCopy = (e) => {
     const id = container(e).dataset.id;
