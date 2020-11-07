@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 import './assets/reset.scss'
 import './assets/style.scss'
 import './assets/test.css'
-import db from './assets/data-temp.json'
 import { useImmer } from 'use-immer'
 // import axios from 'axios'
+import db from './assets/data-temp.json'
 import Form from './components/Form/Form'
 import Table from './components/Table/Table'
 import Modal from './components/Modal/Modal'
@@ -28,27 +28,24 @@ const initModal = {
 
 function App () {
 
-  // const [ isShowing,setModal ] = useState(false);
-  // const handleModal = (e) => { setModal(!isShowing) };
-  
   const [ state,setState ] = useImmer(initState);
   const [ modal,setModal ] = useImmer(initModal);
   const { data,custom,link } = state;
   const states = { 
-    state,setState,
-    modal,setModal,
-    useClipboard,container 
+    state , setState,
+    modal , setModal,
+    useClipboard , container
   };
 
   ////
 
-  // useEffect(() => {
-  //   (() => (
-  //     axios.get('/all')
-  //     .then(res => setState(draft => { draft.data = res.data; }))
-  //     .catch(err => console.error(err))
-  //   ))()
-  // }, [ ])
+  useEffect(() => {
+    (() => (
+      axios.get('/all')
+      .then(res => setState(draft => { draft.data = res.data; }))
+      .catch(err => console.error(err))
+    ))()
+  }, [ setState ])
 
   useEffect(() => {
     console.log( (data ? data : ""),custom,link )

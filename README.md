@@ -33,13 +33,13 @@ DB_NAME_LOCAL = [ add database  ]
 6. **DONE! → Run Web App**
     - `npm run dev`
 
-## Tech Tools
-- DB: `Postres` / `KnexJS` / `ObjectionJS (ORM)`
-- Front-End: `React (Hooks)` / `Sass`
+## Tech Tools Used
+- **Front-End**: `React (Hooks)` / `Sass`
     - http request: `Axios`
-- Back-End: `Node` / `Express`
+- **Back-End**: `Node` / `Express`
     - url tools: `nanoid` / `url-parse` / `yup`
     - protection: `helmet` / `cors`
+- **Database**: `Postres` / `KnexJS` / `ObjectionJS (ORM)`
 
 ---
 
