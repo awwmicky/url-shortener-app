@@ -10,9 +10,7 @@ import Table from './components/Table/Table'
 import Modal from './components/Modal/Modal'
 import Context from './utils/Context.js'
 import useClipboard from './utils/useClipboard.js'
-
-
-const container = (e) => e.target.parentElement.parentElement;
+import { mainContainer } from './utils/mainContainer.js'
 
 const initState = { 
   data: db,
@@ -32,20 +30,19 @@ function App () {
   const [ modal,setModal ] = useImmer(initModal);
   const { data,custom,link } = state;
   const states = { 
-    state , setState,
-    modal , setModal,
-    useClipboard , container
+    state , setState , modal , setModal,
+    useClipboard , mainContainer
   };
 
   ////
 
-  useEffect(() => {
-    (() => (
-      axios.get('/all')
-      .then(res => setState(draft => { draft.data = res.data; }))
-      .catch(err => console.error(err))
-    ))()
-  }, [ setState ])
+  // useEffect(() => {
+  //   (() => (
+  //     axios.get('/all')
+  //     .then(res => setState(draft => { draft.data = res.data; }))
+  //     .catch(err => console.error(err))
+  //   ))()
+  // }, [ setState ])
 
   useEffect(() => {
     console.log( (data ? data : ""),custom,link )

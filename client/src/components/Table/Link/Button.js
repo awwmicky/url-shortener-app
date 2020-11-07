@@ -9,7 +9,7 @@ export default function Button (props) {
   const { cName='' , i='text' } = props;
   const { 
     state:{ data } , setState, setModal,
-    useClipboard , container 
+    useClipboard , mainContainer 
   } = useContext(Context);
   const [ text,setText ] = useState(i);
   const [ isCopied,copyLink ] = useClipboard(1500);
@@ -22,7 +22,7 @@ export default function Button (props) {
   }, [ i,isCopied ])
 
   const handleVisibility = (e) => {
-    const id = container(e).dataset.id;
+    const id = mainContainer(e).dataset.id;
     console.log( data[id].url )
     setModal(draft => {
       draft.isShowing = true;
@@ -31,14 +31,14 @@ export default function Button (props) {
   };
 
   const handleCopy = (e) => {
-    const id = container(e).dataset.id;
+    const id = mainContainer(e).dataset.id;
     const customLink = '/' + data[id].custom;
     copyLink( customLink )
     console.log( isCopied,customLink )
   };
 
   const handleDelete = async (e) => {
-    const id = container(e).dataset.id;
+    const id = mainContainer(e).dataset.id;
     const url = `/url/${ data[id].id }`;
     
     try {

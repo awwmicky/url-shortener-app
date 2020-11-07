@@ -8,13 +8,13 @@ export default function Anchor (props) {
 
   const { url, text, cName='', hide='' } = props;
   const { 
-    state:{ data } , setState , container 
+    state:{ data } , setState , mainContainer 
   } = useContext(Context);
 
   ////
 
   const handleCount = async (e) => {
-    const id = container(e).dataset.id;
+    const id = mainContainer(e).dataset.id;
     if ( data[id].checked ) return;
     const url = `/url/${ data[id].id }?count=${ data[id].count }`;
 
