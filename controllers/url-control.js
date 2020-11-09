@@ -1,10 +1,7 @@
 const { Url_Link } = require('../models/');
 const { nanoid } = require('nanoid');
 const Url = require('url-parse');
-
-const viewLog = (data) => console.table(
-    data , ['id', 'custom', 'domain', 'url', 'count']
-);
+const { viewLogs } = require('./utils.js');
 
 module.exports = {
     /* GET */
@@ -16,6 +13,7 @@ module.exports = {
             .query().findOne({ custom });
 
             // console.table([ data ])
+            // viewLogs([ data ])
             res.json( data )
         } catch (err) { next(err); }
     },

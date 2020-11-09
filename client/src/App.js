@@ -3,8 +3,8 @@ import './assets/reset.scss'
 import './assets/style.scss'
 import './assets/test.css'
 import { useImmer } from 'use-immer'
-// import axios from 'axios'
-import db from './assets/data-temp.json'
+import axios from 'axios'
+// import db from './assets/data-temp.json'
 import Form from './components/Form/Form'
 import Table from './components/Table/Table'
 import Modal from './components/Modal/Modal'
@@ -12,9 +12,10 @@ import Context from './utils/Context.js'
 import useClipboard from './utils/useClipboard.js'
 import { mainContainer } from './utils/mainContainer.js'
 
+
 const initState = { 
-  data: db,
-  // data: null,
+  // data: db,
+  data: null,
   custom: "",
   link: ""
 };
@@ -23,6 +24,7 @@ const initModal = {
   isShowing: false, 
   url: ""
 }
+
 
 function App () {
 
@@ -36,13 +38,13 @@ function App () {
 
   ////
 
-  // useEffect(() => {
-  //   (() => (
-  //     axios.get('/all')
-  //     .then(res => setState(draft => { draft.data = res.data; }))
-  //     .catch(err => console.error(err))
-  //   ))()
-  // }, [ setState ])
+  useEffect(() => {
+    (() => (
+      axios.get('/all')
+      .then(res => setState(draft => { draft.data = res.data; }))
+      .catch(err => console.error(err))
+    ))()
+  }, [ setState ])
 
   useEffect(() => {
     console.log( (data ? data : ""),custom,link )

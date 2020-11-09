@@ -17,3 +17,7 @@ footer { border: 2px solid dimgray; }
 form { border: 2px solid black; }
 table { border: 2px solid black; }
 table *:not(a) { border: 1px solid gray; }
+
+/* table button { */
+    /* background: #000; */
+/* } */
