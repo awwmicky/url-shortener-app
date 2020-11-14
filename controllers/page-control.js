@@ -1,6 +1,7 @@
 const { Url_Link } = require('../models/');
 const { viewLogs } = require('./utils.js');
 
+
 module.exports = {
     /* GET all */
     displayAllUrls : async (req,res,next) => {
@@ -16,19 +17,17 @@ module.exports = {
         const { custom } = req.params;
 
         try {
-            // ! UPDATE Url_Link count++
             const data = await Url_Link.query().findOne({ custom });
+            const upd = await Url_Link.query()
+            .patchAndFetchById(data.id, {count: +(data.count) + 1});
             viewLogs([ data ])
+            
+            if (process.env.NODE_ENV === "development") {
+                return res.json( data );
+            }
 
-            // ! FIX redirect
-            // res.header("Access-Control-Allow-Origin", "*");
-            // res.header("Access-Control-Allow-Origin", 'https://www.google.com/');
-            // return res.statusCode(301).redirect( data.url );
-            return res.statudCode(302).redirect( 'https://www.google.com/' );
-            // return res.writeHead(302, { 'Location':'https://www.google.com/' })
-
-            // if (data) res.redirect( data.url );
-            // else res.redirect(`/?error=${ custom }-not-found`)
+            if (data) res.redirect( data.url );
+            else res.redirect(`/?error=${ custom }-not-found`);
         } catch (err) { res.redirect('/?error=link-not-found'); }
     },
 

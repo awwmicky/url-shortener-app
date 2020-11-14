@@ -3,19 +3,17 @@ const { nanoid } = require('nanoid');
 const Url = require('url-parse');
 const { viewLogs } = require('./utils.js');
 
+
 module.exports = {
     /* GET */
     findUrlByName : async (req,res,next) => {
         const { custom } = req.params;
 
         try {
-            const data = await Url_Link
-            .query().findOne({ custom });
-
-            // console.table([ data ])
+            const data = await Url_Link.query().findOne({ custom });
             // viewLogs([ data ])
             res.json( data )
-        } catch (err) { next(err); }
+        } catch (err) { next(err) }
     },
 
     /* POST */
@@ -33,17 +31,15 @@ module.exports = {
                 const doesExist = await Url_Link
                 .query().where('custom', custom);
 
-                console.log( doesExist )
-
                 if (doesExist.length) throw new Error(
                     'custom URL name is already in use.'
                 );
             }
 
             const data = await Url_Link.query().insert(req.body);
-            console.table([ data ])
+            // viewLogs([ data ])
             res.json( data )
-        } catch (err) { next(err); }
+        } catch (err) { next(err) }
     },
 
     /* PATCH */
@@ -52,13 +48,13 @@ module.exports = {
         const { count } = req.query;
 
         try {
-            const up = await Url_Link.query()
+            const upd = await Url_Link.query()
             .findById(id).patch({count: +(count) + 1});
             // const data = await Url_Link.query();
             // viewLog( data )
             // res.json( data )
             res.send('count updated  ✓')
-        } catch (err) { next(err); }      
+        } catch (err) { next(err) }
     },
 
     /* DELETE */
@@ -71,7 +67,7 @@ module.exports = {
             // viewLog( data )
             // res.json( data )
             res.send('url deleted ✓')
-        } catch (err) { next(err); }      
+        } catch (err) { next(err) }
     },
 
     error : (req,res,next) => next()

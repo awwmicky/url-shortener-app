@@ -6,8 +6,8 @@
         "url"        : "https://www.google.com/",
         "checked"    : false,
         "count"      : 0,
-        "create_at"  : 1111,
-        "updated_at" : 2222
+        "created_at" : "2020-11-05T01:56:46.852Z",
+        "updated_at" : "2020-11-05T01:56:46.852Z"
     },
     {
         "id"         : 2,
@@ -16,8 +16,8 @@
         "url"        : "https://www.amazon.com/",
         "checked"    : false,
         "count"      : 0,
-        "create_at"  : 1111,
-        "updated_at" : 2222
+        "created_at" : "2020-11-05T01:56:46.852Z",
+        "updated_at" : "2020-11-05T01:56:46.852Z"
     },
     {
         "id"         : 3,
@@ -26,7 +26,7 @@
         "url"        : "https://www.torrent.com/",
         "checked"    : false,
         "count"      : 0,
-        "create_at"  : 1111,
-        "updated_at" : 2222
+        "created_at" : "2020-11-05T01:56:46.852Z",
+        "updated_at" : "2020-11-05T01:56:46.852Z"
     }
 ]

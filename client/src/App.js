@@ -47,6 +47,16 @@ function App () {
   }, [ setState ])
 
   useEffect(() => {
+    (() => {
+      const path = window.location.pathname;
+      if (path === '/') return;
+      axios.get(path)
+      .then(res => window.location.assign( res.data.url ))
+      .catch(err => console.error(err))
+    })()
+  }, [ ])
+
+  useEffect(() => {
     console.log( (data ? data : ""),custom,link )
   }, [ data,custom,link ])
 

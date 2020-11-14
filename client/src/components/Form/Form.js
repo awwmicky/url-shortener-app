@@ -25,16 +25,13 @@ export default function Form () {
     } catch (err) { console.error(err) }
   };
 
-  // ! REDIRECT test page
+  // ! REDIRECT to test page
   const handleTest = async (e) => {
     try {
-      // const { data:res } = 
-      await axios.get(`/${custom}`);
-      // console.info( res )
-      // await axios.get(`/${custom}`,{ headers:{ 'Access-Control-Allow-Origin' : '*' }});
-      // setState(draft => { draft.data = res; })
+      const { data:res } = await axios.get(`/${ custom }`);
+      console.info( res )
     } catch (err) { console.error(err) }
-  }; // ? TEST redirect
+  };
 
   ////
 

@@ -16,6 +16,7 @@ export default function Body () {
         data && data.map((link, id) => (
           <tr key={ link.id } data-id={ id }>
             <td className="count">{ link.count }</td>
+            {/* <td>{ link.created_at }</td> */}
 
             <td><Anchor url={ link.url } text={ link.domain } /></td>
             <td><Anchor url={ link.url } text={ '/' + link.custom } /></td>

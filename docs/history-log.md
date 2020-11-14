@@ -49,6 +49,12 @@
     - use `useImmerReducer` for API display all
     - [**File →**](../client/src/App.js)
 
+* [x] workaround: redirect page during development
+
+* [ ] style: make responsive `<table>` CSS
+
+* [ ] style: hero section `<form>` CSS
+
 ---
 
 [**← Go Back**](../)
