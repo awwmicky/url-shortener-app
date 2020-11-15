@@ -1,36 +1,43 @@
 import { useContext } from 'react'
 import Context from '../../utils/Context.js'
-// import './Form.css'
+import './Form.scss'
 import axios from 'axios'
-import Input from './Input'
 
 
 export default function Form () {
 
-  const { state, setState } = useContext(Context);
-  const { custom,link } = state;
+  const { state:{ link },setState } = useContext(Context);
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    const obj = {
+      id: 10,
+      custom: 'as98das',
+      domain: 'google',
+      url: 'https://www.google.com'
+    };
+
     try {
-      const body = { custom,link };
-      const { data:res } = await axios.post('/url/new', body);
+      // const body = { url:link };
+      // const { data:res } = await axios.post('/url/new', body);
       // console.log( res )
       setState(draft => { 
-        // draft.custom = "";
-        // draft.link = "";
-        draft.data.push(res)
+        // draft.data.push(res)
+        // draft.recent = res;
+        // draft.custom = res.custom;
+        // draft.link = ""; // ? RESET
+        
+        // ? TEST
+        draft.custom = obj.custom;
+        draft.recent = obj;
       })
     } catch (err) { console.error(err) }
   };
 
-  // ! REDIRECT to test page
-  const handleTest = async (e) => {
-    try {
-      const { data:res } = await axios.get(`/${ custom }`);
-      console.info( res )
-    } catch (err) { console.error(err) }
+  const handleValue = (e) => {
+    const { name,value } = e.target;
+    setState(draft => { draft[name] = value; })
   };
 
   ////
@@ -41,31 +48,26 @@ export default function Form () {
       id="url-form" 
       onSubmit={ handleSubmit }
     >
-      <Input
-        name={ 'custom' }
-        ph={ 'enter-custom-name' }
-        focus={ true }
-        val={ custom }
+      <input 
+        type="text"
+        name="link"
+        id="link"
+        placeholder=" "
+        autoComplete="off"
+        autoFocus
+        value={ link }
+        onChange={ handleValue }
       />
 
-      <Input
-        name={ 'link' }
-        ph={ 'www.website.com' }
-        val={ link }
-      /> 
-
-      <button
-        type="button"
-        name="get_btn"
-        id="get-btn"
-        onClick={ handleTest }
-      >Redirect Test</button>
+      <label 
+        htmlFor="link"
+      >Add URL Here</label>
 
       <button 
         type="submit"
         name="submit_btn"
         id="submit-btn"
-      >Create URL</button>
+      >shorten 🔗</button>
     </form>
   );
 }

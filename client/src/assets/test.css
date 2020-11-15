@@ -14,10 +14,9 @@ footer { border: 2px solid dimgray; }
 /* main .web-layout { border: 2px solid slategray; } */
 /* footer > .web-layout { border: 2px solid slategray; } */
 
-form { border: 2px solid black; }
+/* form { border: 2px solid black; } */
 table { border: 2px solid black; }
 table *:not(a) { border: 1px solid gray; }
 
-/* table button { */
-    /* background: #000; */
-/* } */
+/* #hero-fold div > * { border: 1px solid silver; } */
+/* #hero-fold .result { border: 2px solid black; } */

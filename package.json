@@ -16,7 +16,8 @@
     "build": "npm install && (cd client && npm install && npm run build)",
     "dev": "concurrently -n 'server,client' -c 'yellow,white' npm:server  npm:client",
     "dev:db": "cd test && node database.js",
-    "dev:val": "cd test && node validation.js"
+    "dev:val": "cd test && node validation.js",
+    "dev:test": "cd test && node index.js"
   },
   "keywords": [],
   "author": "",
@@ -31,7 +32,7 @@
     "morgan": "^1.10.0",
     "nanoid": "^3.1.16",
     "objection": "^2.2.3",
-    "pg": "^8.4.2",
+    "pg": "^8.5.1",
     "url-parse": "^1.4.7",
     "yup": "^0.29.3"
   },

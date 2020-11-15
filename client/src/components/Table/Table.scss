@@ -1,0 +1,51 @@
+$dark: rgb(52, 58, 64);
+$h-dark: rgba(52,58,64,0.5);
+$blue:  rgb(0, 123, 255);
+$h-blue: rgba(0, 123, 255,0.5);
+$yellow: rgb(255, 193, 7);
+$h-yellow: rgba(255,193,7,0.5);
+$red: rgb(220, 53, 69);
+$h-red: rgba(220, 53, 69,0.5);
+
+
+.count {
+    color: $dark;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+}
+
+table a:hover { color: $blue; }
+table a:active { color: $h-blue; }
+
+
+table button {
+    border: 1px solid transparent;
+    line-height: 1.5;
+    border-radius: 0.25em;
+    /* padding: 0.375em 0.75em; */
+    transition: all 0.15s ease-in;
+}
+
+.show { border-color: $dark; }
+.show:hover { background: $dark; }
+.show:active {
+    background: $h-dark;
+    box-shadow: 0 0 0 0.2rem $h-dark;
+}
+
+.copy { border-color: $yellow; }
+.copy:hover { background:$yellow; }
+.copy:active { 
+    background: $h-yellow; 
+    box-shadow: 0 0 0 0.2rem $h-yellow; 
+}
+
+.delete { border-color: $red; }
+.delete:hover { background: $red; }
+.delete:active {
+    background: $h-red;
+    box-shadow: 0 0 0 0.2rem $h-red;
+}

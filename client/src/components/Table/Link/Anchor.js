@@ -7,8 +7,7 @@ import axios from 'axios'
 export default function Anchor (props) {
 
   const { url, text, cName='', hide='' } = props;
-  const { 
-    state:{ data } , setState , mainContainer 
+  const { state:{ data } , setState , mainContainer 
   } = useContext(Context);
 
   ////
@@ -34,7 +33,7 @@ export default function Anchor (props) {
   return (
     <>
       <a
-        className={ cName ? cName : cName }
+        className={ cName }
         href={ url }
         target="_blank"
         rel="noopener noreferrer"

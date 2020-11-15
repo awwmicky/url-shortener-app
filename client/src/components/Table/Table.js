@@ -1,6 +1,6 @@
 import React from 'react'
 // import './Table.css'
-import Body from './Link/Body.js'
+import TBody from './Link/TBody.js'
 
 
 export default function Table () {
@@ -9,8 +9,9 @@ export default function Table () {
       <table name="url_table" id="url-table">
         <thead>
           <tr>
-            <th>Clicks</th>
-            <th>Domain URL</th>
+            <th>Clicked</th>
+            <th>Published</th>
+            <th>Domain</th>
             <th>Custom URL</th>
             <th>Show Link</th>
             <th>Copy Link</th>
@@ -18,7 +19,7 @@ export default function Table () {
           </tr>
         </thead>
 
-        <Body />
+        <TBody />
       </table>
     </div>
   );

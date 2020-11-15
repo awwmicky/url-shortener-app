@@ -29,29 +29,43 @@ const obj = {
 
 const fn = (val) => val.replace(/\s+/g, '-');
 
-const schema = yup.object().shape({
-  custom : yup.string().trim().test( obj ).transform( fn ),
-  link   : yup.string().trim().url().required()
-});
+const schemaUrl = yup.string().trim().url().required();
+const schemaCustom =  yup.string().trim().test( obj ).transform( fn );
 
 module.exports = {  
-  validateInp : async (req,res,next) => {
-    console.log('validating ~')
+  validateUrl : async (req,res,next) => {
     try {
-      const check = [req.body,{abortEarly:false}];
-      const isVal = await schema.validate(...check);
+      const isVal = await schemaUrl.validate(req.body.url);
       
       if (isVal) {
         console.log('validated ✓')
         // console.log(isVal,req.body)
-        req.body = isVal;
+        req.body.url = isVal;
         return next();
       } else { console.error(isVal) }
     } catch (err) {
       console.log('validated ✗')
       // console.error(err)
       return next(err);
-      // ! send proper error message
+      // ! SEND proper error message
+    }
+  },
+
+  validateCustom : async (req,res,next) => {
+    try {
+      const isVal = await schemaCustom.validate(req.query.custom);
+      
+      if (isVal) {
+        console.log('validated ✓')
+        // console.log(isVal,req.query)
+        req.query.custom = isVal;
+        return next();
+      } else { console.error(isVal) }
+    } catch (err) {
+      console.log('validated ✗')
+      // console.error(err)
+      return next(err);
+      // ! SEND proper error message
     }
   }
 }

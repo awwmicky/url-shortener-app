@@ -4,9 +4,10 @@ import './assets/style.scss'
 import './assets/test.css'
 import { useImmer } from 'use-immer'
 import axios from 'axios'
-// import db from './assets/data-temp.json'
+import db from './assets/data-temp.json'
 import Form from './components/Form/Form'
-import Table from './components/Table/Table'
+import Result from './components/Result/Result'
+// import Table from './components/Table/Table'
 import Modal from './components/Modal/Modal'
 import Context from './utils/Context.js'
 import useClipboard from './utils/useClipboard.js'
@@ -14,10 +15,11 @@ import { mainContainer } from './utils/mainContainer.js'
 
 
 const initState = { 
-  // data: db,
-  data: null,
+  data:   db,
+  // data:   null,
+  recent: null,
   custom: "",
-  link: ""
+  link:   ""
 };
 
 const initModal = {
@@ -38,13 +40,13 @@ function App () {
 
   ////
 
-  useEffect(() => {
-    (() => (
-      axios.get('/all')
-      .then(res => setState(draft => { draft.data = res.data; }))
-      .catch(err => console.error(err))
-    ))()
-  }, [ setState ])
+  // useEffect(() => {
+  //   (() => (
+  //     axios.get('/all')
+  //     .then(res => setState(draft => { draft.data = res.data; }))
+  //     .catch(err => console.error(err))
+  //   ))()
+  // }, [ setState ])
 
   useEffect(() => {
     (() => {
@@ -64,13 +66,17 @@ function App () {
 
   return (
     <Context.Provider value={ states }>
-      <main>
-        <h1>URL Shortener App</h1>
+      <main id="hero-fold">
+        <div className="headlines">
+          <h1>"<em>Poke</em>.Me It"</h1>
+          <p>sharing links, made simple.</p>
+        </div>
 
         <Form />
-        <Table />
+        <Result />
       </main>
 
+      {/* <Table /> */}
       <Modal />
     </Context.Provider>
   );

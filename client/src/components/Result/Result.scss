@@ -1,0 +1,51 @@
+.result {
+    background: rgba(0,0,0,0.5);
+    border-radius: 0.75em;
+    max-width: 600px;
+    width: 100%;
+    height: 50px;
+    margin-top: 1.875em;
+    // padding: 1.25em;
+    position: relative;
+
+    // &:hover {}
+    // &:active {}
+
+    .link-btn, 
+    #custom
+    {
+        border-radius: 0.75em;
+        width: 100%;
+        height: 100%;
+        padding: 0 1.25em;
+    }
+
+    label {
+        color: #f5f5f5;
+        position: absolute;
+        top: 110%;
+        left: 0;
+    }
+
+    .options {
+        position: absolute;
+        top: 120%;
+        right: 0;
+
+        button {
+            border: 1px solid transparent;
+            line-height: 1.5;
+            border-radius: 0.25em;
+            padding: 0.375em 0.75em;
+        
+            &:not(:first-child) {
+                margin-left: 1em;
+            }
+
+            // &:hover {}
+            // &:active {}
+        }
+    }
+}
+
+.hide { visibility: hidden; }

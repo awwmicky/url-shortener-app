@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import Context from '../../../utils/Context.js'
-// import Modal from '../../Modal/Modal'
 // import './Body.css'
 import Anchor from './Anchor'
 import Button from './Button'
+import Time from './Time'
 
 
 export default function Body () {
@@ -15,11 +15,11 @@ export default function Body () {
       {
         data && data.map((link, id) => (
           <tr key={ link.id } data-id={ id }>
-            <td className="count">{ link.count }</td>
-            {/* <td>{ link.created_at }</td> */}
+            <td><span className="count">{ link.count }</span></td>
+            <td><Time date={ link.created_at } /></td>
 
             <td><Anchor url={ link.url } text={ link.domain } /></td>
-            <td><Anchor url={ link.url } text={ '/' + link.custom } /></td>
+            <td><Anchor url={ link.url } text={ '/'+link.custom } /></td>
 
             <td><Button cName={ 'show' } i={ '👁‍🗨' } setModal={ setModal } /></td>
             <td><Button cName={ 'copy' } i={ '📋' } /></td>
