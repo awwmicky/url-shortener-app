@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import Context from '../../utils/Context.js'
 import './Form.scss'
-import axios from 'axios'
+// import axios from 'axios'
 
 
 export default function Form () {

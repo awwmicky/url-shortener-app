@@ -40,14 +40,6 @@ function App () {
 
   ////
 
-  // useEffect(() => {
-  //   (() => (
-  //     axios.get('/all')
-  //     .then(res => setState(draft => { draft.data = res.data; }))
-  //     .catch(err => console.error(err))
-  //   ))()
-  // }, [ setState ])
-
   useEffect(() => {
     (() => {
       const path = window.location.pathname;
@@ -57,6 +49,14 @@ function App () {
       .catch(err => console.error(err))
     })()
   }, [ ])
+
+  // useEffect(() => {
+  //   (() => (
+  //     axios.get('/all')
+  //     .then(res => setState(draft => { draft.data = res.data; }))
+  //     .catch(err => console.error(err))
+  //   ))()
+  // }, [ setState ])
 
   useEffect(() => {
     console.log( (data ? data : ""),custom,link )
@@ -68,12 +68,14 @@ function App () {
     <Context.Provider value={ states }>
       <main id="hero-fold">
         <div className="headlines">
-          <h1>"<em>Poke</em>.Me It"</h1>
+          <h1>"<q>Poke.</q>Me It"</h1>
           <p>sharing links, made simple.</p>
         </div>
 
         <Form />
         <Result />
+
+        <button className="more-btn">▼</button>
       </main>
 
       {/* <Table /> */}

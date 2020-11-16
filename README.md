@@ -39,7 +39,7 @@ DB_NAME_LOCAL = [ add database  ]
 - **Back-End**: `Node` / `Express`
     - url tools: `nanoid` / `url-parse` / `yup`
     - protection: `helmet` / `cors`
-- **Database**: `Postres` / `KnexJS` / `ObjectionJS (ORM)`
+- **Database**: `Postres` / `KnexJS (Query Builder)` / `ObjectionJS (ORM)`
 
 ---
 

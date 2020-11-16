@@ -53,17 +53,7 @@ export default function Result () {
 
 /*  
 = TASK FLOW =
-- submit new URL
-  - check if custom URL is new
-  - display URL to Result Comp
 - offest, position absolute container
   - edit/save btn (blue/green)
   - delete btn (red)
-- Button Comp
-  - pre-custom URL link
-  - copy > wait > reset
-- Input Comp
-  - value = pre-custom URL link
-  - cancel by esc-key or click outside
-  - reverts back to Button Comp
 */

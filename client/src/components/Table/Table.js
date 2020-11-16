@@ -5,7 +5,7 @@ import TBody from './Link/TBody.js'
 
 export default function Table () {
   return (
-    <div className="table-container">
+    <section id="table-fold">
       <table name="url_table" id="url-table">
         <thead>
           <tr>
@@ -21,6 +21,6 @@ export default function Table () {
 
         <TBody />
       </table>
-    </div>
+    </section>
   );
 }

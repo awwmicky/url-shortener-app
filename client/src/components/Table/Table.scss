@@ -8,6 +8,11 @@ $red: rgb(220, 53, 69);
 $h-red: rgba(220, 53, 69,0.5);
 
 
+.table-container { overflow-x: scroll; }
+/* .url-table th,  */
+/* .url-table td */
+/* { min-width: 200px; } */
+
 .count {
     color: $dark;
     font-size: 1.25rem;
