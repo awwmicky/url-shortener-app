@@ -75,7 +75,7 @@ export default function Button (props) {
   return (
     <>
       <button 
-        className={ `btn ${cName}` }
+        className={ `tbl-btn ${cName}` }
         title={ checkTitle(cName) }
         onClick={ checkEvent(cName) }
       >{ text }</button>

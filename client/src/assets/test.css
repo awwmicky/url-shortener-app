@@ -15,11 +15,12 @@ footer { border: 2px solid dimgray; }
 /* footer > .web-layout { border: 2px solid slategray; } */
 
 /* form { border: 2px solid black; } */
-table { border: 2px solid black; }
-table *:not(a) { border: 1px solid gray; }
+/* table { border: 2px solid black; } */
+/* table *:not(a) { border: 1px solid gray; } */
 
 /* #hero-fold div > * { border: 1px solid silver; } */
 /* #hero-fold .result { border: 2px solid black; } */
+/* .tbl-btn * { border: 1px solid silver; } */
 
 /*  */
 

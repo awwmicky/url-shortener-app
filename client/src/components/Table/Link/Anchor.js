@@ -33,7 +33,7 @@ export default function Anchor (props) {
   return (
     <>
       <a
-        className={ cName }
+        className={ `tbl-link ${cName}` }
         href={ url }
         target="_blank"
         rel="noopener noreferrer"

@@ -1,6 +1,7 @@
 #hero-fold {
     background: rgb(80,47,185);
-    background-image: linear-gradient(180deg, 
+    background-image: linear-gradient(
+        180deg, 
         rgba(80,47,185,1) 0%,
         rgba(63,94,251,1) 75%,
     );
@@ -13,7 +14,8 @@
     justify-content: center;
     // overflow: hidden;
     // ! MAKE divder responsive
-    clip-path: circle(calc(110% - 10vw) at top);
+    clip-path: ellipse(100% 93% at 50% 0);
+    // display: none;
 }
 
 .headlines {
@@ -41,6 +43,11 @@
     position: absolute;
     bottom: 11%;
     // bottom: 5%;
+}
+
+@media (max-width: 815px) {
+    // #hero-fold{  clip-path: ellipse(150% 100% at 50% 0); }
+    #hero-fold { clip-path: circle(700px at top); }
 }
 
 @media (max-width: 525px) {

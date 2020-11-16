@@ -1,8 +1,7 @@
-// import { useRef,useEffect,useCallback } from 'react'
-import { useRef,useCallback, useContext } from 'react'
+import { useRef,useState,useEffect,useCallback,useContext } from 'react'
 import Context from '../../utils/Context.js';
 import useEventListener from '../../utils/useEventListener.js'
-// import './Modal.css'
+import './Modal.scss'
 
 
 const ESC_KEY = 27;
@@ -10,7 +9,14 @@ const ESC_KEY = 27;
 export default function Modal () {
 
   const { modal:{ isShowing,url },setModal } = useContext(Context);
+  const [offSet, setOffSet] = useState(0);
   const modalRef = useRef();
+
+  ////
+
+  useEffect(() => {
+    if (isShowing) setOffSet(window.scrollY)
+  }, [ isShowing ])
 
   const closeModal = useCallback(() => (
     setModal(draft => { draft.isShowing = false; }
@@ -26,12 +32,15 @@ export default function Modal () {
 
   const handleExitBtn = (e) => closeModal();
 
-  // useEffect(() => {
-  //   document.addEventListener('keyup', handleEscKey)
-  //   return () => document.removeEventListener('keyup', handleEscKey)
-  // }, [ handleEscKey ])
+  // ! FIX disable scroll
+  const handleScroll = useCallback((e) => {
+    if ( !isShowing ) return;
+    console.log( offSet,window )
+    window.scrollTo(0, offSet)
+  }, [ isShowing,offSet ]);
 
   useEventListener('keyup',handleEscKey)
+  useEventListener('scroll',handleScroll)
 
   ////
 

@@ -7,7 +7,7 @@ import axios from 'axios'
 import db from './assets/data-temp.json'
 import Form from './components/Form/Form'
 import Result from './components/Result/Result'
-// import Table from './components/Table/Table'
+import Table from './components/Table/Table'
 import Modal from './components/Modal/Modal'
 import Context from './utils/Context.js'
 import useClipboard from './utils/useClipboard.js'
@@ -78,7 +78,7 @@ function App () {
         <button className="more-btn">▼</button>
       </main>
 
-      {/* <Table /> */}
+      <Table />
       <Modal />
     </Context.Provider>
   );
