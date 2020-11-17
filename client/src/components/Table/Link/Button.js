@@ -21,6 +21,14 @@ export default function Button (props) {
     else setText( i )
   }, [ i,isCopied ])
 
+  const handleCopy = (e) => {
+    const id = mainContainer(e).dataset.id;
+    const customLink = '/' + data[id].custom;
+    copyLink( customLink )
+    console.log( isCopied,customLink )
+  };
+
+  // TODO : edit for modal
   const handleVisibility = (e) => {
     const id = mainContainer(e).dataset.id;
     console.log( data[id].url )
@@ -30,13 +38,7 @@ export default function Button (props) {
     })
   };
 
-  const handleCopy = (e) => {
-    const id = mainContainer(e).dataset.id;
-    const customLink = '/' + data[id].custom;
-    copyLink( customLink )
-    console.log( isCopied,customLink )
-  };
-
+  // TODO : delete for modal
   const handleDelete = async (e) => {
     const id = mainContainer(e).dataset.id;
     const url = `/url/${ data[id].id }`;

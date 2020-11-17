@@ -22,9 +22,9 @@ $test-5: (#e66465, #9198e5);
     align-items: center;
     justify-content: center;
     // overflow: hidden;
-    // ! MAKE divder responsive
+
+    // FIXME : make divder responsive
     clip-path: ellipse(100% 93% at 50% 0);
-    // display: none;
 }
 
 .headlines {

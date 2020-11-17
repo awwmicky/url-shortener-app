@@ -7,8 +7,7 @@ export default function useEventListener (
   useEffect(() => { savedHandler.current = handler; }, [ handler ])
 
   useEffect(() => {
-    const isSupported = element && element.addEventListener;
-    if ( !isSupported ) return;
+    if ( !(element && element.addEventListener) ) return;
     const eventListener = event => savedHandler.current(event);
 
     element.addEventListener(eventName, eventListener)

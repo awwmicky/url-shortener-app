@@ -1,1 +1,3 @@
-export const mainContainer = (e) => e.target.parentElement.parentElement;
+export const mainContainer = (e) => (
+    e.target.parentElement.parentElement
+);

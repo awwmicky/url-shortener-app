@@ -41,5 +41,3 @@ const PORT = process.env.PORT || 5050;
 app.listen(PORT, _ => console.log(
   `Test Server — http://localhost:${PORT}`
 ))
-
-// React → "proxy": "http://localhost:5050",

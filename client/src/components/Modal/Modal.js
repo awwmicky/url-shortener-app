@@ -2,6 +2,8 @@ import { useRef,useState,useEffect,useCallback,useContext } from 'react'
 import Context from '../../utils/Context.js';
 import useEventListener from '../../utils/useEventListener.js'
 import './Modal.scss'
+// import Delete from './Option/Delete'
+// import Save from './Option/Save'
 
 
 const ESC_KEY = 27;
@@ -32,7 +34,7 @@ export default function Modal () {
 
   const handleExitBtn = (e) => closeModal();
 
-  // ! FIX disable scroll
+  // FIXME : disable scroll
   const handleScroll = useCallback((e) => {
     if ( !isShowing ) return;
     // console.log( offSet,window )

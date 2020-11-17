@@ -47,7 +47,7 @@ module.exports = {
       console.log('validated ✗')
       // console.error(err)
       return next(err);
-      // ! SEND proper error message
+      // FIXME : SEND proper error message
     }
   },
 
@@ -65,7 +65,7 @@ module.exports = {
       console.log('validated ✗')
       // console.error(err)
       return next(err);
-      // ! SEND proper error message
+      // FIXME : SEND proper error message
     }
   }
 }

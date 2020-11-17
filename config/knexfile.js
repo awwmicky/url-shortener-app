@@ -1,3 +1,4 @@
+// FIXME : set npm dev env
 // require("dotenv").config({ path:'../.env' })
 
 module.exports = 

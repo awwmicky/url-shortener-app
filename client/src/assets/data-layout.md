@@ -3,13 +3,15 @@
 ```html
 <tr>
     <td>0</td>
+    <td>1 day ago</td>
+    
     <td><a href="link.com">Domain</a></td>
     <td><a href="link.com">/short</a></td>
+    
     <td>
-        <button>👁️</button>
-        <a href="link.com" hidden>link</a>
+        <button>📋</button>
+        <button>✏️</button>
+        <button>❌</button>
     </td>
-    <td><button>📋</button></td>
-    <td><button>❌</button></td>
 </tr>
 ```

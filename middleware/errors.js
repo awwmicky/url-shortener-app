@@ -6,6 +6,7 @@ module.exports = {
     next(error)
   },
 
+  // FIXME : respond, error message
   /* 505 / 500 */
   internalServerError: (err,req,res,next) => {
     console.error(err)
@@ -16,5 +17,5 @@ module.exports = {
         stack: process.env.NODE_ENV === 'production' ? "✗" : err.stack
       }
     })
-  } // ! fix error message update
+  }
 }

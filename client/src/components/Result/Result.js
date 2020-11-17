@@ -25,7 +25,7 @@ export default function Result () {
       setState(draft => { draft.custom = draft.recent.custom; })
       setOption('c-edit-inp')
     } else {
-      // ! ADD patch
+      // REVIEW : add patch call
       // const url = `/url/${ recent.id }?custom=${ custom }`;
       try {
         // const { data:res } = await axios.path(url);
