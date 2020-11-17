@@ -1,10 +1,10 @@
-$dark: rgb(52, 58, 64);
+$dark: rgb(46, 46, 46);
 $a-dark: rgba(52,58,64,0.4);
-$blue:  rgb(0, 123, 255);
+$blue: rgb(66, 133, 244);
 $a-blue: rgba(0, 123, 255,0.4);
-$yellow: rgb(255, 193, 7);
+$yellow: rgb(255, 187, 51);
 $a-yellow: rgba(255,193,7,0.4);
-$red: rgb(220, 53, 69);
+$red: rgb(255, 53, 71);
 $a-red: rgba(220, 53, 69,0.4);
 
 
@@ -79,6 +79,13 @@ $a-red: rgba(220, 53, 69,0.4);
 .copy:active { 
     background: $a-yellow; 
     box-shadow: 0 0 0 0.2rem $a-yellow; 
+}
+
+.edit { border-color: $blue; }
+.edit:hover { background: $blue; }
+.edit:active {
+    background: $a-blue;
+    box-shadow: 0 0 0 0.2rem $a-blue;
 }
 
 .delete { border-color: $red; }

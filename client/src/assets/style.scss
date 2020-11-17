@@ -1,10 +1,19 @@
+// ? TEST
+$test-1: (180deg, rgba(80,47,185,1) 0%, rgba(63,94,251,1) 75%);
+$test-2: (circle, rgba(252,70,107,1)  0%, rgba(63,94,251,1) 100%);
+$test-3: (at top, #f35 0%, #43e 100%);
+$test-4: (farthest-corner at 40px 40px, #f35 0%, #43e 100%);
+$test-5: (#e66465, #9198e5);
+
+
 #hero-fold {
     background: rgb(80,47,185);
-    background-image: linear-gradient(
-        180deg, 
-        rgba(80,47,185,1) 0%,
-        rgba(63,94,251,1) 75%,
-    );
+    // background-image: linear-gradient($test-1);
+    // background-image: radial-gradient($test-2);
+    // background-image: radial-gradient($test-3);
+    background-image: radial-gradient($test-4);
+    // background-image: linear-gradient($test-5);
+
     min-height: 99vh; // ? EDIT
     padding: 0 1em;
     // position: relative;

@@ -22,6 +22,7 @@ const initState = {
   link:   ""
 };
 
+// ! EDIT modal states
 const initModal = {
   isShowing: false, 
   url: ""

@@ -56,6 +56,7 @@ export default function Button (props) {
     switch (className) {
       case 'show'  : return handleVisibility;
       case 'copy'  : return handleCopy;
+      // case 'copy'  : return handleEdit;
       case 'delete': return handleDelete;
       default: break;
     }
@@ -65,6 +66,7 @@ export default function Button (props) {
     switch (className) {
       case 'show'  : return 'show link';
       case 'copy'  : return 'copy link';
+      case 'edit'  : return 'edit link';
       case 'delete': return 'delete link';
       default: break;
     }

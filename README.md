@@ -2,9 +2,13 @@
 
 > ### status: **Not Deployed**
 
+The idea to have your own library of short/custom url links, helps with sending them quick & making it easy to read.
+The goal to is to personalize the links, track the number of clicks, & set the "time ago" it was published.
+The tech. tools I used to create this web app are React, Sass, Node, Express, & PostgreSQL.
+
 ## Setup & Install
 1. **Requirements**
-    - `Node` / `NPM` / `Postgres`
+    - `Node` / `NPM` / `PostgreSQL`
 2. **Clone Repo**
 ```bash
 HTTPS
@@ -39,7 +43,7 @@ DB_NAME_LOCAL = [ add database  ]
 - **Back-End**: `Node` / `Express`
     - url tools: `nanoid` / `url-parse` / `yup`
     - protection: `helmet` / `cors`
-- **Database**: `Postres` / `KnexJS (Query Builder)` / `ObjectionJS (ORM)`
+- **Database**: `PostreSQL` / `KnexJS (Query Builder)` / `ObjectionJS (ORM)`
 
 ---
 

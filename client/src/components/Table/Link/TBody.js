@@ -24,6 +24,7 @@ export default function Body () {
             <td className="link-opts">
               <Button cName={ 'show' } i={ '👁‍🗨' } setModal={ setModal } />
               <Button cName={ 'copy' } i={ '📋' } />
+              <Button cName={ 'edit' } i={ '✏️' } />
               <Button cName={ 'delete' } i={ '❌' } />
             </td>
           </tr>
