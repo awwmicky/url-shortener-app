@@ -1,6 +1,7 @@
 import { useState,useEffect,useContext } from 'react'
 import Context from '../../utils/Context.js'
 import './Result.scss'
+// import axios from 'axios'
 import Copy from './Option/Copy'
 import Edit from './Option/Edit'
 
@@ -8,52 +9,51 @@ import Edit from './Option/Edit'
 export default function Result () {
 
   const { state:{ recent },setState } = useContext(Context);
-  const [ option,setOption ] = useState(recent ? 'link-btn' : '');
-  const subTitle = option && (option === 'link-btn') 
-  ? 'click to copy link' : 'press enter to save';
+  const [ option,setOption ] = useState(recent ? 'c-link-btn' : '');
   const display = option ? '' : 'hide';
+  const subTitle = option && (option === 'c-link-btn') 
+  ? 'click to copy link' : 'press enter to save';
 
   ////
 
   useEffect(() => {
-    if ( recent ) setOption('link-btn');
+    if ( recent ) setOption('c-link-btn');
   }, [ recent ])
 
-  const handleEdit = (e) => {
-    // ! ADD patch
-    if (option === 'link-btn') {
+  const handleEdit = async (e) => {
+    if (option === 'c-link-btn') {
       setState(draft => { draft.custom = draft.recent.custom; })
-      setOption('custom')
+      setOption('c-edit-inp')
     } else {
-      setState(draft => { draft.recent.custom = draft.custom; })
-      setOption('link-btn')
+      // ! ADD patch
+      // const url = `/url/${ recent.id }?custom=${ custom }`;
+      try {
+        // const { data:res } = await axios.path(url);
+        // console.info( res )
+
+        setState(draft => { draft.recent.custom = draft.custom; })
+        setOption('c-link-btn')
+      } catch (err) { console.error(err) }
     }
   };
 
-  const handleCancel = (e) => setOption('link-btn');
+  const handleCancel = (e) => setOption('c-link-btn');
 
   ////
 
   return (
     <div className={`result ${display}`} data-id={ recent?.id }>
       { 
-        recent && option === 'link-btn' ? <Copy /> : 
+        recent && option === 'c-link-btn' ? <Copy /> : 
         <Edit  save={ handleEdit } cancel={ handleCancel } /> 
       }
 
       <label htmlFor={ option }>{ subTitle }</label>
 
-      <div className="options">
+      <div className="result-opts">
         <button onClick={ handleEdit }>✏️</button>
         <button onClick={ handleCancel }>✖</button>
       </div>
     </div>
   );
 }
-
-/*  
-= TASK FLOW =
-- offest, position absolute container
-  - edit/save btn (blue/green)
-  - delete btn (red)
-*/

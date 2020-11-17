@@ -35,7 +35,7 @@ export default function Modal () {
   // ! FIX disable scroll
   const handleScroll = useCallback((e) => {
     if ( !isShowing ) return;
-    console.log( offSet,window )
+    // console.log( offSet,window )
     window.scrollTo(0, offSet)
   }, [ isShowing,offSet ]);
 

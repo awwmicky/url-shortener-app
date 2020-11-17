@@ -32,12 +32,18 @@
     width: 100%;
     max-width: 375px;
     height: 200px;
-}
-  
-.modal-box > button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-weight: bold;
-    margin: 0.5em 0.6em 0 0;
-}
+
+    button {
+        border-radius: 0.25em;
+        background:#efefef;
+        font-weight: bold;
+        margin: 0.5em 0.6em 0 0;
+        padding: 0.375em 0.75em;
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        &:hover { background: #e2e6ea; }
+        &:active { background: #d3d9df; }
+    }
+}  

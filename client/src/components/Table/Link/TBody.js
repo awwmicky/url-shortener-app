@@ -21,7 +21,7 @@ export default function Body () {
             <td><Anchor url={ link.url } text={ link.domain } /></td>
             <td><Anchor url={ link.url } text={ '/'+link.custom } /></td>
 
-            <td className="options">
+            <td className="link-opts">
               <Button cName={ 'show' } i={ '👁‍🗨' } setModal={ setModal } />
               <Button cName={ 'copy' } i={ '📋' } />
               <Button cName={ 'delete' } i={ '❌' } />

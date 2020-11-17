@@ -8,7 +8,10 @@ $red: rgb(220, 53, 69);
 $a-red: rgba(220, 53, 69,0.4);
 
 
-#table-fold { padding: 0 1em 3.5em; }
+#table-fold { 
+    min-height: 100vh;
+    padding: 1em 1em 3.5em;
+}
 
 #url-table {
     line-height: 1.25;
@@ -47,7 +50,7 @@ $a-red: rgba(220, 53, 69,0.4);
 .tbl-link:hover { color: $blue; }
 .tbl-link:active { color: $a-blue; }
 
-.options {
+.link-opts {
     display: flex;
     flex-flow: wrap;
     gap: 0.5em;
@@ -55,6 +58,7 @@ $a-red: rgba(220, 53, 69,0.4);
 }
 .tbl-btn {
     border: 1px solid transparent;
+    background:#efefef;
     line-height: 1.5;
     border-radius: 0.25em;
     width: 30px;

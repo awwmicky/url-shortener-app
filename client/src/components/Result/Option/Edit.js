@@ -28,6 +28,7 @@ export default function Input (props) {
         type="text"
         name="custom"
         id="custom"
+        className="c-edit-inp"
         autoComplete="off"
         autoFocus={ true }
         value={ custom }

@@ -5,21 +5,18 @@
     width: 100%;
     height: 50px;
     margin-top: 1.875em;
-    // padding: 1.25em;
     position: relative;
 
-    // &:hover {}
-    // &:active {}
-
-    .link-btn, 
-    #custom
+    .c-link-btn, 
+    .c-edit-inp
     {
         border-radius: 0.75em;
         width: 100%;
         height: 100%;
         padding: 0 1.25em;
     }
-    .link-btn { background: #eeaeca; }
+    .c-link-btn { background: #eeaeca; }
+    .c-edit-inp:focus { border: 2px solid #eeaeca; }
 
     label {
         color: #f5f5f5;
@@ -28,23 +25,23 @@
         left: 0;
     }
 
-    .options {
+    .result-opts {
         position: absolute;
         top: 120%;
         right: 0;
 
         button {
             border: 1px solid transparent;
+            background:#efefef;
             line-height: 1.5;
             border-radius: 0.25em;
-            padding: 0.375em 0.75em;
+            width: 35px;
+            height: 35px;
         
-            &:not(:first-child) {
-                margin-left: 1em;
-            }
+            &:not(:first-child) { margin-left: 1em; }
 
-            // &:hover {}
-            // &:active {}
+            &:hover { background: #e2e6ea; }
+            &:active { background: #d3d9df; }
         }
     }
 }

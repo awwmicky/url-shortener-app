@@ -5,7 +5,7 @@
         rgba(80,47,185,1) 0%,
         rgba(63,94,251,1) 75%,
     );
-    height: 99vh; // ? EDIT
+    min-height: 99vh; // ? EDIT
     padding: 0 1em;
     // position: relative;
     display: flex;
@@ -45,9 +45,12 @@
     // bottom: 5%;
 }
 
-@media (max-width: 815px) {
+@media (max-width: 700px) {
     // #hero-fold{  clip-path: ellipse(150% 100% at 50% 0); }
-    #hero-fold { clip-path: circle(700px at top); }
+    #hero-fold {
+        // min-height: 130vh; 
+        clip-path: circle(91vh at top); 
+    }
 }
 
 @media (max-width: 525px) {

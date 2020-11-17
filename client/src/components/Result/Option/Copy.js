@@ -24,8 +24,8 @@ export default function Copy () {
   return (
     <>
       <button
-        id="link-btn"
-        className="link-btn"
+        id="c-link-btn"
+        className="c-link-btn"
         onClick={ handleCopy }
       >{ text }</button>
     </>
