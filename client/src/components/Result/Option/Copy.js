@@ -11,14 +11,13 @@ export default function Copy () {
   const [ isCopied,copyLink ] = useClipboard(1500);
 
   useEffect(() => {
-    if (isCopied) setText('COPIED')
-    else setText( '/' + custom )
+    (isCopied) ? setText('COPIED') : setText( '/' + custom )
   }, [ custom,isCopied ])
 
+  // TODO : apply hostname
   const handleCopy = (e) => {
     const customLink = '/' + custom;
     copyLink( customLink )
-    console.log( isCopied,customLink )
   };
 
   return (

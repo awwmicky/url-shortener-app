@@ -14,18 +14,21 @@ import useClipboard from './utils/useClipboard.js'
 import { mainContainer } from './utils/mainContainer.js'
 
 
+// TODO : reverse DB sort
 const initState = { 
   data:   db,
   // data:   null,
   recent: null,
+  option: "",
   custom: "",
   link:   ""
 };
 
 // TODO : edit modal states
 const initModal = {
-  isShowing: false, 
-  url: ""
+  isShowing: false,
+  id: NaN,
+  type: ""
 }
 
 
@@ -80,6 +83,7 @@ function App () {
       </main>
 
       <Table />
+
       <Modal />
     </Context.Provider>
   );

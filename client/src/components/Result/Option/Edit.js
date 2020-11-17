@@ -7,7 +7,7 @@ const [ ENTER_KEY,ESC_KEY ] = [ 13,27 ];
 
 export default function Input (props) {
 
-  const { save,cancel } = props;
+  const { handleEdit,handleCancel } = props.opts;
   const { state:{ custom },setState } = useContext(Context);
 
   const handleValue = (e) => {
@@ -16,8 +16,8 @@ export default function Input (props) {
   };
 
   const handleKeys = (e) => {
-    if (e.which === ENTER_KEY) return save();
-    if (e.which === ESC_KEY) return cancel();
+    if (e.which === ENTER_KEY) return handleEdit();   
+    if (e.which === ESC_KEY) return handleCancel();
   };
 
   ////

@@ -1,14 +1,14 @@
 import { useState,useEffect,useContext } from 'react'
 import Context from '../../../utils/Context.js'
 // import './Button.css'
-import axios from 'axios'
+// import axios from 'axios'
 
 
 export default function Button (props) {
 
   const { cName='' , i='text' } = props;
   const { 
-    state:{ data } , setState, setModal,
+    state:{ data } , setState , setModal,
     useClipboard , mainContainer 
   } = useContext(Context);
   const [ text,setText ] = useState(i);
@@ -17,62 +17,44 @@ export default function Button (props) {
   ////
 
   useEffect(() => {
-    if (isCopied) setText('📦')
-    else setText( i )
+    (isCopied) ? setText('📦') : setText( i )
   }, [ i,isCopied ])
 
+  // TODO : apply hostname
   const handleCopy = (e) => {
     const id = mainContainer(e).dataset.id;
+ 
     const customLink = '/' + data[id].custom;
     copyLink( customLink )
     console.log( isCopied,customLink )
   };
 
-  // TODO : edit for modal
-  const handleVisibility = (e) => {
+  const handleEdit = (e) => {
     const id = mainContainer(e).dataset.id;
-    console.log( data[id].url )
+
+    setState(draft => { draft.custom = data[id].custom; })
     setModal(draft => {
       draft.isShowing = true;
-      draft.url = data[id].url;
+      draft.id = id;
+      draft.type = cName;
     })
   };
 
-  // TODO : delete for modal
-  const handleDelete = async (e) => {
+  const handleDelete = (e) => {
     const id = mainContainer(e).dataset.id;
-    const url = `/url/${ data[id].id }`;
     
-    try {
-      const { data:res } = await axios.delete(url);
-      console.info( res )
-
-      setState(draft => { 
-        delete draft.data[id];
-        draft.data = draft.data.filter(Boolean);
-      })
-    } catch (err) { console.error(err) }
+    setModal(draft => {
+      draft.isShowing = true;
+      draft.id = id;
+      draft.type = cName;
+    })
   };
 
-  const checkEvent = (className) => {
-    switch (className) {
-      case 'show'  : return handleVisibility;
-      case 'copy'  : return handleCopy;
-      // case 'copy'  : return handleEdit;
-      case 'delete': return handleDelete;
-      default: break;
-    }
-  };
-
-  const checkTitle = (className) => {
-    switch (className) {
-      case 'show'  : return 'show link';
-      case 'copy'  : return 'copy link';
-      case 'edit'  : return 'edit link';
-      case 'delete': return 'delete link';
-      default: break;
-    }
-  };
+  const checkEvent = (
+    (cName === 'copy' && handleCopy) || 
+    (cName === 'edit' && handleEdit) || 
+    (cName === 'delete' && handleDelete)
+  );
 
   ////
 
@@ -80,8 +62,8 @@ export default function Button (props) {
     <>
       <button 
         className={ `tbl-btn ${cName}` }
-        title={ checkTitle(cName) }
-        onClick={ checkEvent(cName) }
+        title={ `${cName} link` }
+        onClick={ checkEvent }
       >{ text }</button>
     </>
   );

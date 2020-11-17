@@ -8,7 +8,7 @@ import Time from './Time'
 
 export default function Body () {
 
-  const { state:{ data },setModal } = useContext(Context);
+  const { state:{ data } } = useContext(Context);
 
   return (
     <tbody>
@@ -22,7 +22,6 @@ export default function Body () {
             <td><Anchor url={ link.url } text={ '/'+link.custom } /></td>
 
             <td className="link-opts">
-              <Button cName={ 'show' } i={ '👁‍🗨' } setModal={ setModal } />
               <Button cName={ 'copy' } i={ '📋' } />
               <Button cName={ 'edit' } i={ '✏️' } />
               <Button cName={ 'delete' } i={ '❌' } />

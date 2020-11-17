@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const { 
-    validateUrl , validateCustom 
+const {  validateUrl , validateCustom 
 } = require('../middleware/validates.js');
 const url = require('../controllers/url-control.js');
 

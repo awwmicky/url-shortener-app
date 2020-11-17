@@ -1,23 +1,24 @@
 import { useRef,useState,useEffect,useCallback,useContext } from 'react'
-import Context from '../../utils/Context.js';
+import Context from '../../utils/Context.js'
 import useEventListener from '../../utils/useEventListener.js'
 import './Modal.scss'
-// import Delete from './Option/Delete'
-// import Save from './Option/Save'
+import Delete from './Option/Delete'
+import Save from './Option/Save'
 
 
 const ESC_KEY = 27;
 
 export default function Modal () {
 
-  const { modal:{ isShowing,url },setModal } = useContext(Context);
-  const [offSet, setOffSet] = useState(0);
+  const { modal:{ isShowing,type } , setModal 
+  } = useContext(Context);
+  const [offSetY, setOffSetY] = useState(0);
   const modalRef = useRef();
 
   ////
 
   useEffect(() => {
-    if (isShowing) setOffSet(window.scrollY)
+    if (isShowing) setOffSetY(window.scrollY)
   }, [ isShowing ])
 
   const closeModal = useCallback(() => (
@@ -37,9 +38,9 @@ export default function Modal () {
   // FIXME : disable scroll
   const handleScroll = useCallback((e) => {
     if ( !isShowing ) return;
-    // console.log( offSet,window )
-    window.scrollTo(0, offSet)
-  }, [ isShowing,offSet ]);
+    // console.log( offSetY,window )
+    window.scrollTo(0, offSetY)
+  }, [ isShowing,offSetY ]);
 
   useEventListener('keyup',handleEscKey)
   useEventListener('scroll',handleScroll)
@@ -58,11 +59,8 @@ export default function Modal () {
           onClick={ handleExitBtn }
         >×</button>
 
-        <a 
-          href={ url }
-          target="_blank"
-          rel="noopener noreferrer"
-        >{ url }</a>
+        { (type === 'edit') && <Save /> }
+        { (type === 'delete') && <Delete /> }
       </div>
     </div>
   );
