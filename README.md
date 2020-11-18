@@ -53,7 +53,7 @@ DB_NAME_LOCAL = [ add database  ]
     - user clicks delete button > pop-up box shows to confirm & delete link
 
 ### Routes/Paths
-- to view client-side calls, [click here](/client/src/apis/api-call.js)
+- to view client-side calls, click [api](/client/src/apis/api-call.js)
 - to view server-side routes, click [page](/routers/page-route.js) or [url](/routers/url-route.js)
 
 | Method | Pattern | Handler |
@@ -87,7 +87,7 @@ What each file/folder contains:
 - `/database/` - handles migrates & seeds to source the data.
 - `/middleware/` - handles custom errors & validations.
 - `/models/` -  helps create, update, & validate model schemas.
-- `/routers/` - the route definitions for the APIs path.
+- `/routers/` - the route definitions for the APIs paths.
 
 ### Error Handling
 In `server.js`, it will listen to any 400s and 500s errors. In `/middleware/` , there is error handling and validation handling. These middleware will respond with a 422 status code and format the response to the client.
