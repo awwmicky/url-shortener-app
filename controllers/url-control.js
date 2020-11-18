@@ -42,8 +42,7 @@ module.exports = {
         const { custom } = req.query;
 
         try {
-            const updated = await Url_Link.query()
-            .findById(id).patch({ custom });
+            await Url_Link.query().findById(id).patch({ custom });
             // const data = await Url_Link.query();
             // viewLog( data )
             // res.json( data )
@@ -57,8 +56,7 @@ module.exports = {
         const { count } = req.query;
 
         try {
-            const updated = await Url_Link.query()
-            .findById(id).patch({count: +(count) + 1});
+            await Url_Link.query().findById(id).patch({count: +(count)+1});
             // const data = await Url_Link.query();
             // viewLog( data )
             // res.json( data )
@@ -71,7 +69,7 @@ module.exports = {
         const { id } = req.params;
 
         try {
-            const deleted = await Url_Link.query().deleteById(id);
+            await Url_Link.query().deleteById(id);
             // const data = await Url_Link.query();
             // viewLog( data )
             // res.json( data )

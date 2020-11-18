@@ -24,8 +24,8 @@ app.use( cors() )
 
 
 /* API Routes */
-const urlRoutes = require("./routes/url-route.js");
-const pageRoutes = require("./routes/page-route.js");
+const urlRoutes = require("./routers/url-route.js");
+const pageRoutes = require("./routers/page-route.js");
 app.use("/url", urlRoutes)
 app.use("/", pageRoutes)
 

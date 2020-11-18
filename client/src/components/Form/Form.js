@@ -18,16 +18,17 @@ export default function Form () {
 
   const { state:{ link },setState } = useContext(Context);
 
+  // REVIEW : convert API
   // FIXME : issue with Time comp
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const url = '/url/new';
+    const body = { url:link };
 
     try {
-      // const body = { url:link };
-      // const { data:res } = await axios.post('/url/new', body);
+      // const { data:res } = await axios.post(url, body);
       // console.log( res )
 
-      // STUB : testing
       setState(draft => { 
         draft.data.push(res)
         draft.recent = res;

@@ -27,7 +27,7 @@ export default function Result () {
       draft.custom = recent.custom;
     });
 
-    // REVIEW : TEST patch call
+    // REVIEW : convert API
     if (option === 'c-edit-inp') {
       // const url = `/url/${ recent.id }?custom=${ custom }`;
 

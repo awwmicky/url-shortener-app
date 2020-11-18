@@ -55,11 +55,9 @@ $a-delete: #ce0012;
     }
 }
 
-// TODO : style Save & Delete comp
-
 .modal-content {
     width: 100%;
-    max-width: 295px; // ?
+    max-width: 295px;
     display: flex;
     flex-flow: column;
 

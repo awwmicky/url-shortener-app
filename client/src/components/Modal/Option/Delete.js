@@ -13,6 +13,7 @@ export default function Delete () {
   } = useContext(Context);
   const { url,custom } = data[id];
 
+  // REVIEW : convert API
   const handleDelete = async (e) => {
     const url = `/url/${ data[id].id }`;
     

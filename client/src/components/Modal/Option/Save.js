@@ -5,7 +5,6 @@ import Context from '../../../utils/Context.js'
 const ENTER_KEY = 13;
 
 
-// TODO : update content
 export default function Save () {
 
   const { 
@@ -23,7 +22,8 @@ export default function Save () {
     setState(draft => { draft.data[id].custom = custom; })
     setModal(draft => { draft.isShowing = false; })
   };
-  
+
+  // REVIEW : convert API
   const handleSave = async (e) => {
     const url = `/url/${ data[id].id }?custom=${ custom }`;
     

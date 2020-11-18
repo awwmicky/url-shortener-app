@@ -12,6 +12,7 @@ export default function Anchor (props) {
 
   ////
 
+  // REVIEW : convert API
   const handleCount = async (e) => {
     const id = mainContainer(e).dataset.id;
     if ( data[id].checked ) return;

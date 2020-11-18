@@ -24,7 +24,6 @@ const initState = {
   link:   ""
 };
 
-// TODO : edit modal states
 const initModal = {
   isShowing: false,
   id: NaN,
@@ -54,7 +53,9 @@ function App () {
     })()
   }, [ ])
 
+  // REVIEW : convert API
   // TODO : load all data after URL shortens
+// const handleData = (e) => (
   // useEffect(() => {
   //   (() => (
   //     axios.get('/all')
@@ -62,6 +63,7 @@ function App () {
   //     .catch(err => console.error(err))
   //   ))()
   // }, [ setState ])
+// );
 
   useEffect(() => {
     console.log( (data ? data : ""),custom,link )
@@ -80,7 +82,7 @@ function App () {
         <Form />
         <Result />
 
-        <button className="more-btn">▼</button>
+        {/* <button onClick={ handleData }>▼</button> */}
       </main>
 
       <Table />
