@@ -54,7 +54,7 @@ module.exports = {
   validateCustom : async (req,res,next) => {
     try {
       const isVal = await schemaCustom.validate(req.query.custom);
-      
+
       if (isVal) {
         console.log('validated ✓')
         // console.log(isVal,req.query)

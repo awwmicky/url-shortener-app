@@ -15,11 +15,10 @@ export default function Anchor (props) {
   const handleCount = async (e) => {
     const id = mainContainer(e).dataset.id;
     if ( data[id].checked ) return;
-    const url = `/url/${ data[id].id }?count=${ data[id].count }`;
+    const url = `/url/count/${ data[id].id }?count=${ data[id].count }`;
 
     try {
-      const { data:res } = await axios.patch(url);
-      console.info( res )
+      await axios.patch(url)
 
       setState(draft => { 
         draft.data[id].count += 1;

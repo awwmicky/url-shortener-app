@@ -24,13 +24,12 @@ export default function Save () {
     setModal(draft => { draft.isShowing = false; })
   };
   
-  // REVIEW : TEST patch call
   const handleSave = async (e) => {
     const url = `/url/${ data[id].id }?custom=${ custom }`;
-    console.log(e.target,'\n',url)
+    
     try {
-      // const { data:res } = await axios.path(url);
-      // console.info( res )
+      console.log(url)
+      // await axios.patch(url)
 
       setState(draft => { draft.data[id].custom = custom; })
       setModal(draft => { draft.isShowing = false; })

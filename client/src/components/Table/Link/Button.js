@@ -1,7 +1,6 @@
 import { useState,useEffect,useContext } from 'react'
 import Context from '../../../utils/Context.js'
 // import './Button.css'
-// import axios from 'axios'
 
 
 export default function Button (props) {

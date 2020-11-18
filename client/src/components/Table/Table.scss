@@ -47,7 +47,12 @@ $a-red: rgba(220, 53, 69,0.4);
     display: inline-block;
 }
 
-.tbl-link:hover { color: $blue; }
+
+.tbl-link:hover {
+    padding-bottom: 0.1em;
+    border-bottom: 1px solid $blue; 
+    color: $blue;
+}
 .tbl-link:active { color: $a-blue; }
 
 .link-opts {
@@ -55,10 +60,11 @@ $a-red: rgba(220, 53, 69,0.4);
     flex-flow: wrap;
     gap: 0.5em;
     justify-content: center;
-}
-.tbl-btn {
-    width: 30px;
-    height: 30px;
+
+    .tbl-btn {
+        width: 30px;
+        height: 30px;
+    }
 }
 
 .copy { border-color: $yellow; }
@@ -81,6 +87,8 @@ $a-red: rgba(220, 53, 69,0.4);
     background: $a-red;
     box-shadow: 0 0 0 0.2rem $a-red;
 }
+
+////
 
 @media (max-width: 700px) {
     #url-table { 

@@ -4,7 +4,7 @@ import Context from '../../../utils/Context.js'
 // import axios from 'axios'
 
 
-// TODO : update content
+
 export default function Delete () {
 
   const { 
@@ -13,13 +13,13 @@ export default function Delete () {
   } = useContext(Context);
   const { url,custom } = data[id];
 
-  // REVIEW : TEST delete call
   const handleDelete = async (e) => {
     const url = `/url/${ data[id].id }`;
-    console.log(e.target,'\n',url)
+    
     try {
-      // const { data:res } = await axios.delete(url);
-      // console.info( res )
+      console.log(url)
+      // await axios.delete(url)
+
       setState(draft => { 
         delete draft.data[id];
         draft.data = draft.data.filter(Boolean);

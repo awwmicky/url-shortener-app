@@ -3,7 +3,7 @@ import './assets/reset.scss'
 import './assets/style.scss'
 import './assets/test.css'
 import { useImmer } from 'use-immer'
-import axios from 'axios'
+// import axios from 'axios'
 import db from './assets/data-temp.json'
 import Form from './components/Form/Form'
 import Result from './components/Result/Result'
@@ -54,6 +54,7 @@ function App () {
     })()
   }, [ ])
 
+  // TODO : load all data after URL shortens
   // useEffect(() => {
   //   (() => (
   //     axios.get('/all')
