@@ -8,7 +8,7 @@ import Time from './Time'
 
 export default function Body () {
 
-  const { state:{ data } } = useContext(Context);
+  const {state:{ data }} = useContext(Context);
 
   return (
     <tbody>

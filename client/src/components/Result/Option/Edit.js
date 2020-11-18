@@ -1,9 +1,8 @@
 import { useContext } from 'react'
 import Context from '../../../utils/Context.js'
 // import './Input.css'
+const [ ENTER_KEY,ESC_KEY ] = [13,27];
 
-
-const [ ENTER_KEY,ESC_KEY ] = [ 13,27 ];
 
 export default function Input (props) {
 
@@ -30,7 +29,10 @@ export default function Input (props) {
         id="custom"
         className="c-edit-inp"
         autoComplete="off"
-        autoFocus={ true }
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck="false"
+        autoFocus="true"
         value={ custom }
         onChange={ handleValue }
         onKeyUp={ handleKeys }

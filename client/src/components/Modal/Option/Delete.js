@@ -8,7 +8,8 @@ import Context from '../../../utils/Context.js'
 export default function Delete () {
 
   const { 
-    state:{ data } , setState , modal:{ id } , setModal 
+    state:{ data } , setState, 
+    modal:{ id } , setModal 
   } = useContext(Context);
   const { url,custom } = data[id];
 
@@ -34,8 +35,8 @@ export default function Delete () {
   };
 
   return (
-    <div className="delete-modal">
-      <div>
+    <div className="modal-content">
+      <div className="delete-modal">
         <p>Are you sure you want to delete this?</p>
         <a href={ url }>{ '/' + custom }</a>
       </div>
@@ -44,11 +45,11 @@ export default function Delete () {
         <button
           className="delete-btn"
           onClick={ handleDelete }
-        >🗑️</button>
+        >✔</button>
         <button
           className="cancel-btn"
           onClick={ handleCancel }
-        >✖️</button>
+        >✘</button>
       </div>
     </div>
   );

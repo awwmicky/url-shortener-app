@@ -55,7 +55,10 @@ export default function Form () {
         id="link"
         placeholder=" "
         autoComplete="off"
-        autoFocus
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck="false"
+        autoFocus="true"
         value={ link }
         onChange={ handleValue }
       />

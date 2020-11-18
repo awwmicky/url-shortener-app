@@ -4,14 +4,12 @@ import useEventListener from '../../utils/useEventListener.js'
 import './Modal.scss'
 import Delete from './Option/Delete'
 import Save from './Option/Save'
-
-
 const ESC_KEY = 27;
+
 
 export default function Modal () {
 
-  const { modal:{ isShowing,type } , setModal 
-  } = useContext(Context);
+  const { modal:{ isShowing,type },setModal } = useContext(Context);
   const [offSetY, setOffSetY] = useState(0);
   const modalRef = useRef();
 
@@ -54,10 +52,7 @@ export default function Modal () {
       onClick={ handleClickOut }
     >
       <div className="modal-box">
-        <button 
-          className="close-btn"
-          onClick={ handleExitBtn }
-        >×</button>
+        <button onClick={ handleExitBtn }>×</button>
 
         { (type === 'edit') && <Save /> }
         { (type === 'delete') && <Delete /> }

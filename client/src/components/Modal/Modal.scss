@@ -18,6 +18,7 @@
   
 .modal-box {
     $shadow: rgba(0, 0, 0, 0.5);
+    border-radius: 0.25em;
     position: relative;
 
     overflow-y: auto;
@@ -49,3 +50,61 @@
 }
 
 // TODO : style Save & Delete comp
+
+.modal-content {
+    width: 100%;
+    max-width: 280px;
+    display: flex;
+    flex-flow: column;
+
+    .save-modal > *,
+    .delete-modal > *
+    { margin-bottom: 1em; }
+
+    .modal-opts { margin-left: auto; }
+    
+    button {
+        border: 1px solid transparent;
+        background:#efefef;
+        line-height: 1.5;
+        border-radius: 0.25em;
+        width: 35px;
+        height: 35px;
+
+        &:not(:first-child) { margin-left: 1em; }
+        &:last-child { border-color: #ddd; }
+
+        &:hover { background: #e2e6ea; }
+        &:active { background: #d3d9df; }
+    }
+    .save-btn {
+        // background: green;
+        &:hover { background: #222; }
+        &:active { background: #d3d9df; }
+    }
+    .delete-btn {
+        background: red;
+        &:hover { background: #222; }
+        &:active { background: #d3d9df; }
+    }
+}
+
+.save-modal {
+    label {
+        font-size: 0.875rem;
+        display: block;
+    }
+    input {
+        border: 1px solid #ddd;
+        width: 100%;
+        padding: 0.75em;
+
+        &:focus { border-color: #000; }
+    }
+}
+
+.delete-modal {
+    > * { text-align: center; }
+    p { font-weight: bold; }
+    a { display: block; }
+}

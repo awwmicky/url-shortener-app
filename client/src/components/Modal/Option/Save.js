@@ -2,8 +2,8 @@ import { useContext } from 'react'
 import Context from '../../../utils/Context.js'
 // import './Save.css'
 // import axios from 'axios'
-
 const ENTER_KEY = 13;
+
 
 // TODO : update content
 export default function Save () {
@@ -44,8 +44,8 @@ export default function Save () {
   };
 
   return (
-    <div className="save-modal">
-      <div>
+    <div className="modal-content">
+      <div className="save-modal">
         <label htmlFor="custom">
           press enter to save
         </label>
@@ -55,7 +55,10 @@ export default function Save () {
           id="custom"
           className="c-edit-inp"
           autoComplete="off"
-          autoFocus={ true }
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
+          autoFocus="true"
           value={ custom }
           onChange={ handleValue }
           onKeyUp={ handleEnterKey }
@@ -66,11 +69,11 @@ export default function Save () {
         <button
           className="save-btn"
           onClick={ handleSave }
-        >✔️</button>
+        >✔</button>
         <button
           className="cancel-btn"
           onClick={ handleCancel }
-        >✖️</button>
+        >✘</button>
       </div>
     </div>
   );
