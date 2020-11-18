@@ -54,7 +54,7 @@ DB_NAME_LOCAL = [ add database  ]
 
 ### Routes/Paths
 - to view client-side calls, [click here](/client/src/apis/api-call.js)
-- to view server-side routes, [click here](/routes/)
+- to view server-side routes, click [page](/routers/page-route.js) or [url](/routers/url-route.js)
 
 | Method | Pattern | Handler |
 |-|-|-|
@@ -77,16 +77,17 @@ DB_NAME_LOCAL = [ add database  ]
 - **Database**: `PostreSQL` / `KnexJS (Query Builder)` / `ObjectionJS (ORM)`
 
 ### Application Structure
-What each file/folder contains
+What each file/folder contains:
 
-- `server.js` - the entry point to our application. this file defines our express server, specify server routes, and connects it to PostgreSQL.
+- `server.js` - the entry point to our application. 
+    - it defines the express server, specify its API routes, and connects it to PostgreSQL.
 - `/client/` - renders static page to display the UI.
-- `/config/` - contains configuration for the database access.
+- `/config/` - configurations for the database access.
 - `/controllers/` - handles the requests & responses.
-- `/database/` - contains migrates & seeds to source the data.
+- `/database/` - handles migrates & seeds to source the data.
 - `/middleware/` - handles custom errors & validations.
 - `/models/` -  helps create, update, & validate model schemas.
-- `/routers/` - contains the route definitions for the APIs.
+- `/routers/` - the route definitions for the APIs path.
 
 ### Error Handling
 In `server.js`, it will listen to any 400s and 500s errors. In `/middleware/` , there is error handling and validation handling. These middleware will respond with a 422 status code and format the response to the client.
