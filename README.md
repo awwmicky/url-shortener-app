@@ -24,7 +24,7 @@ GitHub CLI
     - `npm install`
     - …it will take some time…
 4. **Create `.env` File**
-    - add postres admin credentials
+    - add Postres admin credentials
     - this connects to the client DB
 ```env
 DB_HOST_LOCAL = [ add localhost ]
@@ -34,7 +34,7 @@ DB_NAME_LOCAL = [ add database  ]
 ```
 5. **Migrate & Seed Data**
     - `npm run db`
-6. **DONE! → Run Web App**
+6. **DONE! → Run Server**
     - `npm run dev`
 
 ## Tech Tools Used

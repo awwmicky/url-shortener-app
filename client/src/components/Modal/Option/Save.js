@@ -58,7 +58,7 @@ export default function Save () {
           autoCorrect="off"
           autoCapitalize="off"
           spellCheck="false"
-          autoFocus="true"
+          autoFocus={ true }
           value={ custom }
           onChange={ handleValue }
           onKeyUp={ handleEnterKey }
@@ -67,11 +67,11 @@ export default function Save () {
 
       <div className="modal-opts">
         <button
-          className="save-btn"
+          className="btns save-btn"
           onClick={ handleSave }
         >✔</button>
         <button
-          className="cancel-btn"
+          className="btns cancel-btn"
           onClick={ handleCancel }
         >✘</button>
       </div>

@@ -32,7 +32,7 @@ export default function Input (props) {
         autoCorrect="off"
         autoCapitalize="off"
         spellCheck="false"
-        autoFocus="true"
+        autoFocus={ true }
         value={ custom }
         onChange={ handleValue }
         onKeyUp={ handleKeys }

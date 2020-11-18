@@ -43,11 +43,11 @@ export default function Delete () {
 
       <div className="modal-opts">
         <button
-          className="delete-btn"
+          className="btns delete-btn"
           onClick={ handleDelete }
         >✔</button>
         <button
-          className="cancel-btn"
+          className="btns cancel-btn"
           onClick={ handleCancel }
         >✘</button>
       </div>

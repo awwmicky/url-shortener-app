@@ -34,6 +34,8 @@ $test-5: (#e66465, #9198e5);
         color: $txt-color;
         font-size: 5rem;
         font-weight: 700;
+        text-shadow: 1px 1px 1px #000;
+        // text-shadow: 2px 2px 2px #000;
         
         q { color: #eeaeca; }
     }
@@ -52,7 +54,25 @@ $test-5: (#e66465, #9198e5);
     position: absolute;
     bottom: 11%;
     // bottom: 5%;
+    display: none;
 }
+
+////
+
+.btns {
+    border: 1px solid transparent;
+    border-radius: 0.25em;
+    border-color: #ddd;
+    background:#efefef;
+    color: #333;
+    padding: 0;
+    transition: all 0.15s ease-in-out;
+
+    &:hover { background: #e2e6ea; }
+    &:active { background: #d3d9df; }
+}
+
+////
 
 @media (max-width: 700px) {
     // #hero-fold{  clip-path: ellipse(150% 100% at 50% 0); }

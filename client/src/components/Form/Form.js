@@ -4,7 +4,7 @@ import './Form.scss'
 // import axios from 'axios'
 
 
-const obj = {
+const res = {
   id: 10,
   count: 2,
   custom: 'as98das',
@@ -25,13 +25,13 @@ export default function Form () {
       // const body = { url:link };
       // const { data:res } = await axios.post('/url/new', body);
       // console.log( res )
+
+      // STUB : testing
       setState(draft => { 
-        
-        // STUB : testing
-        draft.data.push( obj )
-        draft.custom = obj.custom;
-        draft.recent = obj;
-        // draft.link = ""; // ? RESET
+        draft.data.push(res)
+        draft.recent = res;
+        draft.custom = res.custom;
+        draft.link = "";
       })
     } catch (err) { console.error(err) }
   };
@@ -58,7 +58,7 @@ export default function Form () {
         autoCorrect="off"
         autoCapitalize="off"
         spellCheck="false"
-        autoFocus="true"
+        autoFocus={ true }
         value={ link }
         onChange={ handleValue }
       />

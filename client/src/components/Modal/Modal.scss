@@ -1,6 +1,13 @@
+$save: #00c851;
+$h-save: #00e25b;
+$a-save: #218838;
+$delete: #ff3547;
+$h-delete: #ff4f5e;
+$a-delete: #ce0012;
+
 .modal-scope {
     z-index: 1111;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0,0,0,0.6);
   
     width: 100%;
     height: 100%;
@@ -11,35 +18,34 @@
 
     position: fixed;
     top: 0;
-    left: 0;
-  
-    transition: all 0.3s ease-out;
+    left: 0; 
 }
   
 .modal-box {
-    $shadow: rgba(0, 0, 0, 0.5);
     border-radius: 0.25em;
-    position: relative;
-
-    overflow-y: auto;
     background: #f8f8f8;
-    box-shadow: 0 0 60px 10px $shadow;
-
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 0 0 60px 10px rgba(0,0,0,0.5);
   
     width: 100%;
     max-width: 375px;
     height: 200px;
 
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    overflow-y: auto;
+
     > button {
         border-radius: 0.25em;
         background:#efefef;
         font-weight: bold;
+        
         margin: 0.5em 0.6em 0 0;
         padding: 0.375em 0.75em;
+        
         position: absolute;
         top: 0;
         right: 0;
@@ -53,7 +59,7 @@
 
 .modal-content {
     width: 100%;
-    max-width: 280px;
+    max-width: 295px; // ?
     display: flex;
     flex-flow: column;
 
@@ -61,31 +67,31 @@
     .delete-modal > *
     { margin-bottom: 1em; }
 
-    .modal-opts { margin-left: auto; }
-    
-    button {
-        border: 1px solid transparent;
-        background:#efefef;
-        line-height: 1.5;
-        border-radius: 0.25em;
-        width: 35px;
-        height: 35px;
+    .modal-opts { 
+        margin-left: auto; 
 
-        &:not(:first-child) { margin-left: 1em; }
-        &:last-child { border-color: #ddd; }
-
-        &:hover { background: #e2e6ea; }
-        &:active { background: #d3d9df; }
+        button {
+            width: 35px;
+            height: 35px;
+            
+            &:not(:first-child) { margin-left: 1em; }
+            &:first-child { color: #efefef; }
+        }
     }
+
     .save-btn {
-        // background: green;
-        &:hover { background: #222; }
-        &:active { background: #d3d9df; }
+        border-color: $save;
+        background: $save;
+
+        &:hover { background:  $h-save; }
+        &:active { background:  $a-save; }
     }
     .delete-btn {
-        background: red;
-        &:hover { background: #222; }
-        &:active { background: #d3d9df; }
+        border-color: $delete;
+        background: $delete;
+
+        &:hover { background: $h-delete; }
+        &:active { background: $a-delete; }
     }
 }
 
@@ -94,12 +100,13 @@
         font-size: 0.875rem;
         display: block;
     }
-    input {
+    input {        
         border: 1px solid #ddd;
+        border-radius: 0.25em;
         width: 100%;
         padding: 0.75em;
 
-        &:focus { border-color: #000; }
+        &:focus { border-color: #333; }
     }
 }
 

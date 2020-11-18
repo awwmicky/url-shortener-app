@@ -23,28 +23,3 @@ footer { border: 2px solid dimgray; }
 /* .tbl-btn * { border: 1px solid silver; } */
 /* .modal-content { border: 1px solid dimgray; } */
 /* .modal-content > div { border: 1px solid silver; } */
-
-/*  */
-
-/*
-&::after {
-    content: "";
-    z-index: -1;
-    border-radius: 0 0 50% 50% / 0 0 100% 100%;
-    background: rgb(80,47,185);
-    background-image: linear-gradient(180deg, 
-        rgba(80,47,185,1) 0%,
-        rgba(63,94,251,1) 75%,
-    );
-    // #634C9E #7255A5 #7f53ac #B17EB7 #647dee;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: (
-        translateY(-1%)
-        scaleX(1.5)
-    );
-}
-*/

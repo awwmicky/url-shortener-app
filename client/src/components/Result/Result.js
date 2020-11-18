@@ -10,6 +10,8 @@ export default function Result () {
 
   const { state:{ recent,option },setState } = useContext(Context);
   const display = option ? '' : 'hide';
+  const text = option === 'c-link-btn' ? '✏️' : '✔';
+  const isInput = option === 'c-edit-inp';
   const subTitle = option && (option === 'c-link-btn') 
   ? 'click to copy link' : 'press enter to save';
 
@@ -28,10 +30,10 @@ export default function Result () {
     // REVIEW : TEST patch call
     if (option === 'c-edit-inp') {
       // const url = `/url/${ recent.id }?custom=${ custom }`;
+
       try {
         // const { data:res } = await axios.path(url);
         // console.info( res )
-
         setState(draft => {
           draft.option = 'c-link-btn';
           draft.recent.custom = draft.custom; 
@@ -54,8 +56,8 @@ export default function Result () {
       <label htmlFor={ option }>{ subTitle }</label>
 
       <div className="result-opts">
-        <button onClick={ handleEdit }>✏️</button>
-        <button onClick={ handleCancel }>✖️</button>
+        <button className="btns" onClick={ handleEdit }>{ text }</button>
+        { isInput && <button className="btns" onClick={ handleCancel }>✘</button> }
       </div>
     </div>
   );

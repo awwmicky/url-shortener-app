@@ -1,9 +1,3 @@
-// ? TEST
-$gray: #e0e0e0; // #efefef
-$h-gray: #d3d9df; // #e2e6ea
-$a-gray: #adadad; // #d3d9df
-
-
 .result {
     background: rgba(0,0,0,0.5);
     border-radius: 0.75em;
@@ -37,17 +31,12 @@ $a-gray: #adadad; // #d3d9df
         right: 0;
 
         button {
-            border: 1px solid transparent;
-            background:#efefef;
-            line-height: 1.5;
-            border-radius: 0.25em;
+            font-weight: bold;
             width: 35px;
             height: 35px;
-        
-            &:not(:first-child) { margin-left: 1em; }
 
-            &:hover { background: #e2e6ea; }
-            &:active { background: #d3d9df; }
+            &:not(:first-child) { margin-left: 1em; }
+            &:first-child { color: #00c851; }
         }
     }
 }
