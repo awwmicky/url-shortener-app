@@ -42,6 +42,7 @@ export default function Button (props) {
   const handleDelete = (e) => {
     const id = mainContainer(e).dataset.id;
     
+    setState(draft => { draft.recent = data[id]; })
     setModal(draft => {
       draft.isShowing = true;
       draft.id = id;

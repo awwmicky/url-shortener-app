@@ -3,12 +3,13 @@ import './assets/reset.scss'
 import './assets/style.scss'
 import './assets/test.css'
 import { useImmer } from 'use-immer'
-// import axios from 'axios'
-import db from './assets/data-temp.json'
+import axios from 'axios'
+// import db from './assets/data-temp.json'
 import Form from './components/Form/Form'
 import Result from './components/Result/Result'
 import Table from './components/Table/Table'
 import Modal from './components/Modal/Modal'
+// import { getAll } from './apis/api-call.js'
 import Context from './utils/Context.js'
 import useClipboard from './utils/useClipboard.js'
 import { mainContainer } from './utils/mainContainer.js'
@@ -16,12 +17,12 @@ import { mainContainer } from './utils/mainContainer.js'
 
 // TODO : reverse DB sort
 const initState = { 
-  data:   db,
-  // data:   null,
+  // data:   db,
+  data  : null,
   recent: null,
   option: "",
   custom: "",
-  link:   ""
+  link  : ""
 };
 
 const initModal = {
@@ -46,7 +47,7 @@ function App () {
   useEffect(() => {
     (() => {
       const path = window.location.pathname;
-      if (path === '/') return;
+      if ((path === '/') || (path === '/all')) return;
       axios.get(path)
       .then(res => window.location.assign( res.data.url ))
       .catch(err => console.error(err))
@@ -56,13 +57,13 @@ function App () {
   // REVIEW : convert API
   // TODO : load all data after URL shortens
 // const handleData = (e) => (
-  // useEffect(() => {
-  //   (() => (
-  //     axios.get('/all')
-  //     .then(res => setState(draft => { draft.data = res.data; }))
-  //     .catch(err => console.error(err))
-  //   ))()
-  // }, [ setState ])
+  useEffect(() => {
+    (() => (
+      axios.get('/all')
+      .then(res => setState(draft => { draft.data = res.data; }))
+      .catch(err => console.error(err))
+    ))()
+  }, [ setState ])
 // );
 
   useEffect(() => {

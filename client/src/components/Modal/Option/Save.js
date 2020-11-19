@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import Context from '../../../utils/Context.js'
 // import './Save.css'
-// import axios from 'axios'
+import axios from 'axios'
 const ENTER_KEY = 13;
 
 
@@ -28,8 +28,8 @@ export default function Save () {
     const url = `/url/${ data[id].id }?custom=${ custom }`;
     
     try {
-      console.log(url)
-      // await axios.patch(url)
+      // console.log(url)
+      await axios.patch(url)
 
       setState(draft => { draft.data[id].custom = custom; })
       setModal(draft => { draft.isShowing = false; })

@@ -12,7 +12,7 @@ const epochs = [
 ];
 
 const getDuration = (timeAgoInSeconds) => {
-  for (let [epoch, seconds] of epochs) {
+  for (let [ epoch , seconds ] of epochs) {
     const interval = Math.floor(timeAgoInSeconds / seconds);
     if (interval >= 1) return { interval , epoch };
   }
@@ -20,29 +20,31 @@ const getDuration = (timeAgoInSeconds) => {
 
 const timeAgo = (date) => {
   const timeAgoInSeconds = Math.floor((new Date() - Date.parse(date)) / 1000);
-  const { interval,epoch } = getDuration(timeAgoInSeconds);
+  if (timeAgoInSeconds === 0) return 'just now';
+  const { interval , epoch } = getDuration(timeAgoInSeconds);
   const suffix = interval === 1 ? '' : 's';
   return `${interval} ${epoch + suffix} ago`;
 };
 
 const options = { 
-  weekday : 'short', 
-  year    : 'numeric', 
+  weekday : 'short',
+  year    : 'numeric',
   month   : 'short', 
-  day     : 'numeric' 
+  day     : 'numeric'
 };
 
 const timestamp = (date) => new Date(date).toLocaleDateString(undefined, options);
 const timeszone = (date) => new Date(date).toUTCString();
 
+////
 
 export default function Time (props) {
 
   const { date } = props;
   const [{ post,stamp,zone }] = useState({
-    post: timeAgo(date),
-    stamp: timestamp(date),
-    zone: timeszone(date)
+    post  : timeAgo(date),
+    stamp : timestamp(date),
+    zone  : timeszone(date)
   });
 
   return (

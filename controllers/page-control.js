@@ -17,9 +17,9 @@ module.exports = {
         const { custom } = req.params;
 
         try {
-            const data = await Url_Link.query().findOne({ custom });
-            const upd = await Url_Link.query()
-            .patchAndFetchById(data.id, {count: +(data.count) + 1});
+            let { id,count } = await Url_Link.query().findOne({ custom });
+            count = +(data.count) + 1;
+            await Url_Link.query().patchAndFetchById(id, { count });
             viewLogs([ data ])
             
             if (process.env.NODE_ENV === "development") {

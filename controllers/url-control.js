@@ -21,16 +21,20 @@ module.exports = {
         const domain = new Url(req.body.url);
         req.body.domain = domain.hostname;
         req.body.custom = nanoid(7).toLowerCase();
+        const { custom } = req.body;
 
         try {
-            const doesExist = await Url_Link.query()
-            .where('custom', req.body.custom);
+            const doesExist = await Url_Link.query().findOne({ custom });
+            if ( doesExist ) throw new Error('Try again.');
+           
+            const data = {
+                ... await Url_Link.query().insert(req.body),
+                created_at: new Date().toISOString(),
+                updated_at: new Date().toISOString(),
+                checked: false,
+                count: 0
+            };
 
-            if (doesExist.length) throw new Error(
-                'custom URL name is already in use.'
-            );
-
-            const data = await Url_Link.query().insert(req.body);
             // viewLogs([ data ])
             res.json( data )
         } catch (err) { next(err) }
@@ -42,10 +46,13 @@ module.exports = {
         const { custom } = req.query;
 
         try {
+            const doesExist = await Url_Link.query().findOne({ custom });
+            const errMsg = 'custom URL name is already in use.';
+            if ( doesExist ) throw new Error( errMsg );
+
             await Url_Link.query().findById(id).patch({ custom });
-            // const data = await Url_Link.query();
-            // viewLog( data )
-            // res.json( data )
+            // const data = await Url_Link.query().findById(id);
+            // viewLog([ data ])
             res.send('custom updated  ✓')
         } catch (err) { next(err) }
     },
@@ -53,13 +60,13 @@ module.exports = {
     /* PATCH count */
     updateCountToUrl: async (req,res,next) => {
         const { id } = req.params;
-        const { count } = req.query;
+        let { count } = req.query;
+        count = +(count) + 1;
 
         try {
-            await Url_Link.query().findById(id).patch({count: +(count)+1});
-            // const data = await Url_Link.query();
-            // viewLog( data )
-            // res.json( data )
+            await Url_Link.query().findById(id).patch({ count });
+            // const data = await Url_Link.query().findById(id);
+            // viewLog([ data ])
             res.send('count updated  ✓')
         } catch (err) { next(err) }
     },
@@ -72,7 +79,6 @@ module.exports = {
             await Url_Link.query().deleteById(id);
             // const data = await Url_Link.query();
             // viewLog( data )
-            // res.json( data )
             res.send('url deleted ✓')
         } catch (err) { next(err) }
     },

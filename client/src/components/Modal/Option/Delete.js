@@ -1,25 +1,25 @@
 import { useContext } from 'react'
 import Context from '../../../utils/Context.js'
 // import './Delete.css'
-// import axios from 'axios'
-
+import axios from 'axios'
 
 
 export default function Delete () {
 
+  // TODO : FIX current item
   const { 
-    state:{ data } , setState, 
+    state:{ data,recent } , setState, 
     modal:{ id } , setModal 
   } = useContext(Context);
-  const { url,custom } = data[id];
+  const { url="",custom="" } = recent;
 
   // REVIEW : convert API
   const handleDelete = async (e) => {
-    const url = `/url/${ data[id].id }`;
+    const path = `/url/${ data[id].id }`;
     
     try {
-      console.log(url)
-      // await axios.delete(url)
+      // console.log(path)
+      await axios.delete(path)
 
       setState(draft => { 
         delete draft.data[id];
@@ -45,6 +45,7 @@ export default function Delete () {
       <div className="modal-opts">
         <button
           className="btns delete-btn"
+          autoFocus={ true }
           onClick={ handleDelete }
         >✔</button>
         <button
