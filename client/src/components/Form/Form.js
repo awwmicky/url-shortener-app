@@ -7,7 +7,7 @@ const FORM = 'form';
 
 export default function Form () {
 
-  const { value:{ link,type,error } , setValue , setState 
+  const { value:{ link , type , error } , setValue , setState 
   } = useContext(Context);
   const display = type === FORM ? "" : 'hide-error';
 

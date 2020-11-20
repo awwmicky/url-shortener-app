@@ -20,15 +20,18 @@ const obj = {
     const { createError } = this;
 
     const len = val.length;
-    const regex = /^([\w\s\-\_])+$/;
-    const [ MIN,MAX ] = [4,20];
+    const regex = /^[\w\s\-\_]+$/;
+    const [ min,max ] = [4,20];
+
+    const checkLength = !(min <= len && len <= max);
+    const checkChars = !regex.test(val);
 
     if ( !val ) return true;
-    if ( !(MIN <= len && len <= MAX) ) return errorResponse({
-      createError, path:obj.name, message:obj.lenErr
+    if ( checkLength ) return errorResponse({
+      createError , path:obj.name , message:obj.lenErr
     });
-    if ( !regex.test(val) ) return errorResponse({
-      createError, path:obj.name, message:obj.charErr
+    if ( checkChars ) return errorResponse({
+      createError , path:obj.name , message:obj.charErr
     });
 
     return val;
@@ -36,7 +39,7 @@ const obj = {
 };
 
 const schemaUrl = yup.string().trim().url().required();
-const schemaCustom =  yup.string().trim().test(obj).transform(fn);
+const schemaCustom =  yup.string().trim().test(obj) //.transform(fn);
 
 ////
 
@@ -69,8 +72,9 @@ module.exports = {
   },
 
   validateUrl : async (req,res,next) => {
+    const { url } = req.body;
     try {
-      const isVal = await schemaUrl.validate(req.body.url);
+      const isVal = await schemaUrl.validate(url);
       
       if (isVal) {
         console.log('validated ✓')
@@ -86,10 +90,11 @@ module.exports = {
     }
   },
 
-  // FIXME : solve issue to display char err
   validateCustom : async (req,res,next) => {
+    const custom = decodeURIComponent(req.query.custom);
     try {
-      const isVal = await schemaCustom.validate(req.query.custom);
+      console.log(custom)
+      const isVal = await schemaCustom.validate(custom);
 
       if (isVal) {
         console.log('validated ✓')

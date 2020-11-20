@@ -11,7 +11,7 @@ module.exports = {
         try {
             const data = await Url_Link.query().findOne({ custom });
             // viewLogs([ data ])
-            res.json( data )
+            res.status(200).json( data )
         } catch (err) { next(err) }
     },
 
@@ -33,7 +33,7 @@ module.exports = {
             };
 
             // viewLogs([ data ])
-            res.json( data )
+            res.status(201).json( data )
         } catch (err) { next( err ) }
     },
 
@@ -50,7 +50,7 @@ module.exports = {
             await Url_Link.query().findById(id).patch({ custom });
             // const data = await Url_Link.query().findById(id);
             // viewLog([ data ])
-            res.send('custom updated  ✓')
+            res.status(204).send('custom updated  ✓')
         } catch (err) { next( err ) }
     },
 
@@ -64,7 +64,7 @@ module.exports = {
             await Url_Link.query().findById(id).patch({ count });
             // const data = await Url_Link.query().findById(id);
             // viewLog([ data ])
-            res.send('count updated  ✓')
+            res.status(204).send('count updated  ✓')
         } catch (err) { next(err) }
     },
 
@@ -76,7 +76,7 @@ module.exports = {
             await Url_Link.query().deleteById(id);
             // const data = await Url_Link.query();
             // viewLog( data )
-            res.send('url deleted ✓')
+            res.status(204).send('url deleted ✓')
         } catch (err) { next(err) }
     },
 

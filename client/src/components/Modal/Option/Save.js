@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import Context from '../../../utils/Context.js'
 // import './Save.css'
 import axios from 'axios'
-const [ MODAL,ENTER_KEY ] = ['modal',13];
+const [ MODAL , ENTER_KEY ] = ['modal',13];
 
 
 export default function Save () {
@@ -15,6 +15,11 @@ export default function Save () {
 
   ////
 
+  const closeModal = () => {
+    setValue(draft => { draft.type = ""; })
+    setModal(draft => { draft.isShowing = false; })
+  };
+
   const handleValue = (e) => {
     const { name,value } = e.target;
     setValue(draft => { draft[name] = value; })
@@ -22,7 +27,8 @@ export default function Save () {
 
   // REVIEW : → convert API
   const handleSave = async (e) => {
-    const url = `/url/custom/${ data[id].id }?custom=${ custom }`;
+    const [ dId,query ] = [data[id].id,encodeURIComponent(custom)];
+    const url = `/url/custom/${ dId }?custom=${ query }`;
     
     try {
       if ( data[id].custom !== custom ) {
@@ -30,20 +36,14 @@ export default function Save () {
         if (res?.error) throw res.error;
       }
 
-      if (!result) {
-        setState(draft => { 
-          draft.data[id].custom = custom;
-        })
-      } else {
-        setState(draft => { 
-          draft.data[id].custom = custom;
-          draft.result.custom = custom;
-        })
-      }
-      setValue(draft => { draft.type = ""; })
-      setModal(draft => { draft.isShowing = false; })
+      closeModal()
+      setState(draft => {
+        draft.data[id].custom = custom;
+        if (result) draft.result.custom = custom;
+      })
     } catch (err) { 
 
+      console.log(err)
       console.error( err.stack )
       setValue(draft => { 
         draft.type = MODAL;
@@ -52,17 +52,13 @@ export default function Save () {
     }
   };
 
-  const handleCancel = (e) => {
-    setModal(draft => { draft.isShowing = false; })
-  };
-
-  const handleEnterKey = (e) => {
-    if (e.which === ENTER_KEY) return handleSave();
-  };
+  const handleCancel = (e) => closeModal();
+  const handleEnterKey = (e) => (
+    (e.which === ENTER_KEY) && handleSave()
+  );
 
   ////
 
-  // SECTION : include error label
   return (
     <div className="modal-content">
       <div className="save-modal">

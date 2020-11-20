@@ -4,12 +4,15 @@ import useEventListener from '../../utils/useEventListener.js'
 import './Modal.scss'
 import Delete from './Option/Delete'
 import Save from './Option/Save'
-const ESC_KEY = 27;
+const [EDIT , DELETE , ESC_KEY] = [
+  'edit','delete',27
+];
 
 
 export default function Modal () {
 
-  const { modal:{ isShowing,type },setModal } = useContext(Context);
+  const { modal:{ isShowing , type } , setModal , setValue 
+  } = useContext(Context);
   const [offSetY, setOffSetY] = useState(0);
   const modalRef = useRef();
 
@@ -19,9 +22,10 @@ export default function Modal () {
     if (isShowing) setOffSetY(window.scrollY)
   }, [ isShowing ])
 
-  const closeModal = useCallback(() => (
-    setModal(draft => { draft.isShowing = false; }
-  )), [ setModal ]);
+  const closeModal = useCallback(() => {
+    setValue(draft => { draft.type = "" })
+    setModal(draft => { draft.isShowing = false; })
+  }, [ setValue,setModal ]);
 
   const handleEscKey = useCallback((e) => {
     if (isShowing && e.which === ESC_KEY) closeModal();
@@ -54,8 +58,8 @@ export default function Modal () {
       <div className="modal-box">
         <button onClick={ handleExitBtn }>×</button>
 
-        { (type === 'edit') && <Save /> }
-        { (type === 'delete') && <Delete /> }
+        { (type === EDIT) && <Save /> }
+        { (type === DELETE) && <Delete /> }
       </div>
     </div>
   );

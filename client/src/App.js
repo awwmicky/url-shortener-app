@@ -60,9 +60,11 @@ function App () {
       const path = window.location.pathname;
       if ((path === '/') || (path === '/all')) return;
       const redirect = (url) => window.location.assign(url);
-  
       axios.get(path)
-      .then(res => redirect(res.data.url))
+      .then(res => {
+        if (res.data !== 'false') throw res.data;
+        else return redirect(res.data);
+      })
       .catch(err => console.error(err))
     })()
   }, [ ])

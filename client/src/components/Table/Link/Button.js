@@ -1,6 +1,9 @@
 import { useState,useEffect,useContext } from 'react'
 import Context from '../../../utils/Context.js'
 // import './Button.css'
+const [ COPY , EDIT , DELETE ] = [
+  'copy','edit','delete'
+];
 
 
 export default function Button (props) {
@@ -19,12 +22,19 @@ export default function Button (props) {
     (isCopied) ? setText('📦') : setText( i )
   }, [ i,isCopied ])
 
-  const openModal = (id) => {
+  const openModal = (id, ) => {
     setModal(draft => {
       draft.isShowing = true;
       draft.id = id;
       draft.type = cName;
     })
+
+    if (cName === EDIT) return setValue(draft => { 
+      draft.custom = data[id].custom; 
+    });
+    if (cName === DELETE) return setState(draft => { 
+      draft.target = data[id]; 
+    });
   };
 
   const handleCopy = (e) => {
@@ -35,22 +45,13 @@ export default function Button (props) {
     copyLink( customLink )
   };
 
-  const handleEdit = (e) => {
-    const id = mainContainer(e).dataset.id;
-    openModal( id )
-    setValue(draft => { draft.custom = data[id].custom; })
-  };
-
-  const handleDelete = (e) => {
-    const id = mainContainer(e).dataset.id;
-    openModal( id )
-    setState(draft => { draft.target = data[id]; })
-  };
+  const handleEdit = (e) => openModal( mainContainer(e).dataset.id );
+  const handleDelete = (e) => openModal( mainContainer(e).dataset.id );
 
   const checkEvent = (
-    (cName === 'copy' && handleCopy) || 
-    (cName === 'edit' && handleEdit) || 
-    (cName === 'delete' && handleDelete)
+    (cName === COPY && handleCopy) || 
+    (cName === EDIT && handleEdit) || 
+    (cName === DELETE && handleDelete)
   );
 
   ////

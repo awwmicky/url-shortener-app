@@ -12,7 +12,7 @@ const [ RESULT , BUTTON , INPUT ] = [
 export default function Result () {
 
   const { 
-    state:{ data , result } ,  setState,
+    state:{ data , result } , setState,
     value:{ custom , option , type , error } , setValue
   } = useContext(Context);
 
@@ -37,7 +37,8 @@ export default function Result () {
 
     // REVIEW : → convert API
     if (option === INPUT) {
-      const url = `/url/custom/${ result.id }?custom=${ custom }`;
+      const [ rId,query ] = [result.id,encodeURIComponent(custom)];
+      const url = `/url/custom/${ rId }?custom=${ query }`;
 
       try {
         if ( result.custom !== custom ) {
@@ -46,14 +47,14 @@ export default function Result () {
           if (res?.error) throw res.error;
         }
 
-        const dId = data.length - 1;
+        const dId = !data ? 0 : data.length - 1;
         setValue(draft => { 
           draft.option = BUTTON;
           draft.type = "";
         })
         setState(draft => { 
           draft.result.custom = custom;
-          draft.data[dId].custom = custom;
+          if (data[dId]) draft.data[dId].custom = custom;
         })
       } catch (err) {
 
