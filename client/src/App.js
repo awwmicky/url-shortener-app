@@ -4,42 +4,53 @@ import './assets/style.scss'
 import './assets/test.css'
 import { useImmer } from 'use-immer'
 import axios from 'axios'
-import db from './assets/data-temp.json'
+// import db from './assets/data-temp.json'
 import Form from './components/Form/Form'
 import Result from './components/Result/Result'
 import Table from './components/Table/Table'
 import Modal from './components/Modal/Modal'
-// import { getAll } from './apis/api-call.js'
 import Context from './utils/Context.js'
 import useClipboard from './utils/useClipboard.js'
 import { mainContainer } from './utils/mainContainer.js'
 
 
-// TODO : reverse DB sort
 const initState = { 
-  data:   db,
-  // data  : null,
-  recent: null,
-  option: "",
-  custom: "",
-  link  : ""
+  // data: db,
+  data   : null,
+  result : null,
+  target : null
+};
+
+const initValue = { 
+  link   : "",
+  custom : "",
+  option : "",
+  type   : "",
+  error  : null
 };
 
 const initModal = {
-  isShowing: false,
-  id: NaN,
-  type: ""
+  isShowing : false,
+  id        : NaN,
+  type      : ""
 }
 
 
 function App () {
 
   const [ state,setState ] = useImmer(initState);
+  const [ value,setValue ] = useImmer(initValue);
   const [ modal,setModal ] = useImmer(initModal);
-  const { data,custom,link } = state;
+  
+  const { data } = state;
+  const { custom } = value;
+  
   const states = { 
-    state , setState , modal , setModal,
-    useClipboard , mainContainer
+    state , setState,
+    value , setValue,
+    modal , setModal,
+    useClipboard , mainContainer 
+    // , API
   };
 
   ////
@@ -48,27 +59,28 @@ function App () {
     (() => {
       const path = window.location.pathname;
       if ((path === '/') || (path === '/all')) return;
+      const redirect = (url) => window.location.assign(url);
+  
       axios.get(path)
-      .then(res => window.location.assign( res.data.url ))
+      .then(res => redirect(res.data.url))
       .catch(err => console.error(err))
     })()
   }, [ ])
 
   // REVIEW : convert API
-  // TODO : load all data after URL shortens
 // const handleData = (e) => (
-  // useEffect(() => {
-  //   (() => (
-  //     axios.get('/all')
-  //     .then(res => setState(draft => { draft.data = res.data; }))
-  //     .catch(err => console.error(err))
-  //   ))()
-  // }, [ setState ])
+  useEffect(() => {
+    (() => (
+      axios.get('/all')
+      .then(res => setState(draft => { draft.data = res.data; }))
+      .catch(err => console.error(err))
+    ))()
+  }, [ setState ])
 // );
 
   useEffect(() => {
-    console.log( (data ? data : ""),custom,link )
-  }, [ data,custom,link ])
+    console.log( (data ? data : "") , custom )
+  }, [ data,custom ])
 
   ////
 

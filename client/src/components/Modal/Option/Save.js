@@ -2,47 +2,67 @@ import { useContext } from 'react'
 import Context from '../../../utils/Context.js'
 // import './Save.css'
 import axios from 'axios'
-const ENTER_KEY = 13;
+const [ MODAL,ENTER_KEY ] = ['modal',13];
 
 
-// SECTION : include error label
 export default function Save () {
 
   const { 
-    state:{ data,custom } , setState, 
-    modal:{ id } , setModal 
+    state:{ data , result } , value:{ custom , type , error }, 
+    modal:{ id } , setState , setValue , setModal 
   } = useContext(Context);
+  const display = type === MODAL ? "" : 'hide-error';
+
+  ////
 
   const handleValue = (e) => {
     const { name,value } = e.target;
-    setState(draft => { draft[name] = value; })
+    setValue(draft => { draft[name] = value; })
   };
 
-  const handleEnterKey = (e) => {
-    if (e.which !== ENTER_KEY) return;
-    setState(draft => { draft.data[id].custom = custom; })
-    setModal(draft => { draft.isShowing = false; })
-  };
-
-  // REVIEW : convert API
+  // REVIEW : → convert API
   const handleSave = async (e) => {
-    const url = `/url/${ data[id].id }?custom=${ custom }`;
+    const url = `/url/custom/${ data[id].id }?custom=${ custom }`;
     
     try {
-      // console.log(url)
-      await axios.patch(url)
+      if ( data[id].custom !== custom ) {
+        const { data:res } = await axios.patch(url);
+        if (res?.error) throw res.error;
+      }
 
-      setState(draft => { draft.data[id].custom = custom; })
+      if (!result) {
+        setState(draft => { 
+          draft.data[id].custom = custom;
+        })
+      } else {
+        setState(draft => { 
+          draft.data[id].custom = custom;
+          draft.result.custom = custom;
+        })
+      }
+      setValue(draft => { draft.type = ""; })
       setModal(draft => { draft.isShowing = false; })
-    } catch (err) { console.error(err) }
+    } catch (err) { 
+
+      console.error( err.stack )
+      setValue(draft => { 
+        draft.type = MODAL;
+        draft.error = err.message; 
+      })
+    }
   };
 
   const handleCancel = (e) => {
-    setModal(draft => {
-      draft.isShowing = false;
-    })
+    setModal(draft => { draft.isShowing = false; })
   };
 
+  const handleEnterKey = (e) => {
+    if (e.which === ENTER_KEY) return handleSave();
+  };
+
+  ////
+
+  // SECTION : include error label
   return (
     <div className="modal-content">
       <div className="save-modal">
@@ -76,10 +96,8 @@ export default function Save () {
         >✘</button>
       </div>
 
-      <span className="err modal-error">
-        {/* Custom URL name is already in use. */}
-        Must contain only a-z, 0-9, or "-"/"_".
-        {/* Must be between 4-20 chars long. */}
+      <span className={`err modal-error ${display}`}>
+        { type === MODAL && error }
       </span>
     </div>
   );

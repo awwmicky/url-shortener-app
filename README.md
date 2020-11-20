@@ -58,13 +58,13 @@ DB_NAME_LOCAL = [ add database  ]
 
 | Method | Pattern | Handler |
 |---|---|---|
-| **GET**    | `/all`           | read all url data         |
-| **GET**    | `/:custom`       | redirect to url           |
-| **GET**    | `/url/:custom`   | read one url data         |
-| **POST**   | `/url/new`       | create custom url         |
-| **PATCH**  | `/url/:id`       | update custom url name    |
-| **PATCH**  | `/url/count/:id` | update # of clicks to url |
-| **DELETE** | `/url/:id`       | remove url data           |
+| **GET**    | `/all`            | read all url data         |
+| **GET**    | `/:custom`        | redirect to url           |
+| **GET**    | `/url/:custom`    | read one url data         |
+| **POST**   | `/url/new`        | create custom url         |
+| **PATCH**  | `/url/custom/:id` | update custom url name    |
+| **PATCH**  | `/url/:id`        | update # of clicks to url |
+| **DELETE** | `/url/:id`        | remove url data           |
 
 ## Code Overview
 

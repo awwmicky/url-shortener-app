@@ -1,43 +1,48 @@
 import { useContext } from 'react'
 import Context from '../../utils/Context.js'
 import './Form.scss'
-// import axios from 'axios'
+import axios from 'axios'
+const FORM = 'form';
 
 
-const res = {
-  url: 'https://codewithmosh.com/p/the-ultimate-git-course',
-  domain: 'codewithmosh',
-  custom: 'code-with-mosh',
-  created_at: new Date().toISOString(),
-  count: 0
-};
-
-// SECTION : include error label
 export default function Form () {
 
-  const { state:{ link },setState } = useContext(Context);
+  const { value:{ link,type,error } , setValue , setState 
+  } = useContext(Context);
+  const display = type === FORM ? "" : 'hide-error';
 
   // REVIEW : convert API
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // const [ url,body ] = ['/url/new',{ url:link }];
+    const [ url,body ] = ['/url/new',{ url:link }];
 
     try {
-      // const { data:res } = await axios.post(url, body);
-      // console.log( res )
+      const { data:res } = await axios.post(url, body);
+      console.info( 'data:',res )
+      if (res?.error) throw res.error;
 
-      setState(draft => { 
-        draft.data.push(res)
-        draft.recent = res;
+      setValue(draft => {
         draft.custom = res.custom;
         draft.link = "";
+        draft.type = "";
       })
-    } catch (err) { console.error(err) }
+      setState(draft => { 
+        draft.data.push(res)
+        draft.result = res;
+      })
+    } catch (err) { 
+
+      console.error(err.stack)
+      setValue(draft => {
+        draft.type = FORM;
+        draft.error = err.message; 
+      })
+    }
   };
 
   const handleValue = (e) => {
     const { name,value } = e.target;
-    setState(draft => { draft[name] = value; })
+    setValue(draft => { draft[name] = value; })
   };
 
   ////
@@ -72,8 +77,8 @@ export default function Form () {
         id="submit-btn"
       >shorten 🔗</button>
 
-      <span className="err link-error">
-        This is a reserved or unknown domain.
+      <span className={`err link-error ${display}`}>
+        { type === FORM && error }
       </span>
     </form>
   );

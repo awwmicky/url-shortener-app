@@ -33,6 +33,7 @@ app.use("/", pageRoutes)
 /* Error Handling */
 const errors = require("./middleware/errors.js");
 app.use(errors.pageNotFoundError)
+app.use(errors.customErrorHandling)
 app.use(errors.internalServerError)
 
 

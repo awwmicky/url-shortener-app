@@ -6,21 +6,22 @@ import axios from 'axios'
 
 export default function Delete () {
 
-  // TODO : FIX current item
   const { 
-    state:{ data,recent } , setState, 
-    modal:{ id } , setModal 
+    state:{ data , target:{ url,custom }},
+    modal:{ id } , setState , setModal
   } = useContext(Context);
-  const { url="",custom="" } = recent;
 
-  // REVIEW : convert API
+  ////
+
+  // REVIEW : TEST converted API
   const handleDelete = async (e) => {
     const path = `/url/${ data[id].id }`;
+    // const id = data[id].id;
     
     try {
-      // console.log(path)
+      // await deleteUrl(id)
       await axios.delete(path)
-
+      
       setState(draft => { 
         delete draft.data[id];
         draft.data = draft.data.filter(Boolean);
@@ -30,10 +31,10 @@ export default function Delete () {
   };
 
   const handleCancel = (e) => {
-    setModal(draft => {
-      draft.isShowing = false;
-    })
+    setModal(draft => { draft.isShowing = false; })
   };
+
+  ////
 
   return (
     <div className="modal-content">

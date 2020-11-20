@@ -59,6 +59,9 @@ $test-5: (#e66465, #9198e5);
 
 ////
 
+.hide-result , .hide-error
+{ visibility: hidden; }
+
 .err {
     border-radius: 0.375em;
     background: #FFE0E0;

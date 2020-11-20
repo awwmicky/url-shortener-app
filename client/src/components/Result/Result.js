@@ -1,50 +1,73 @@
 import { useEffect,useContext } from 'react'
 import Context from '../../utils/Context.js'
 import './Result.scss'
-// import axios from 'axios'
+import axios from 'axios'
 import Copy from './Option/Copy'
 import Edit from './Option/Edit'
+const [ RESULT , BUTTON , INPUT ] = [
+  'result','c-link-btn','c-edit-inp'
+];
 
 
-// SECTION : include error label
 export default function Result () {
 
-  const { state:{ recent,option },setState } = useContext(Context);
-  const display = option ? '' : 'hide';
-  const text = option === 'c-link-btn' ? '✏️' : '✔';
-  const isInput = option === 'c-edit-inp';
-  const subTitle = option && (option === 'c-link-btn') 
+  const { 
+    state:{ data , result } ,  setState,
+    value:{ custom , option , type , error } , setValue
+  } = useContext(Context);
+
+  const displayError = type === RESULT ? "" : 'hide-error';
+  const displayResult = option.length ? "" : 'hide-result';
+  const isInput = option === INPUT;
+  const text = option === BUTTON ? '✏️' : '✔';
+  const subTitle = option && (option === BUTTON) 
   ? 'click to copy link' : 'press enter to save';
 
   ////
 
   useEffect(() => {
-    if ( recent ) setState(draft => { draft.option = 'c-link-btn'; });
-  }, [ recent,setState ])
+    if (result) setValue(draft => { draft.option = BUTTON; });
+  }, [ result,setValue ])
 
   const handleEdit = async (e) => {
-    if (option === 'c-link-btn') return setState(draft => {
-      draft.option = 'c-edit-inp'; 
-      draft.custom = recent.custom;
+    if (option === BUTTON) return setValue(draft => {
+      draft.option = INPUT;
+      draft.custom = result.custom;
     });
 
-    // REVIEW : convert API
-    if (option === 'c-edit-inp') {
-      // const url = `/url/${ recent.id }?custom=${ custom }`;
+    // REVIEW : → convert API
+    if (option === INPUT) {
+      const url = `/url/custom/${ result.id }?custom=${ custom }`;
 
       try {
-        // const { data:res } = await axios.path(url);
-        // console.info( res )
-        setState(draft => {
-          draft.option = 'c-link-btn';
-          draft.recent.custom = draft.custom; 
+        if ( result.custom !== custom ) {
+          const { data:res } = await axios.patch(url);
+          console.info( 'check:',res )
+          if (res?.error) throw res.error;
+        }
+
+        const dId = data.length - 1;
+        setValue(draft => { 
+          draft.option = BUTTON;
+          draft.type = "";
         })
-      } catch (err) { console.error(err) }
+        setState(draft => { 
+          draft.result.custom = custom;
+          draft.data[dId].custom = custom;
+        })
+      } catch (err) {
+
+        console.error( err.stack )
+        setValue(draft => {
+          draft.type = RESULT;
+          draft.error = err.message; 
+        })
+      }
     }
   };
 
-  const handleCancel = (e) => setState(draft => { 
-    draft.option = 'c-link-btn'; 
+  const handleCancel = (e) => setValue(draft => { 
+    draft.option = BUTTON;
   });
 
   const opts = { handleEdit,handleCancel };
@@ -52,8 +75,8 @@ export default function Result () {
   ////
 
   return (
-    <div className={`result ${display}`} data-id={ recent?.id }>
-      { recent && option === 'c-link-btn' ? <Copy /> : <Edit opts={ opts } /> }
+    <div className={`result ${displayResult}`} data-id={ result?.id }>
+      { result && option === BUTTON ? <Copy /> : <Edit opts={ opts } /> }
       <label htmlFor={ option }>{ subTitle }</label>
 
       <div className="result-opts">
@@ -61,8 +84,8 @@ export default function Result () {
         { isInput && <button className="btns" onClick={ handleCancel }>✘</button> }
       </div>
 
-      <span className="err custom-error">
-        Custom URL name is already in use.
+      <span className={`err custom-error ${displayError}`}>
+        { type === RESULT && error }
       </span>
     </div>
   );

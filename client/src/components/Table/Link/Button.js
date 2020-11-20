@@ -6,9 +6,9 @@ import Context from '../../../utils/Context.js'
 export default function Button (props) {
 
   const { cName='' , i='text' } = props;
-  const { 
-    state:{ data } , setState , setModal,
-    useClipboard , mainContainer 
+  const {
+    state:{ data } , setState , setValue, 
+    setModal , useClipboard , mainContainer 
   } = useContext(Context);
   const [ text,setText ] = useState(i);
   const [ isCopied,copyLink ] = useClipboard(1500);
@@ -19,35 +19,32 @@ export default function Button (props) {
     (isCopied) ? setText('📦') : setText( i )
   }, [ i,isCopied ])
 
-  // TODO : apply hostname
+  const openModal = (id) => {
+    setModal(draft => {
+      draft.isShowing = true;
+      draft.id = id;
+      draft.type = cName;
+    })
+  };
+
   const handleCopy = (e) => {
     const id = mainContainer(e).dataset.id;
- 
-    const customLink = '/' + data[id].custom;
+    const domain = window.location.href;
+    const customLink = domain + data[id].custom;
+
     copyLink( customLink )
-    console.log( isCopied,customLink )
   };
 
   const handleEdit = (e) => {
     const id = mainContainer(e).dataset.id;
-
-    setState(draft => { draft.custom = data[id].custom; })
-    setModal(draft => {
-      draft.isShowing = true;
-      draft.id = id;
-      draft.type = cName;
-    })
+    openModal( id )
+    setValue(draft => { draft.custom = data[id].custom; })
   };
 
   const handleDelete = (e) => {
     const id = mainContainer(e).dataset.id;
-    
-    setState(draft => { draft.recent = data[id]; })
-    setModal(draft => {
-      draft.isShowing = true;
-      draft.id = id;
-      draft.type = cName;
-    })
+    openModal( id )
+    setState(draft => { draft.target = data[id]; })
   };
 
   const checkEvent = (

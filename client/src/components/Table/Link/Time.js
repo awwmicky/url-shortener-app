@@ -41,19 +41,19 @@ const timeszone = (date) => new Date(date).toUTCString();
 export default function Time (props) {
 
   const { date } = props;
-  const [{ post,stamp,zone }] = useState({
-    post  : timeAgo(date),
-    stamp : timestamp(date),
-    zone  : timeszone(date)
+  const [{ tAgo,tStamp,tZone }] = useState({
+    tAgo   : timeAgo(date),
+    tStamp : timestamp(date),
+    tZone  : timeszone(date)
   });
 
   return (
     <>
       <time 
         className="time"
-        title={ stamp }
-        dateTime={ zone }
-      >{ post }</time>
+        title={ tStamp }
+        dateTime={ tZone }
+      >{ tAgo }</time>
     </>
   );
 }

@@ -3,29 +3,31 @@ import Context from '../../../utils/Context.js'
 // import './Anchor.css'
 import axios from 'axios'
 
-
+// API:{ updateCount }
 export default function Anchor (props) {
 
   const { url, text, cName='' } = props;
-  const { state:{ data } , setState , mainContainer 
+  const { state:{ data } , setState , mainContainer
   } = useContext(Context);
   const title = cName === "domain" 
   ? new URL(url).hostname : "go to link";
 
   ////
 
-  // REVIEW : convert API
+  // REVIEW : TEST convert API
   const handleCount = async (e) => {
     const id = mainContainer(e).dataset.id;
     if ( data[id].checked ) return;
-    const url = `/url/count/${ data[id].id }?count=${ data[id].count }`;
+    const url = `/url/${ data[id].id }?count=${ data[id].count }`;
+    // const [ dId,query ] = [data[id].id,data[id].count];
 
     try {
+      // await updateCount( dId,query )
       await axios.patch(url)
-
+      
       setState(draft => { 
         draft.data[id].count += 1;
-        draft.data[id].checked = !draft.data[id].checked;
+        draft.data[id].checked = true;
       })
     } catch (err) { console.error(err) }
   };

@@ -7,11 +7,11 @@ const [ ENTER_KEY,ESC_KEY ] = [13,27];
 export default function Input (props) {
 
   const { handleEdit,handleCancel } = props.opts;
-  const { state:{ custom },setState } = useContext(Context);
+  const { value:{ custom },setValue } = useContext(Context);
 
   const handleValue = (e) => {
     const { name,value } = e.target;
-    setState(draft => { draft[name] = value; })
+    setValue(draft => { draft[name] = value; })
   };
 
   const handleKeys = (e) => {

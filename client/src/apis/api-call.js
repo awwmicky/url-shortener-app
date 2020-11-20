@@ -20,6 +20,7 @@ module.exports = {
     } catch (err) { console.error(err) }
   },
 
+  // REVIEW : TEST
   postUrl: async (link) => {
     const [ path,body ] = ['/url/new',{ url:link }];
     try {
@@ -29,8 +30,9 @@ module.exports = {
     } catch (err) { console.error(err) }
   },
 
+  // REVIEW : TEST
   updateCustom: async (id,query) => {
-    const path = `/url/${ id }?custom=${ query }`;
+    const path = `/url/custom/${ id }?custom=${ query }`;
     try {
       console.log('val:', id,query,path)
       const { data } = await axios.patch(path);

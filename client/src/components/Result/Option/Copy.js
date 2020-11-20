@@ -5,8 +5,8 @@ import Context from '../../../utils/Context.js'
 
 export default function Copy () {
   
-  const { state,useClipboard } = useContext(Context);
-  const { custom } = state.recent;
+  const { state:{result:{ custom }} , useClipboard 
+  } = useContext(Context);
   const [ text,setText ] = useState( '/' + custom );
   const [ isCopied,copyLink ] = useClipboard(1500);
 
@@ -14,9 +14,10 @@ export default function Copy () {
     (isCopied) ? setText('COPIED') : setText( '/' + custom )
   }, [ custom,isCopied ])
 
-  // TODO : apply hostname
   const handleCopy = (e) => {
-    const customLink = '/' + custom;
+    const domain = window.location.href;
+    const customLink = domain + custom;
+
     copyLink( customLink )
   };
 

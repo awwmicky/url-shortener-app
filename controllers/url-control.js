@@ -22,7 +22,7 @@ module.exports = {
 
         try {
             const doesExist = await Url_Link.query().findOne({ custom });
-            if ( doesExist ) throw new Error('Try again.');
+            if ( doesExist ) throw new Error('Try again','UrlError');
            
             const data = {
                 ... await Url_Link.query().insert(req.body),
@@ -34,7 +34,7 @@ module.exports = {
 
             // viewLogs([ data ])
             res.json( data )
-        } catch (err) { next(err) }
+        } catch (err) { next( err ) }
     },
 
     /* PATCH custom */
@@ -44,14 +44,14 @@ module.exports = {
 
         try {
             const doesExist = await Url_Link.query().findOne({ custom });
-            const errMsg = 'Custom URL name is already in use.';
-            if ( doesExist ) throw new Error( errMsg );
+            const errMsg = 'Custom URL name is already in use';
+            if ( doesExist ) throw new Error(errMsg,'UrlError');
 
             await Url_Link.query().findById(id).patch({ custom });
             // const data = await Url_Link.query().findById(id);
             // viewLog([ data ])
             res.send('custom updated  ✓')
-        } catch (err) { next(err) }
+        } catch (err) { next( err ) }
     },
 
     /* PATCH count */

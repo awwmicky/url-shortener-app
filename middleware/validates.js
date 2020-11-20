@@ -8,11 +8,14 @@ const errorResponse = (err) => {
   return createError({ path,message });
 };
 
+const upper = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+const fn = (val) => val.replace(/\s+/g, '-');
+
 const obj = {
   name: 'custom-name',
   message: 'error',
-  lenErr  : 'Must be between 4 - 20 chars long.',
-  charErr : 'Must contain only a-z, 0-9, or "-"/"_".',
+  lenErr  : 'Must be between 4 - 20 chars long',
+  charErr : 'Must contain only a-z, 0-9, or "-"/"_"',
   test (val) {
     const { createError } = this;
 
@@ -32,8 +35,6 @@ const obj = {
   }
 };
 
-const fn = (val) => val.replace(/\s+/g, '-');
-
 const schemaUrl = yup.string().trim().url().required();
 const schemaCustom =  yup.string().trim().test(obj).transform(fn);
 
@@ -42,27 +43,27 @@ const schemaCustom =  yup.string().trim().test(obj).transform(fn);
 module.exports = {
   confirmUrl: (req,res,next) => {
     const parseResult = parseDomain(fromUrl( req.body.url ));
+    const msg = { 
+      unknown: 'This is a reserved or unknown domain',
+      invalid: 'This is an ip address or invalid domain'
+    };
+    let err;
 
-    switch (parseResult) {
+    switch (parseResult.type) {
       case ParseResultType.Listed:
-        console.log( true,parseResult )
         req.body.domain = parseResult.icann.domain;
         next()
       break;
       case ParseResultType.Reserved:
       case ParseResultType.NotListed:
-        // FIXME : SEND proper error message
-        const err = new Error(
-          'This is a reserved or unknown domain.'
-        );
-        next(err)
+        err = new Error(msg.unknown,'DomainError');
+        err.statusCode = 400;
+        next( err )
       break;
       default: 
-        // FIXME : SEND proper error message
-        const err = new Error(
-          'This is an ip address or invalid domain.'
-        );
-        next(err)
+        err = new Error(msg.invalid,'DomainError');
+        err.statusCode = 400;
+        next( err )
       break;
     }
   },
@@ -73,33 +74,34 @@ module.exports = {
       
       if (isVal) {
         console.log('validated ✓')
-        // console.log(isVal,req.body)
         req.body.url = isVal;
         return next();
       } else { console.error(isVal) }
     } catch (err) {
+
       console.log('validated ✗')
-      // console.error(err)
-      return next(err);
-      // FIXME : SEND proper error message
+      err.message = upper(err.message);
+      err.statusCode = 400;
+      return next( err );
     }
   },
 
+  // FIXME : solve issue to display char err
   validateCustom : async (req,res,next) => {
     try {
       const isVal = await schemaCustom.validate(req.query.custom);
 
       if (isVal) {
         console.log('validated ✓')
-        // console.log(isVal,req.query)
         req.query.custom = isVal;
         return next();
       } else { console.error(isVal) }
     } catch (err) {
+
       console.log('validated ✗')
-      // console.error(err)
-      return next(err);
-      // FIXME : SEND proper error message
+      err.message = upper(err.message);
+      err.statusCode = 400;
+      return next( err );
     }
   }
 }
