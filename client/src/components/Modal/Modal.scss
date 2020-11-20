@@ -60,6 +60,7 @@ $a-delete: #ce0012;
     max-width: 295px;
     display: flex;
     flex-flow: column;
+    position: relative;
 
     .save-modal > *,
     .delete-modal > *
@@ -90,6 +91,12 @@ $a-delete: #ce0012;
 
         &:hover { background: $h-delete; }
         &:active { background: $a-delete; }
+    }
+
+    .modal-error {
+        position: absolute;
+        left: 0;
+        bottom: -27%;
     }
 }
 

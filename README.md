@@ -57,14 +57,14 @@ DB_NAME_LOCAL = [ add database  ]
 - to view server-side routes, click [page](/routers/page-route.js) or [url](/routers/url-route.js)
 
 | Method | Pattern | Handler |
-|-|-|-|
-| **GET**    | `/all`           | read all url data |
-| **GET**    | `/:custom`       | redirect to url |
-| **GET**    | `/url/:custom`   | read one url data |
-| **POST**   | `/url/new`       | create custom url |
-| **PATCH**  | `/url/:id`       | update custom url name |
+|---|---|---|
+| **GET**    | `/all`           | read all url data         |
+| **GET**    | `/:custom`       | redirect to url           |
+| **GET**    | `/url/:custom`   | read one url data         |
+| **POST**   | `/url/new`       | create custom url         |
+| **PATCH**  | `/url/:id`       | update custom url name    |
 | **PATCH**  | `/url/count/:id` | update # of clicks to url |
-| **DELETE** | `/url:id/`       | remove url data |
+| **DELETE** | `/url/:id`       | remove url data           |
 
 ## Code Overview
 
@@ -81,16 +81,16 @@ What each file/folder contains:
 
 - `server.js` - the entry point to our application. 
     - it defines the express server, specify its API routes, and connects it to PostgreSQL.
-- `/client/` - renders static page to display the UI.
-- `/config/` - configurations for the database access.
-- `/controllers/` - handles the requests & responses.
-- `/database/` - handles migrates & seeds to source the data.
-- `/middleware/` - handles custom errors & validations.
-- `/models/` -  helps create, update, & validate model schemas.
-- `/routers/` - the route definitions for the APIs paths.
+- `/client` - renders static page to display the UI.
+- `/config` - configurations for the database access.
+- `/controllers` - handles the requests & responses.
+- `/database` - handles migrates & seeds to source the data.
+- `/middleware` - handles custom errors & validations.
+- `/models` -  helps create, update, & validate model schemas.
+- `/routers` - the route definitions for the APIs paths.
 
 ### Error Handling
-In `server.js`, it will listen to any 400s and 500s errors. In `/middleware/` , there is error handling and validation handling. These middleware will respond with a 422 status code and format the response to the client.
+In `server.js`, it will listen to any 400s and 500s errors. In `/middleware` , there is error handling and validation handling. These middleware will respond with a 422 status code and format the response to the client.
 
 ---
 

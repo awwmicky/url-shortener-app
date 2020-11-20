@@ -6,7 +6,7 @@ module.exports = {
   getAll: async () => {
     const path = '/all';
     try {
-      console.log('val:',path)
+      console.log('val:', path)
       const { data } = await axios.get(path);
       return data;
     } catch (err) { console.error(err) }
@@ -14,44 +14,45 @@ module.exports = {
 
   redirectTo: async (path) => {
     try {
-      console.log('val:',path)
-      const { data } = await axios.get();
+      console.log('val:', path)
+      const { data } = await axios.get(path);
       return data;
-      
     } catch (err) { console.error(err) }
   },
-  
-  postUrl: async (url,body) => {
+
+  postUrl: async (link) => {
+    const [ path,body ] = ['/url/new',{ url:link }];
     try {
-      console.log('val:',url,body)
-      const { data } = await axios.post();
+      console.log('val:', link,path,body)
+      const { data } = await axios.post(path,body);
       return data;
-    
     } catch (err) { console.error(err) }
   },
-  
+
   updateCustom: async (id,query) => {
+    const path = `/url/${ id }?custom=${ query }`;
     try {
-      console.log('val:',id,query)
-      const { data } = await axios.patch();
+      console.log('val:', id,query,path)
+      const { data } = await axios.patch(path);
       return data;
     } catch (err) { console.error(err) }
   },
-  
+
   updateCount: async (id,query) => {
+    const path = `/url/${ id }?count=${ query }`;
     try {
-      console.log('val:',id,query)
-      const { data } = await axios.patch();
+      console.log('val:', id,query,path)
+      const { data } = await axios.patch(path);
       return data;
     } catch (err) { console.error(err) }
   },
-  
+
   deleteUrl: async (id) => {
+    const path = `/url/${ id }`;
     try {
-      console.log('val:',id)
-      const { data } = await axios.delete();
+      console.log('val:', id,path)
+      const { data } = await axios.delete(path);
       return data;
-    
     } catch (err) { console.error(err) }
   }
 }

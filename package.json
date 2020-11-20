@@ -32,9 +32,10 @@
     "morgan": "^1.10.0",
     "nanoid": "^3.1.16",
     "objection": "^2.2.3",
+    "parse-domain": "^3.0.3",
     "pg": "^8.5.1",
     "url-parse": "^1.4.7",
-    "yup": "^0.29.3"
+    "yup": "^0.30.0"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",

@@ -1,8 +1,8 @@
 [
     {
         "id"         : 1,
-        "custom"     : "ge",
-        "domain"     : "google.com",
+        "custom"     : "6b-mytt",
+        "domain"     : "google",
         "url"        : "https://www.google.com/",
         "checked"    : false,
         "count"      : 0,
@@ -11,8 +11,8 @@
     },
     {
         "id"         : 2,
-        "custom"     : "an",
-        "domain"     : "amazon.com",
+        "custom"     : "_z5jdhi",
+        "domain"     : "amazon",
         "url"        : "https://www.amazon.com/",
         "checked"    : false,
         "count"      : 0,
@@ -21,8 +21,8 @@
     },
     {
         "id"         : 3,
-        "custom"     : "bg",
-        "domain"     : "bing.com",
+        "custom"     : "1stgxr8",
+        "domain"     : "bing",
         "url"        : "https://www.bing.com/",
         "checked"    : false,
         "count"      : 0,
@@ -31,8 +31,8 @@
     },
     {
         "id"         : 4,
-        "custom"     : "tt",
-        "domain"     : "torrent.com",
+        "custom"     : "tttt",
+        "domain"     : "torrent",
         "url"        : "https://www.torrent.com/",
         "checked"    : false,
         "count"      : 0,

@@ -23,3 +23,5 @@ footer { border: 2px solid dimgray; }
 /* .tbl-btn * { border: 1px solid silver; } */
 /* .modal-content { border: 1px solid dimgray; } */
 /* .modal-content > div { border: 1px solid silver; } */
+
+.err { border: 1px solid red; }

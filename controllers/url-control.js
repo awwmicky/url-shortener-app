@@ -1,7 +1,6 @@
 const { Url_Link } = require('../models/');
 const { nanoid } = require('nanoid');
-const Url = require('url-parse');
-const { viewLogs } = require('./utils.js');
+// const { viewLogs } = require('./utils.js');
 
 
 module.exports = {
@@ -18,8 +17,6 @@ module.exports = {
 
     /* POST */
     createShortUrl : async (req,res,next) => {
-        const domain = new Url(req.body.url);
-        req.body.domain = domain.hostname;
         req.body.custom = nanoid(7).toLowerCase();
         const { custom } = req.body;
 
@@ -47,7 +44,7 @@ module.exports = {
 
         try {
             const doesExist = await Url_Link.query().findOne({ custom });
-            const errMsg = 'custom URL name is already in use.';
+            const errMsg = 'Custom URL name is already in use.';
             if ( doesExist ) throw new Error( errMsg );
 
             await Url_Link.query().findById(id).patch({ custom });

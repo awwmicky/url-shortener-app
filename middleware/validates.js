@@ -1,4 +1,7 @@
+const { fromUrl,parseDomain,ParseResultType } = require('parse-domain');
 const yup = require('yup');
+
+////
 
 const errorResponse = (err) => {
   const { createError,path,message } = err;
@@ -8,14 +11,14 @@ const errorResponse = (err) => {
 const obj = {
   name: 'custom-name',
   message: 'error',
-  lenErr  : 'custom URL must be between 4 - 30 char long.',
-  charErr : 'custom URL must contain a-z,0-9, or "-"/"_".',
+  lenErr  : 'Must be between 4 - 20 chars long.',
+  charErr : 'Must contain only a-z, 0-9, or "-"/"_".',
   test (val) {
     const { createError } = this;
 
     const len = val.length;
     const regex = /^([\w\s\-\_])+$/;
-    const [ MIN,MAX ] = [4,30]
+    const [ MIN,MAX ] = [4,20];
 
     if ( !val ) return true;
     if ( !(MIN <= len && len <= MAX) ) return errorResponse({
@@ -36,7 +39,34 @@ const schemaCustom =  yup.string().trim().test(obj).transform(fn);
 
 ////
 
-module.exports = {  
+module.exports = {
+  confirmUrl: (req,res,next) => {
+    const parseResult = parseDomain(fromUrl( req.body.url ));
+
+    switch (parseResult) {
+      case ParseResultType.Listed:
+        console.log( true,parseResult )
+        req.body.domain = parseResult.icann.domain;
+        next()
+      break;
+      case ParseResultType.Reserved:
+      case ParseResultType.NotListed:
+        // FIXME : SEND proper error message
+        const err = new Error(
+          'This is a reserved or unknown domain.'
+        );
+        next(err)
+      break;
+      default: 
+        // FIXME : SEND proper error message
+        const err = new Error(
+          'This is an ip address or invalid domain.'
+        );
+        next(err)
+      break;
+    }
+  },
+
   validateUrl : async (req,res,next) => {
     try {
       const isVal = await schemaUrl.validate(req.body.url);

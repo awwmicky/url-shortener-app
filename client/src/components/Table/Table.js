@@ -7,7 +7,7 @@ export default function Table () {
   return (
     <section id="table-fold">
       <table name="url_table" id="url-table">
-        <caption>URL Histoy Log</caption>
+        <caption>URL History Log</caption>
         
         <thead>
           <tr>

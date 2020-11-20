@@ -6,6 +6,7 @@ import Copy from './Option/Copy'
 import Edit from './Option/Edit'
 
 
+// SECTION : include error label
 export default function Result () {
 
   const { state:{ recent,option },setState } = useContext(Context);
@@ -59,6 +60,10 @@ export default function Result () {
         <button className="btns" onClick={ handleEdit }>{ text }</button>
         { isInput && <button className="btns" onClick={ handleCancel }>✘</button> }
       </div>
+
+      <span className="err custom-error">
+        Custom URL name is already in use.
+      </span>
     </div>
   );
 }

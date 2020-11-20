@@ -4,7 +4,7 @@ import './assets/style.scss'
 import './assets/test.css'
 import { useImmer } from 'use-immer'
 import axios from 'axios'
-// import db from './assets/data-temp.json'
+import db from './assets/data-temp.json'
 import Form from './components/Form/Form'
 import Result from './components/Result/Result'
 import Table from './components/Table/Table'
@@ -17,8 +17,8 @@ import { mainContainer } from './utils/mainContainer.js'
 
 // TODO : reverse DB sort
 const initState = { 
-  // data:   db,
-  data  : null,
+  data:   db,
+  // data  : null,
   recent: null,
   option: "",
   custom: "",
@@ -57,13 +57,13 @@ function App () {
   // REVIEW : convert API
   // TODO : load all data after URL shortens
 // const handleData = (e) => (
-  useEffect(() => {
-    (() => (
-      axios.get('/all')
-      .then(res => setState(draft => { draft.data = res.data; }))
-      .catch(err => console.error(err))
-    ))()
-  }, [ setState ])
+  // useEffect(() => {
+  //   (() => (
+  //     axios.get('/all')
+  //     .then(res => setState(draft => { draft.data = res.data; }))
+  //     .catch(err => console.error(err))
+  //   ))()
+  // }, [ setState ])
 // );
 
   useEffect(() => {
@@ -82,7 +82,6 @@ function App () {
 
         <Form />
         <Result />
-
         {/* <button onClick={ handleData }>▼</button> */}
       </main>
 

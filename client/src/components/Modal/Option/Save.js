@@ -5,6 +5,7 @@ import axios from 'axios'
 const ENTER_KEY = 13;
 
 
+// SECTION : include error label
 export default function Save () {
 
   const { 
@@ -74,6 +75,12 @@ export default function Save () {
           onClick={ handleCancel }
         >✘</button>
       </div>
+
+      <span className="err modal-error">
+        {/* Custom URL name is already in use. */}
+        Must contain only a-z, 0-9, or "-"/"_".
+        {/* Must be between 4-20 chars long. */}
+      </span>
     </div>
   );
 }

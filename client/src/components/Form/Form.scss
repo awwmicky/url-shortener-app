@@ -1,16 +1,22 @@
 #url-form {
-    overflow: hidden;
+    $b-radius: 0.75em;
+    $btn-color: #eeaeca;
+
     border: 2px solid transparent;
-    border-radius: 0.75em;
+    border-radius: calc(0.1em + #{$b-radius});
     max-width: 600px;
     width: 100%;
+    margin-top: 3.75em;
+    
     position: relative;
     display: flex;
-    margin-top: 3.75em;
 
-    &:focus-within { border-color: #eeaeca; }
+    &:focus-within { border-color: $btn-color; }
 
     input {
+        $b-radius: 0.7em;
+        
+        border-radius: $b-radius 0 0 $b-radius;
         flex: 1 1 auto;
         padding: 1.25em;
 
@@ -33,15 +39,22 @@
     }
 
     button {
-        $btn-color: #eeaeca;
+        $b-radius: 0.7em;
 
+        border-radius: 0 $b-radius $b-radius 0;
         background: $btn-color;
-        font-weight: 700;
+        font-weight: bold;
         text-transform: uppercase;
         padding: 1.25em;
         transition: all 0.3s ease-in;
 
         &:hover { background: lighten($btn-color, 5%); }
         &:active { background: darken($btn-color, 10%); }
+    }
+
+    .link-error {
+        position: absolute;
+        top: -70%;
+        left: 0;
     }
 }

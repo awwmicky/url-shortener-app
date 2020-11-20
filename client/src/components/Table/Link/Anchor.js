@@ -6,9 +6,11 @@ import axios from 'axios'
 
 export default function Anchor (props) {
 
-  const { url, text, cName='', hide='' } = props;
+  const { url, text, cName='' } = props;
   const { state:{ data } , setState , mainContainer 
   } = useContext(Context);
+  const title = cName === "domain" 
+  ? new URL(url).hostname : "go to link";
 
   ////
 
@@ -37,8 +39,7 @@ export default function Anchor (props) {
         href={ url }
         target="_blank"
         rel="noopener noreferrer"
-        title="go to link"
-        hidden={ hide ? true : false }
+        title={ title }
         onClick={ handleCount }
       >{ text }</a>
     </>

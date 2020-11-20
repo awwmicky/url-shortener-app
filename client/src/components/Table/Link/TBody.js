@@ -18,8 +18,8 @@ export default function Body () {
             <td><span className="count">{ link.count }</span></td>
             <td><Time date={ link.created_at } /></td>
 
-            <td><Anchor url={ link.url } text={ link.domain } /></td>
-            <td><Anchor url={ link.url } text={ '/'+link.custom } /></td>
+            <td><Anchor url={ link.url } cName={ 'domain' } text={ link.domain } /></td>
+            <td><Anchor url={ link.url } cName={ 'custom' } text={ '/'+link.custom } /></td>
 
             <td className="link-opts">
               <Button cName={ 'copy' } i={ '📋' } />

@@ -1,23 +1,30 @@
 import { useContext } from 'react'
 import Context from '../../utils/Context.js'
 import './Form.scss'
-import axios from 'axios'
+// import axios from 'axios'
 
 
+const res = {
+  url: 'https://codewithmosh.com/p/the-ultimate-git-course',
+  domain: 'codewithmosh',
+  custom: 'code-with-mosh',
+  created_at: new Date().toISOString(),
+  count: 0
+};
+
+// SECTION : include error label
 export default function Form () {
 
   const { state:{ link },setState } = useContext(Context);
 
   // REVIEW : convert API
-  // FIXME : issue with Time comp
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const url = '/url/new';
-    const body = { url:link };
+    // const [ url,body ] = ['/url/new',{ url:link }];
 
     try {
-      const { data:res } = await axios.post(url, body);
-      console.log( res )
+      // const { data:res } = await axios.post(url, body);
+      // console.log( res )
 
       setState(draft => { 
         draft.data.push(res)
@@ -64,6 +71,10 @@ export default function Form () {
         name="submit_btn"
         id="submit-btn"
       >shorten 🔗</button>
+
+      <span className="err link-error">
+        This is a reserved or unknown domain.
+      </span>
     </form>
   );
 }
