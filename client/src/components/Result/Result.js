@@ -1,7 +1,6 @@
 import { useEffect,useContext } from 'react'
 import Context from '../../utils/Context.js'
 import './Result.scss'
-import axios from 'axios'
 import Copy from './Option/Copy'
 import Edit from './Option/Edit'
 const [ RESULT , BUTTON , INPUT ] = [
@@ -12,9 +11,8 @@ const [ RESULT , BUTTON , INPUT ] = [
 export default function Result () {
 
   const { 
-    state:{ data , result } , setState,
-    value:{ custom , option , type , error } , setValue
-    //, API
+    state:{ data , result } , value:{ custom , option , type , error }, 
+    setState , setValue , API
   } = useContext(Context);
 
   const displayError = type === RESULT ? "" : 'hide-error';
@@ -36,28 +34,23 @@ export default function Result () {
       draft.custom = result.custom;
     });
 
-    // REVIEW : → convert API
     if (option === INPUT) {
-      // const [ rId,query ] = [result.id,custom];
-      const [ rId,query ] = [result.id,encodeURIComponent(custom)];
-      const url = `/url/custom/${ rId }?custom=${ query }`;
+      const [ rId,query ] = [result.id,custom];
 
       try {
         if ( result.custom !== custom ) {
-          // const res = await API.updateCustom(dId,query);
-          const { data:res } = await axios.patch(url);
-          console.info( 'check:',res )
-          if (res?.error) throw res.error;
+          await API.updateCustom(rId,query);
         }
 
-        const dId = !data ? 0 : data.length - 1;
+        const saved = custom.replace(/\s+/g, '-');
+        const dId = data.length - 1;
         setValue(draft => { 
           draft.option = BUTTON;
           draft.type = "";
         })
         setState(draft => { 
-          draft.result.custom = custom;
-          if (data[dId]) draft.data[dId].custom = custom;
+          draft.result.custom = saved;
+          if (data[dId]) draft.data[dId].custom = saved;
         })
       } catch (err) {
 

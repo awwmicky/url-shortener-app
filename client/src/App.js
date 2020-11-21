@@ -65,9 +65,9 @@ function App () {
     (() => {
       const path = window.location.pathname;
       if ((path === '/') || (path === '/all')) return;
-      const redirect = (url) => window.location.assign(url);
+      const redirecting = (url) => window.location.assign(url);
       API.redirectTo(path)
-      .then(url => redirect(url))
+      .then(url => redirecting(url))
       .catch(err => console.error(err))
     })()
   }, [ ])

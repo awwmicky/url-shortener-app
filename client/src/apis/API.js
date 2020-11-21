@@ -1,50 +1,47 @@
 import axios from 'axios'
 
-// TODO : 4/6 : test API calls
+
 export const getAll = async () => {
   const path = '/all';
-  console.log('val:', path)
-
+  // console.log('val:', path)
   try { return await axios.get(path); } 
   catch (err) { throw err; }
 };
 
 
 export const redirectTo = async (path) => {
-  console.log('val:', path)
+  // console.log('val:', path)
   try {
     const { data } = await axios.get(path);
+    // console.info(data)
     if (data === 'false') throw data;
     else return data;
   } catch (err) { throw err; }
 };
 
 
-// LINK to be TESTED 1
+
 export const postUrl = async (url) => {
   const [ path,body ] = ['/url/new',{ url }];
-  console.log('val:', path,body)
+  // console.log('val:', path,body)
   
   try {
     const { data } = await axios.post(path,body);
-    console.info(data)
-
+    // console.info(data)
     if (data?.error) throw data.error;
     else return data;
   } catch (err) { throw err; }
 };
 
 
-// LINK to be TESTED 2
 export const updateCustom = async (id,query) => {
-  // query = encodeURIComponent(query);
+  query = encodeURIComponent(query);
   const path = `/url/custom/${ id }?custom=${ query }`;
-  console.log('val:', id,query,path)
+  // console.log('val:', id,query,path)
   
   try {
     const { data } = await axios.patch(path);
-    console.info(data)
-
+    // console.info(data)
     if (data?.error) throw data.error;
     else return data;
   } catch (err) { throw err; }

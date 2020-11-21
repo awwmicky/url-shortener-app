@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import Context from '../../../utils/Context.js'
 // import './Save.css'
-import axios from 'axios'
 const [ MODAL , ENTER_KEY ] = ['modal',13];
 
 
@@ -9,8 +8,7 @@ export default function Save () {
 
   const { 
     state:{ data , result } , value:{ custom , type , error }, 
-    modal:{ id } , setState , setValue , setModal
-    //, API 
+    modal:{ id } , setState , setValue , setModal , API
   } = useContext(Context);
   const display = type === MODAL ? "" : 'hide-error';
 
@@ -26,23 +24,19 @@ export default function Save () {
     setValue(draft => { draft[name] = value; })
   };
 
-  // REVIEW : → convert API
   const handleSave = async (e) => {
-    // const [ rId,query ] = [result.id,custom];
-    const [ dId,query ] = [data[id].id,encodeURIComponent(custom)];
-    const url = `/url/custom/${ dId }?custom=${ query }`;
+    const [ dId , query ] = [data[id].id,custom];
     
     try {
       if ( data[id].custom !== custom ) {
-        // const res = await API.updateCustom(dId,query);
-        const { data:res } = await axios.patch(url);
-        if (res?.error) throw res.error;
+        await API.updateCustom(dId,query);
       }
 
+      const saved = custom.replace(/\s+/g, '-');
       closeModal()
       setState(draft => {
-        draft.data[id].custom = custom;
-        if (result) draft.result.custom = custom;
+        draft.data[id].custom = saved;
+        if (result) draft.result.custom = saved;
       })
     } catch (err) { 
 

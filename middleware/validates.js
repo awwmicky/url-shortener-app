@@ -39,7 +39,7 @@ const obj = {
 };
 
 const schemaUrl = yup.string().trim().url().required();
-const schemaCustom =  yup.string().trim().test(obj) //.transform(fn);
+const schemaCustom =  yup.string().trim().test(obj).transform(fn);
 
 ////
 

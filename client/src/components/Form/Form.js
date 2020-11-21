@@ -1,29 +1,24 @@
 import { useContext } from 'react'
 import Context from '../../utils/Context.js'
 import './Form.scss'
-import axios from 'axios'
 const FORM = 'form';
 
 
 export default function Form () {
 
-  const { value:{ link , type , error } , setValue , setState 
-  //, API
+  const { 
+    value:{ link , type , error } , setValue , setState , API
   } = useContext(Context);
   const display = type === FORM ? "" : 'hide-error';
 
   ////
 
-  // REVIEW : convert API
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const [ url,body ] = ['/url/new',{ url:link }];
 
     try {
-      // const res = API.postUrl(link)
-      const { data:res } = await axios.post(url, body);
+      const res = await API.postUrl(link);
       console.info( 'data:',res )
-      if (res?.error) throw res.error;
 
       setValue(draft => {
         draft.custom = res.custom;
@@ -36,7 +31,6 @@ export default function Form () {
       })
     } catch (err) { 
 
-      console.log(err)
       console.error( err.stack )
       setValue(draft => {
         draft.type = FORM;

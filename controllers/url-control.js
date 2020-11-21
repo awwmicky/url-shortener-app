@@ -1,6 +1,6 @@
 const { Url_Link } = require('../models/');
 const { nanoid } = require('nanoid');
-const { viewLogs } = require('./utils.js');
+// const { viewLogs } = require('./utils.js');
 
 
 module.exports = {
