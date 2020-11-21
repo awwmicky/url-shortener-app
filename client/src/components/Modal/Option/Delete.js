@@ -1,26 +1,23 @@
 import { useContext } from 'react'
 import Context from '../../../utils/Context.js'
 // import './Delete.css'
-import axios from 'axios'
 
 
 export default function Delete () {
 
   const { 
     state:{ data , target:{ url,custom }},
-    modal:{ id } , setState , setModal
+    modal:{ id } , setState , setModal, API
   } = useContext(Context);
 
   ////
 
-  // REVIEW : TEST converted API
   const handleDelete = async (e) => {
-    const path = `/url/${ data[id].id }`;
-    // const id = data[id].id;
-    
+    const dId = data[id].id;
+
     try {
-      // await deleteUrl(id)
-      await axios.delete(path)
+      await API.deleteUrl(dId)
+      // await axios.delete(path)
       
       setState(draft => { 
         delete draft.data[id];

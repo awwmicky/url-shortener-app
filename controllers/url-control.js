@@ -1,6 +1,6 @@
 const { Url_Link } = require('../models/');
 const { nanoid } = require('nanoid');
-// const { viewLogs } = require('./utils.js');
+const { viewLogs } = require('./utils.js');
 
 
 module.exports = {
@@ -49,7 +49,7 @@ module.exports = {
 
             await Url_Link.query().findById(id).patch({ custom });
             // const data = await Url_Link.query().findById(id);
-            // viewLog([ data ])
+            // viewLogs([ data ])
             res.status(204).send('custom updated  ✓')
         } catch (err) { next( err ) }
     },
@@ -63,7 +63,7 @@ module.exports = {
         try {
             await Url_Link.query().findById(id).patch({ count });
             // const data = await Url_Link.query().findById(id);
-            // viewLog([ data ])
+            // viewLogs([ data ])
             res.status(204).send('count updated  ✓')
         } catch (err) { next(err) }
     },
@@ -75,7 +75,7 @@ module.exports = {
         try {
             await Url_Link.query().deleteById(id);
             // const data = await Url_Link.query();
-            // viewLog( data )
+            // viewLogs( data )
             res.status(204).send('url deleted ✓')
         } catch (err) { next(err) }
     },

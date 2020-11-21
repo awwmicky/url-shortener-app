@@ -14,6 +14,7 @@ export default function Result () {
   const { 
     state:{ data , result } , setState,
     value:{ custom , option , type , error } , setValue
+    //, API
   } = useContext(Context);
 
   const displayError = type === RESULT ? "" : 'hide-error';
@@ -37,11 +38,13 @@ export default function Result () {
 
     // REVIEW : → convert API
     if (option === INPUT) {
+      // const [ rId,query ] = [result.id,custom];
       const [ rId,query ] = [result.id,encodeURIComponent(custom)];
       const url = `/url/custom/${ rId }?custom=${ query }`;
 
       try {
         if ( result.custom !== custom ) {
+          // const res = await API.updateCustom(dId,query);
           const { data:res } = await axios.patch(url);
           console.info( 'check:',res )
           if (res?.error) throw res.error;
@@ -58,6 +61,7 @@ export default function Result () {
         })
       } catch (err) {
 
+        console.log(err)
         console.error( err.stack )
         setValue(draft => {
           draft.type = RESULT;

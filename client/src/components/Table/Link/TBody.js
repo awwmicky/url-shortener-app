@@ -6,7 +6,7 @@ import Button from './Button'
 import Time from './Time'
 
 
-export default function Body () {
+export default function TBody () {
 
   const {state:{ data }} = useContext(Context);
 

@@ -8,8 +8,11 @@ const FORM = 'form';
 export default function Form () {
 
   const { value:{ link , type , error } , setValue , setState 
+  //, API
   } = useContext(Context);
   const display = type === FORM ? "" : 'hide-error';
+
+  ////
 
   // REVIEW : convert API
   const handleSubmit = async (e) => {
@@ -17,6 +20,7 @@ export default function Form () {
     const [ url,body ] = ['/url/new',{ url:link }];
 
     try {
+      // const res = API.postUrl(link)
       const { data:res } = await axios.post(url, body);
       console.info( 'data:',res )
       if (res?.error) throw res.error;
@@ -32,7 +36,8 @@ export default function Form () {
       })
     } catch (err) { 
 
-      console.error(err.stack)
+      console.log(err)
+      console.error( err.stack )
       setValue(draft => {
         draft.type = FORM;
         draft.error = err.message; 

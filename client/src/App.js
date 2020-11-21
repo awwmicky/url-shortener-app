@@ -1,17 +1,17 @@
-import { useEffect } from 'react'
+import { useEffect,useMemo } from 'react'
 import './assets/reset.scss'
 import './assets/style.scss'
 import './assets/test.css'
 import { useImmer } from 'use-immer'
-import axios from 'axios'
-// import db from './assets/data-temp.json'
 import Form from './components/Form/Form'
 import Result from './components/Result/Result'
 import Table from './components/Table/Table'
 import Modal from './components/Modal/Modal'
+// import db from './assets/data-temp.json'
 import Context from './utils/Context.js'
 import useClipboard from './utils/useClipboard.js'
 import { mainContainer } from './utils/mainContainer.js'
+import * as API from './apis/API.js'
 
 
 const initState = { 
@@ -33,7 +33,7 @@ const initModal = {
   isShowing : false,
   id        : NaN,
   type      : ""
-}
+};
 
 
 function App () {
@@ -45,40 +45,40 @@ function App () {
   const { data } = state;
   const { custom } = value;
   
-  const states = { 
+  const states = useMemo(() => ({ 
     state , setState,
     value , setValue,
     modal , setModal,
-    useClipboard , mainContainer 
-    // , API
-  };
+    useClipboard, 
+    mainContainer,
+    API
+  }), [
+    state , setState,
+    value , setValue,
+    modal , setModal
+  ]);
 
   ////
 
+  // TODO : useState for is loading/error/data
   useEffect(() => {
     (() => {
       const path = window.location.pathname;
       if ((path === '/') || (path === '/all')) return;
       const redirect = (url) => window.location.assign(url);
-      axios.get(path)
-      .then(res => {
-        if (res.data !== 'false') throw res.data;
-        else return redirect(res.data);
-      })
+      API.redirectTo(path)
+      .then(url => redirect(url))
       .catch(err => console.error(err))
     })()
   }, [ ])
 
-  // REVIEW : convert API
-// const handleData = (e) => (
   useEffect(() => {
     (() => (
-      axios.get('/all')
-      .then(res => setState(draft => { draft.data = res.data; }))
-      .catch(err => console.error(err))
+      API.getAll().then(res => setState(
+        draft => { draft.data = res.data; }
+      )).catch(err => console.error( err ))
     ))()
   }, [ setState ])
-// );
 
   useEffect(() => {
     console.log( (data ? data : "") , custom )
@@ -96,7 +96,6 @@ function App () {
 
         <Form />
         <Result />
-        {/* <button onClick={ handleData }>▼</button> */}
       </main>
 
       <Table />

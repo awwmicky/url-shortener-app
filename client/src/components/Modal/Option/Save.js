@@ -9,7 +9,8 @@ export default function Save () {
 
   const { 
     state:{ data , result } , value:{ custom , type , error }, 
-    modal:{ id } , setState , setValue , setModal 
+    modal:{ id } , setState , setValue , setModal
+    //, API 
   } = useContext(Context);
   const display = type === MODAL ? "" : 'hide-error';
 
@@ -27,11 +28,13 @@ export default function Save () {
 
   // REVIEW : → convert API
   const handleSave = async (e) => {
+    // const [ rId,query ] = [result.id,custom];
     const [ dId,query ] = [data[id].id,encodeURIComponent(custom)];
     const url = `/url/custom/${ dId }?custom=${ query }`;
     
     try {
       if ( data[id].custom !== custom ) {
+        // const res = await API.updateCustom(dId,query);
         const { data:res } = await axios.patch(url);
         if (res?.error) throw res.error;
       }
