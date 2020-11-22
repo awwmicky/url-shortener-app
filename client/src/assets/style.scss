@@ -58,6 +58,10 @@ $test-5: (#e66465, #9198e5);
 
 ////
 
+.disable-scrolling {
+    overflow: hidden;
+}
+
 .hide-result , .hide-error
 { visibility: hidden; }
 

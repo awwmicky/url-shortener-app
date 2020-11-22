@@ -1,6 +1,5 @@
 # URL Shortener App
 
-
 > ### Status: **Not Deployed**
 
 The idea to have your own library of short/custom url links, helps with sending them quick & making it easy to read.

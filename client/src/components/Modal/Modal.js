@@ -1,6 +1,5 @@
-import { useRef,useState,useEffect,useCallback,useContext } from 'react'
+import { useRef,useEffect,useCallback,useContext } from 'react'
 import Context from '../../utils/Context.js'
-import useEventListener from '../../utils/useEventListener.js'
 import './Modal.scss'
 import Delete from './Option/Delete'
 import Save from './Option/Save'
@@ -11,15 +10,20 @@ const [EDIT , DELETE , ESC_KEY] = [
 
 export default function Modal () {
 
-  const { modal:{ isShowing , type } , setModal , setValue 
+  const { 
+    modal:{ isShowing , type }, 
+    setModal , setValue , useEventListener
   } = useContext(Context);
-  const [offSetY, setOffSetY] = useState(0);
   const modalRef = useRef();
 
   ////
 
   useEffect(() => {
-    if (isShowing) setOffSetY(window.scrollY)
+    if ( isShowing ) {
+      const X = window.scrollX;
+      const Y = window.scrollY;
+      window.onscroll = () => window.scrollTo(X,Y);
+    } else { window.onscroll = null; }
   }, [ isShowing ])
 
   const closeModal = useCallback(() => {
@@ -37,15 +41,7 @@ export default function Modal () {
 
   const handleExitBtn = (e) => closeModal();
 
-  // FIXME : disable scroll
-  const handleScroll = useCallback((e) => {
-    if ( !isShowing ) return;
-    // console.log( offSetY,window )
-    window.scrollTo(0, offSetY)
-  }, [ isShowing,offSetY ]);
-
-  useEventListener('keyup',handleEscKey)
-  useEventListener('scroll',handleScroll)
+  useEventListener( 'keyup',handleEscKey )
 
   ////
 

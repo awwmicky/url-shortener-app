@@ -9,7 +9,7 @@ export const getAll = async () => {
 };
 
 
-export const redirectTo = async (path) => {
+export const redirectToUrl = async (path) => {
   // console.log('val:', path)
   try {
     const { data } = await axios.get(path);

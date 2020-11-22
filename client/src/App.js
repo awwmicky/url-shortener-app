@@ -7,16 +7,17 @@ import Form from './components/Form/Form'
 import Result from './components/Result/Result'
 import Table from './components/Table/Table'
 import Modal from './components/Modal/Modal'
-// import db from './assets/data-temp.json'
 import Context from './utils/Context.js'
 import useClipboard from './utils/useClipboard.js'
+import useEventListener from './utils/useEventListener.js'
 import { mainContainer } from './utils/mainContainer.js'
+import db from './assets/data-temp.json'
 import * as API from './apis/API.js'
 
 
 const initState = { 
-  // data: db,
-  data   : null,
+  data: db,
+  // data   : null,
   result : null,
   target : null
 };
@@ -49,7 +50,8 @@ function App () {
     state , setState,
     value , setValue,
     modal , setModal,
-    useClipboard, 
+    useClipboard,
+    useEventListener,
     mainContainer,
     API
   }), [
@@ -65,20 +67,20 @@ function App () {
     (() => {
       const path = window.location.pathname;
       if ((path === '/') || (path === '/all')) return;
-      const redirecting = (url) => window.location.assign(url);
-      API.redirectTo(path)
-      .then(url => redirecting(url))
+      const redirect = (url) => window.location.assign(url);
+      API.redirectToUrl(path)
+      .then(url => redirect(url))
       .catch(err => console.error(err))
     })()
   }, [ ])
 
-  useEffect(() => {
-    (() => (
-      API.getAll().then(res => setState(
-        draft => { draft.data = res.data; }
-      )).catch(err => console.error( err ))
-    ))()
-  }, [ setState ])
+  // useEffect(() => {
+  //   (() => (
+  //     API.getAll().then(res => setState(
+  //       draft => { draft.data = res.data; }
+  //     )).catch(err => console.error( err ))
+  //   ))()
+  // }, [ setState ])
 
   useEffect(() => {
     console.log( (data ? data : "") , custom )
